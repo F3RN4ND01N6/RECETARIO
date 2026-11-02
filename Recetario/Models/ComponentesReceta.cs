@@ -123,7 +123,7 @@ public class IngredienteTemporada
     public string NombreBind => nombreFrutaVerdura;
 
     [JsonIgnore]
-    public string TipoTexto => tipo == TipoVegetal.FRUTA ? "🍎 Fruta de Estación" : "🥕 Verdura / Hortaliza";
+    public string TipoTexto => tipo == TipoVegetal.FRUTA ? "Fruta de Estación" : "Verdura / Hortaliza";
 
     [JsonIgnore]
     public string EstacionTexto => $"Estación: {estacionPrincipal}";
@@ -136,7 +136,7 @@ public class IngredienteTemporada
 }
 
 /// <summary>
-/// Ingrediente cuantificado que compone una receta (Composición 1..* en Receta, implementa IValidable).
+/// Ingrediente cuantificado que compone una receta .
 /// </summary>
 public class IngredienteReceta : IValidable
 {
@@ -183,6 +183,10 @@ public class IngredienteReceta : IValidable
         this.referenciaTemporada = referenciaTemporada;
     }
 
+
+
+
+
     // Métodos exactos del Diagrama de Clases
     public string Nombre() => nombre;
     public double Cantidad() => cantidad;
@@ -191,6 +195,10 @@ public class IngredienteReceta : IValidable
     public bool EsFrutaOVerduraEstacion() => esFrutaOVerduraEstacion;
     public TipoVegetal TipoVegetal() => tipoVegetal;
     public IngredienteTemporada? ReferenciaTemporada() => referenciaTemporada;
+
+
+
+
 
     public string FormatearIngrediente()
     {
@@ -215,15 +223,25 @@ public class IngredienteReceta : IValidable
         return errores;
     }
 
+
+
+
+    // ELIMINACION OPORTUNA -> -> //
     [JsonIgnore]
     public string TextoFormateado => FormatearIngrediente();
 }
 
+
+
+
 /// <summary>
-/// Reseña y puntaje otorgado por un usuario a una RecetaPublica (Agregación 0..* en RecetaPublica, UC09).
+/// RECEÑA PUNTAJE DE RECETAS (UC09).
 /// </summary>
 public class Calificacion
 {
+
+    // PROPIEDADES XAML
+
     [JsonInclude]
     private string idCalificacion = Guid.NewGuid().ToString("N")[..8];
 
@@ -239,9 +257,16 @@ public class Calificacion
     [JsonInclude]
     private DateTime fecha = DateTime.Now;
 
+
+
+    /// <summary>
+    /// ELIMINACION OPORTUNA -> -> //
+    /// </summary>
     public Calificacion()
     {
     }
+
+
 
     public Calificacion(string idUsuario, int puntaje, string comentario)
     {
@@ -252,12 +277,18 @@ public class Calificacion
         this.fecha = DateTime.Now;
     }
 
+
+
+
     // Métodos exactos del Diagrama de Clases
     public string IdCalificacion() => idCalificacion;
     public string IdUsuario() => idUsuario;
     public int Puntaje() => puntaje;
     public string Comentario() => comentario;
     public DateTime Fecha() => fecha;
+
+
+
 
     // Propiedades de lectura para XAML
     [JsonIgnore]
@@ -269,6 +300,11 @@ public class Calificacion
     [JsonIgnore]
     public string AutorYFechaTexto => $"Por {idUsuario} • {fecha:dd/MM/yyyy}";
 }
+
+
+
+
+
 
 /// <summary>
 /// Criterios de búsqueda y filtrado multicriterio de recetas (UC06).
@@ -299,9 +335,20 @@ public class FiltroReceta
     [JsonInclude]
     private bool soloVerificadasPorChef;
 
+
+
+
+
+    /// <summary>
+    /// ELIMINACION OPORTUNA -> -> //
+    /// </summary>
     public FiltroReceta()
     {
     }
+
+
+
+
 
     public FiltroReceta(
         TipoVegetal? tipoFrutaOVerdura = null,
@@ -323,6 +370,8 @@ public class FiltroReceta
         this.soloVerificadasPorChef = soloVerificadasPorChef;
     }
 
+
+
     // Métodos exactos del Diagrama de Clases
     public TipoVegetal? TipoFrutaOVerdura() => tipoFrutaOVerdura;
     public string CategoriaFiltro() => categoriaFiltro;
@@ -332,6 +381,16 @@ public class FiltroReceta
     public string DietaFiltro() => dietaFiltro;
     public NivelDificultad? Dificultad() => dificultad;
     public bool SoloVerificadasPorChef() => soloVerificadasPorChef;
+
+
+
+
+
+    /// <summary>
+    /// RESTRICCIONES PARA LA CREACION DE RECETAS (EXCEPCIONES)
+    /// </summary>
+    /// <param name="receta"></param>
+    /// <returns></returns>
 
     public bool CumpleCriterios(Receta receta)
     {

@@ -1,0 +1,99 @@
+@startuml DiagramaCasosDeUso_Broccoli
+left to right direction
+
+title Diagrama de Casos de Uso - Raccolta di ricette (RecetasApp)
+
+' === CONFIGURACIÓN VISUAL LIMPIA (Vértices rectos sin pisar texto) ===
+skinparam linetype polyline
+skinparam nodesep 40
+skinparam ranksep 110
+skinparam packageStyle rectangle
+
+' === COLUMNA IZQUIERDA: Actores Humanos ===
+together {
+    actor "Usuario / Cocinero" as Usuario
+    actor "Creador Especialista\n(Chef / Youtuber / Nutricionista)" as Creador
+    actor "Administrador" as Administrador
+}
+
+' Herencia entre actores alineada en la misma columna izquierda
+Creador -right-|> Usuario
+Administrador -right-|> Usuario
+
+' === COLUMNA CENTRAL: Los 5 paquetes en una sola fila vertical ===
+rectangle "Raccolta di ricette" {
+
+    package "1. Gestión del Recetario" as P1 {
+        usecase "UC01: Crear Receta\n(Privada o Estándar)" as UC01
+        usecase "UC02: Editar o Eliminar Receta" as UC02
+        usecase "UC03: Asignar Categoría, Dieta y Etiquetas" as UC03
+        usecase "UC04: Validar Datos de la Receta" as UC04
+    }
+
+    package "2. Búsqueda y Feed" as P2 {
+        usecase "UC05: Visualizar Catálogo / Feed de Recetas" as UC05
+        usecase "UC06: Buscar y Filtrar Recetas\n(Fruta/Verdura, Temporada, País/Región,\nCategoría, Dieta o Favoritas)" as UC06
+        usecase "UC07: Consultar Calendario de Temporada\n(Por mes o estación)" as UC07
+    }
+
+    package "3. Respaldo Local (Recetas Privadas)" as P3 {
+        usecase "UC14: Guardar Recetario Privado en JSON" as UC14
+        usecase "UC15: Cargar Recetario Privado desde JSON" as UC15
+    }
+
+    package "4. Respaldo Global (Feed Público)" as P4 {
+        usecase "UC16: Publicar Receta Global en JSON (Feed)" as UC16
+        usecase "UC17: Bajar / Cargar Recetas Globales desde JSON" as UC17
+    }
+    
+    package "5. Interacción Social y Preferencias" as P5 {
+        usecase "UC08: Marcar/Desmarcar como Favorita" as UC08
+        usecase "UC09: Calificar una Receta" as UC09
+    }
+
+    ' Alinear casos de uso en columna vertical
+    UC01 -[hidden]right- UC02
+    UC02 -[hidden]right- UC03
+    UC03 -[hidden]right- UC05
+    UC05 -[hidden]right- UC06
+    UC06 -[hidden]right- UC07
+    UC07 -[hidden]right- UC08
+    UC08 -[hidden]right- UC09
+    UC09 -[hidden]right- UC14
+    UC14 -[hidden]right- UC15
+    UC15 -[hidden]right- UC16
+    UC16 -[hidden]right- UC17
+}
+
+' === COLUMNA DERECHA: Sistema Externo ===
+actor "Sistema de Archivos\n(Memoria Secundaria JSON)" as SistemaArchivos <<Sistema>>
+
+' === 1. FLECHAS DE ACTORES ===
+Usuario -[#Green]-> UC01
+Usuario -[#Green]-> UC02
+Usuario -[#Green]-> UC03
+Usuario -[#Green]-> UC05
+Usuario -[#Green]-> UC06
+Usuario -[#Green]-> UC07
+Usuario -[#Green]-> UC08
+Usuario -[#Green]-> UC09
+Usuario -[#Green]-> UC14
+Usuario -[#Green]-> UC15
+
+Creador -[#Blue]-> UC16
+
+Administrador -[#Red]-> UC02
+Administrador -[#Red]-> UC17
+
+' === 2. RELACIONES INTERNAS ===
+UC01 .[#Purple].> UC04 : <<include>>
+UC02 .[#Purple].> UC04 : <<include>>
+UC03 .[#Purple].> UC04 : <<include>>
+
+' === 3. CONEXIONES AL SISTEMA DE ARCHIVOS ===
+UC14 -[#Yellow]--> SistemaArchivos : "Serializa JSON Local"
+UC15 -[#Orange]--> SistemaArchivos : "Deserializa JSON Local"
+UC16 -[#Yellow]--> SistemaArchivos : "Serializa JSON Global"
+UC17 -[#Orange]--> SistemaArchivos : "Deserializa JSON Global"
+
+@enduml

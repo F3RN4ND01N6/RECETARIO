@@ -8,20 +8,12 @@
              BackgroundColor="#F7F4EA">
 
 
-    <!-- ========================================================================= -->
-    <!--      CONTENEDOR PRINCIPAL (FILA 0: CALENDARIO / FILA 1: BARRA INFERIOR)     -->
-    <!-- ========================================================================= -->
-
     <Grid RowDefinitions="*,Auto">
 
         <ScrollView Grid.Row="0" Padding="16">
 
             <VerticalStackLayout Spacing="14" MaximumWidthRequest="920" HorizontalOptions="Fill">
 
-
-                <!-- ========================================================================= -->
-                <!--      CABECERA DEL CALENDARIO DE FRUTAS Y VERDURAS DE TEMPORADA (UC07)     -->
-                <!-- ========================================================================= -->
 
                 <Border BackgroundColor="#E8EDE4"
                         Stroke="#758B68"
@@ -44,11 +36,6 @@
 
                 </Border>
 
-
-
-                <!-- ========================================================================= -->
-                <!--      PANEL SELECTOR DE ESTACIONES DEL AÑO EN VERDE SALVIA Y CREMA     -->
-                <!-- ========================================================================= -->
 
                 <Border BackgroundColor="#FFFFFF"
                         Stroke="#D8D3C4"
@@ -143,22 +130,12 @@
                 </Border>
 
 
-
-                <!-- ========================================================================= -->
-                <!--      CONTENEDOR DINAMICO DE TARJETAS DE INGREDIENTETEMPORADA     -->
-                <!-- ========================================================================= -->
-
                 <VerticalStackLayout x:Name="StackIngredientesTemporada" Spacing="10" />
 
 
             </VerticalStackLayout>
 
         </ScrollView>
-
-
-        <!-- ========================================================================= -->
-        <!--      BARRA DE NAVEGACION INFERIOR FIJA EN FILA 1     -->
-        <!-- ========================================================================= -->
 
         <comp:BarraInferiorView Grid.Row="1" PestanaActiva="Temporada" />
 

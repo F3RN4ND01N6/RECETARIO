@@ -8,20 +8,11 @@
              BackgroundColor="#F7F4EA">
 
 
-    <!-- ========================================================================= -->
-    <!--      CONTENEDOR PRINCIPAL (FILA 0: RECETARIO PRIVADO / FILA 1: BARRA INFERIOR)     -->
-    <!-- ========================================================================= -->
-
     <Grid RowDefinitions="*,Auto">
 
         <ScrollView Grid.Row="0" Padding="16">
 
             <VerticalStackLayout Spacing="14" MaximumWidthRequest="960" HorizontalOptions="Fill">
-
-
-                <!-- ========================================================================= -->
-                <!--      CABECERA DEL RECETARIO PRIVADO Y RUTA DEL ARCHIVO JSON LOCAL     -->
-                <!-- ========================================================================= -->
 
                 <Border BackgroundColor="#E8EDE4"
                         Stroke="#758B68"
@@ -48,11 +39,6 @@
 
                 </Border>
 
-
-
-                <!-- ========================================================================= -->
-                <!--      PANEL DE BUSQUEDA PRIVADA Y CONTROL DE MEMORIA SECUNDARIA JSON     -->
-                <!-- ========================================================================= -->
 
                 <Border BackgroundColor="#ECE8DC"
                         Stroke="#D8D3C4"
@@ -128,11 +114,6 @@
                 </Border>
 
 
-
-                <!-- ========================================================================= -->
-                <!--      CONTENEDOR DINAMICO DE TARJETAS DE RECETAS PRIVADAS DEL USUARIO     -->
-                <!-- ========================================================================= -->
-
                 <VerticalStackLayout x:Name="StackRecetasPrivadas" Spacing="12" />
 
 
@@ -140,10 +121,6 @@
 
         </ScrollView>
 
-
-        <!-- ========================================================================= -->
-        <!--      BARRA DE NAVEGACION INFERIOR FIJA EN FILA 1     -->
-        <!-- ========================================================================= -->
 
         <comp:BarraInferiorView Grid.Row="1" PestanaActiva="MisRecetas" />
 

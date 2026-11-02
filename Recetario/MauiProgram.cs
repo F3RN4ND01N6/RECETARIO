@@ -15,10 +15,16 @@ public static class MauiProgram
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                fonts.AddFont("Lucidacalligraphy.ttf", "ScriptFont");
             });
 
         // Registro de Servicios (Singleton para compartir estado y persistencia JSON entre todas las pestañas)
         builder.Services.AddSingleton<RecetaService>();
+        builder.Services.AddSingleton<AuthService>();
+
+        // Registro de Vistas de Autenticación
+        builder.Services.AddTransient<LoginPage>();
+        builder.Services.AddTransient<RegistroPage>();
 
         // Registro de Vistas del TabBar Inferior
         builder.Services.AddSingleton<FeedPage>();

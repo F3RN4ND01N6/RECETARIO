@@ -75,7 +75,8 @@ public abstract class Receta : IIdentificable, IValidable
         Origen origen,
         string region,
         List<IngredienteReceta> ingredientes,
-        List<PasoPreparacion> pasos)
+        List<PasoPreparacion> pasos,
+        DateTime? fechaPublicacion = null)
     {
         this.idReceta = string.IsNullOrWhiteSpace(idReceta) ? Guid.NewGuid().ToString("N")[..8] : idReceta;
         this.idUsuarioAutor = idUsuarioAutor;
@@ -88,7 +89,7 @@ public abstract class Receta : IIdentificable, IValidable
         this.porciones = porciones;
         this.dificultad = dificultad;
         this.estacion = estacion;
-        this.fechaPublicacion = DateTime.Now;
+        this.fechaPublicacion = fechaPublicacion ?? DateTime.Now;
         this.origen = origen;
         this.region = region;
         this.ingredientes = ingredientes ?? new List<IngredienteReceta>();
@@ -344,7 +345,7 @@ public class RecetaPrivada : Receta
         List<PasoPreparacion> pasos,
         string notasPersonales = "",
         bool soloDispositivoLocal = true)
-        : base(idReceta, idUsuarioAutor, titulo, categoria, tipoDieta, etiquetas, imagenPlatillo,
+        :base(idReceta, idUsuarioAutor, titulo, categoria, tipoDieta, etiquetas, imagenPlatillo,
                tiempoPreparacion, porciones, dificultad, estacion, origen, region, ingredientes, pasos)
     {
         this.notasPersonales = notasPersonales ?? string.Empty;
@@ -411,6 +412,7 @@ public class RecetaPublica : Receta, ICalificable, IFiltrable
         int porciones,
         NivelDificultad dificultad,
         Estacion estacion,
+        //DateTime fechaPublicacion,
         Origen origen,
         string region,
         List<IngredienteReceta> ingredientes,

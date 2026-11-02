@@ -8,20 +8,12 @@
              BackgroundColor="#F7F4EA">
 
 
-    <!-- ========================================================================= -->
-    <!--      CONTENEDOR PRINCIPAL (FILA 0: PERFIL Y ROL / FILA 1: BARRA INFERIOR)     -->
-    <!-- ========================================================================= -->
-
     <Grid RowDefinitions="*,Auto">
 
         <ScrollView Grid.Row="0" Padding="16">
 
             <VerticalStackLayout Spacing="14" MaximumWidthRequest="920" HorizontalOptions="Fill">
 
-
-                <!-- ========================================================================= -->
-                <!--      TARJETA SUPERIOR DE ACTOR ACTIVO Y POLIMORFISMO (HERENCIAS 1, 2 Y 3)     -->
-                <!-- ========================================================================= -->
 
                 <Border BackgroundColor="#E8EDE4"
                         Stroke="#758B68"
@@ -51,77 +43,6 @@
 
                 </Border>
 
-
-
-                <!-- ========================================================================= -->
-                <!--      SELECTOR DE ROL DEL DIAGRAMA DE CASOS DE USO (USUARIO, CHEF, ADMIN)     -->
-                <!-- ========================================================================= -->
-
-                <Border BackgroundColor="#FFFFFF"
-                        Stroke="#D8D3C4"
-                        StrokeShape="RoundRectangle 18"
-                        Padding="16">
-
-                    <VerticalStackLayout Spacing="10">
-
-                        <Label Text="🎭 Cambiar Actor Activo (Demostración de Permisos y EjecutarAccionRol)"
-                               FontSize="16"
-                               FontAttributes="Bold"
-                               TextColor="#283B2D" />
-
-                        <Label Text="Selecciona uno de los 3 actores del Diagrama de Casos de Uso para probar sus métodos polimórficos y casos de uso:"
-                               FontSize="12"
-                               TextColor="#5A6B5C" />
-
-
-                        <!--   BOTONES PARA CAMBIAR ENTRE LOS 3 ACTORES EN TIEMPO REAL   -->
-
-                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
-
-                            <!--   COLUMNA 0: ACTOR USUARIO NORMAL / COCINERO   -->
-
-                            <Button Grid.Column="0"
-                                    Text="🧑‍🍳 Usuario / Cocinero&#x0a;(UsuarioNormal)"
-                                    Clicked="OnSeleccionarUsuarioNormalClicked"
-                                    BackgroundColor="#758B68"
-                                    TextColor="#FFFFFF"
-                                    FontAttributes="Bold"
-                                    CornerRadius="12" />
-
-
-                            <!--   COLUMNA 1: ACTOR CREADOR ESPECIALISTA (CHEF / NUTRICIONISTA)   -->
-
-                            <Button Grid.Column="1"
-                                    Text="👨‍🍳 Creador Especialista&#x0a;(Chef / Nutricionista)"
-                                    Clicked="OnSeleccionarChefClicked"
-                                    BackgroundColor="#C8785A"
-                                    TextColor="#FFFFFF"
-                                    FontAttributes="Bold"
-                                    CornerRadius="12" />
-
-
-                            <!--   COLUMNA 2: ACTOR ADMINISTRADOR / MODERADOR GLOBAL   -->
-
-                            <Button Grid.Column="2"
-                                    Text="🛡️ Administrador&#x0a;(Moderador Global)"
-                                    Clicked="OnSeleccionarAdminClicked"
-                                    BackgroundColor="#283B2D"
-                                    TextColor="#FFFFFF"
-                                    FontAttributes="Bold"
-                                    CornerRadius="12" />
-
-                        </Grid>
-
-                    </VerticalStackLayout>
-
-                </Border>
-
-
-
-                <!-- ========================================================================= -->
-                <!--      FORMULARIO DE DATOS DEL USUARIO Y CONFIGURACIONPERFIL (AGREGACION 1)     -->
-                <!-- ========================================================================= -->
-
                 <Border BackgroundColor="#ECE8DC"
                         Stroke="#D8D3C4"
                         StrokeShape="RoundRectangle 18"
@@ -129,7 +50,7 @@
 
                     <VerticalStackLayout Spacing="12">
 
-                        <Label Text="⚙️ Datos del Usuario y ConfiguracionPerfil (Agregación 1)"
+                        <Label Text="Datos del Usuario y Configuracion de Perfil"
                                FontSize="16"
                                FontAttributes="Bold"
                                TextColor="#283B2D" />
@@ -173,7 +94,7 @@
 
                         <!--   CAMPOS DE PREFERENCIAS DE TEMPORADA Y ORIGEN (CONFIGURACIONPERFIL)   -->
 
-                        <Label Text="Preferencias de Temporada y Origen (ConfiguracionPerfil):"
+                        <Label Text="Preferencias de Temporada y Origen:"
                                FontSize="14"
                                FontAttributes="Bold"
                                TextColor="#283B2D" />
@@ -218,15 +139,21 @@
                                 FontAttributes="Bold"
                                 CornerRadius="12" />
 
+                        <Button Text="🚪 Cerrar Sesión"
+                                Clicked="OnCerrarSesionClicked"
+                                BackgroundColor="#FFF0ED"
+                                TextColor="#D9381E"
+                                BorderColor="#FFC8BF"
+                                BorderWidth="1"
+                                FontAttributes="Bold"
+                                CornerRadius="12"
+                                HeightRequest="40"
+                                Margin="0,4,0,0" />
+
                     </VerticalStackLayout>
 
                 </Border>
 
-
-
-                <!-- ========================================================================= -->
-                <!--      PANEL INFORMATIVO DEL SISTEMA DE ARCHIVOS (MEMORIA SECUNDARIA JSON)     -->
-                <!-- ========================================================================= -->
 
                 <Border BackgroundColor="#FFFFFF"
                         Stroke="#758B68"
@@ -256,11 +183,6 @@
             </VerticalStackLayout>
 
         </ScrollView>
-
-
-        <!-- ========================================================================= -->
-        <!--      BARRA DE NAVEGACION INFERIOR FIJA EN FILA 1     -->
-        <!-- ========================================================================= -->
 
         <comp:BarraInferiorView Grid.Row="1" PestanaActiva="Perfil" />
 

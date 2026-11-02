@@ -99,4 +99,14 @@ public partial class PerfilPage : ContentPage
             $"Los datos de '{usuario.NombreUsuario()}' y su ConfiguracionPerfil se guardaron y validaron correctamente.",
             "Aceptar");
     }
+
+    private async void OnCerrarSesionClicked(object? sender, EventArgs e)
+    {
+        bool confirmar = await DisplayAlertAsync("Cerrar Sesión", "¿Estás seguro de que deseas salir de tu cuenta?", "Sí, cerrar sesión", "Cancelar");
+        if (confirmar && Application.Current != null && Application.Current.Windows.Count > 0)
+        {
+            var authService = Handler?.MauiContext?.Services.GetService<AuthService>() ?? new AuthService();
+            Application.Current.Windows[0].Page = new NavigationPage(new LoginPage(authService, _service));
+        }
+    }
 }

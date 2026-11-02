@@ -8,20 +8,12 @@
              BackgroundColor="#F7F4EA">
 
 
-    <!-- ========================================================================= -->
-    <!--      CONTENEDOR PRINCIPAL (FILA 0: FORMULARIO / FILA 1: BARRA INFERIOR)     -->
-    <!-- ========================================================================= -->
-
     <Grid RowDefinitions="*,Auto">
 
         <ScrollView Grid.Row="0" Padding="16">
 
             <VerticalStackLayout Spacing="14" MaximumWidthRequest="920" HorizontalOptions="Fill">
 
-
-                <!-- ========================================================================= -->
-                <!--      BANNER SUPERIOR DE MODO CREACION / EDICION EN VERDE SALVIA Y CREMA     -->
-                <!-- ========================================================================= -->
 
                 <Border BackgroundColor="#E8EDE4"
                         Stroke="#758B68"
@@ -65,10 +57,6 @@
                 </Border>
 
 
-
-                <!-- ========================================================================= -->
-                <!--      SECCION 1: DATOS PRINCIPALES, FOTOGRAFIA Y CLASIFICACION (UC01 / UC03)     -->
-                <!-- ========================================================================= -->
 
                 <Border BackgroundColor="#ECE8DC"
                         Stroke="#D8D3C4"
@@ -297,10 +285,6 @@
 
 
 
-                <!-- ========================================================================= -->
-                <!--      SECCION 2: CONSTRUCTOR DE INGREDIENTES (COMPOSICION 1..* INGREDIENTERECETA)     -->
-                <!-- ========================================================================= -->
-
                 <Border BackgroundColor="#ECE8DC"
                         Stroke="#D8D3C4"
                         StrokeShape="RoundRectangle 18"
@@ -364,10 +348,6 @@
 
 
 
-                <!-- ========================================================================= -->
-                <!--      SECCION 3: CONSTRUCTOR DE PASOS DE PREPARACION (COMPOSICION 1..* PASOPREPARACION)     -->
-                <!-- ========================================================================= -->
-
                 <Border BackgroundColor="#ECE8DC"
                         Stroke="#D8D3C4"
                         StrokeShape="RoundRectangle 18"
@@ -421,10 +401,6 @@
 
 
 
-                <!-- ========================================================================= -->
-                <!--      PANEL DE ESTADO DE VALIDACION (UC04 - IVALIDABLE)     -->
-                <!-- ========================================================================= -->
-
                 <Border x:Name="BannerValidacion"
                         BackgroundColor="#E8EDE4"
                         Stroke="#758B68"
@@ -441,10 +417,6 @@
                 </Border>
 
 
-
-                <!-- ========================================================================= -->
-                <!--      BOTONERA FINAL DE ACCIONES (VERDE SALVIA Y TERRACOTA)     -->
-                <!-- ========================================================================= -->
 
                 <FlexLayout Wrap="Wrap" JustifyContent="SpaceBetween" AlignItems="Center">
 
@@ -482,10 +454,6 @@
 
         </ScrollView>
 
-
-        <!-- ========================================================================= -->
-        <!--      BARRA DE NAVEGACION INFERIOR FIJA EN FILA 1     -->
-        <!-- ========================================================================= -->
 
         <comp:BarraInferiorView Grid.Row="1" PestanaActiva="CrearEditar" />
 

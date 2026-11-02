@@ -21,18 +21,21 @@ public partial class FeedPage : ContentPage
         RefrescarVista();
     }
 
+    /// <summary>
+    /// LLAMADO DE ENUMERADORES 
+    /// </summary>
     private void ConfigurarSelectores()
     {
-        PickerVegetal.ItemsSource = new List<string> { "Todos", "FRUTA", "VERDURA", "OTRO" };
+        PickerVegetal.ItemsSource = new List<string> { "TODOS", "FRUTA", "VERDURA", "OTRO" };
         PickerVegetal.SelectedIndex = 0;
 
-        PickerEstacion.ItemsSource = new List<string> { "Todas", "PRIMAVERA", "VERANO", "OTONIO", "INVIERNO", "TODOELANHIO" };
+        PickerEstacion.ItemsSource = new List<string> { "TODAS", "PRIMAVERA", "VERANO", "OTOÑO", "INVIERNO", "TODO EL AÑO" };
         PickerEstacion.SelectedIndex = 0;
 
-        PickerOrigen.ItemsSource = new List<string> { "Todos", "CHILE", "ARGENTINA", "PERU", "COLOMBIA", "OTRO" };
+        PickerOrigen.ItemsSource = new List<string> { "TODOS", "CHILE", "ARGENTINA", "PERU", "COLOMBIA", "OTRO" };
         PickerOrigen.SelectedIndex = 0;
 
-        PickerDificultad.ItemsSource = new List<string> { "Todas", "FACIL", "MEDIA", "DIFICIL" };
+        PickerDificultad.ItemsSource = new List<string> { "TODAS", "FACIL", "MEDIA", "DIFICIL" };
         PickerDificultad.SelectedIndex = 0;
     }
 

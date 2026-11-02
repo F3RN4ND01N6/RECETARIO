@@ -63,6 +63,9 @@ public abstract class Usuario : IIdentificable, IValidable
     protected string correo = string.Empty;
 
     [JsonInclude]
+    protected string password = string.Empty;
+
+    [JsonInclude]
     protected string biografia = string.Empty;
 
     [JsonInclude]
@@ -78,11 +81,12 @@ public abstract class Usuario : IIdentificable, IValidable
     {
     }
 
-    protected Usuario(string idUsuario, string nombreUsuario, string correo, string biografia, TipoPerfilUsuario tipoPerfil, ConfiguracionPerfil? configuracion = null)
+    protected Usuario(string idUsuario, string nombreUsuario, string correo, string biografia, TipoPerfilUsuario tipoPerfil, ConfiguracionPerfil? configuracion = null, string password = "")
     {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.correo = correo;
+        this.password = password;
         this.biografia = biografia;
         this.fechaRegistro = DateTime.Now;
         this.tipoPerfil = tipoPerfil;
@@ -93,6 +97,9 @@ public abstract class Usuario : IIdentificable, IValidable
     public string IdUsuario() => idUsuario;
     public string NombreUsuario() => nombreUsuario;
     public string Correo() => correo;
+    public string Password() => password;
+    public void EstablecerPassword(string nuevaPassword) => password = nuevaPassword;
+    public bool ValidarPassword(string passwordAValidar) => !string.IsNullOrEmpty(password) && password == passwordAValidar;
     public string Biografia() => biografia;
     public DateTime FechaRegistro() => fechaRegistro;
     public ConfiguracionPerfil ConfiguracionPerfil() => configuracionPerfil;
@@ -143,8 +150,8 @@ public class UsuarioNormal : Usuario
         tipoPerfil = TipoPerfilUsuario.USUARIO_NORMAL;
     }
 
-    public UsuarioNormal(string idUsuario, string nombreUsuario, string correo, string biografia, ConfiguracionPerfil? configuracion = null)
-        : base(idUsuario, nombreUsuario, correo, biografia, TipoPerfilUsuario.USUARIO_NORMAL, configuracion)
+    public UsuarioNormal(string idUsuario, string nombreUsuario, string correo, string biografia, ConfiguracionPerfil? configuracion = null, string password = "")
+        : base(idUsuario, nombreUsuario, correo, biografia, TipoPerfilUsuario.USUARIO_NORMAL, configuracion, password)
     {
     }
 
@@ -243,8 +250,8 @@ public class Administrador : Usuario
         tipoPerfil = TipoPerfilUsuario.ADMINISTRADOR;
     }
 
-    public Administrador(string idUsuario, string nombreUsuario, string correo, string biografia, string nivelAcceso, ConfiguracionPerfil? configuracion = null)
-        : base(idUsuario, nombreUsuario, correo, biografia, TipoPerfilUsuario.ADMINISTRADOR, configuracion)
+    public Administrador(string idUsuario, string nombreUsuario, string correo, string biografia, string nivelAcceso, ConfiguracionPerfil? configuracion = null, string password = "")
+        : base(idUsuario, nombreUsuario, correo, biografia, TipoPerfilUsuario.ADMINISTRADOR, configuracion, password)
     {
         this.nivelAcceso = nivelAcceso;
     }

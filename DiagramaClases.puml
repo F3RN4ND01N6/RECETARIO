@@ -1,0 +1,340 @@
+@startuml DiagramaClases
+title Diagrama de clases - Recetario
+
+'skinparam classAttributeIconSize 0
+
+package "Recetario.Models" {
+
+    ' === ENUMERADORES (6 en total) ===
+    enum NivelDificultad {
+        FACIL
+        MEDIA 
+        DIFICIL
+    }
+
+    enum Estacion {
+        TODOELANHIO
+        PRIMAVERA
+        VERANO
+        OTONIO 
+        INVIERNO 
+    }
+    
+    enum Origen {
+        CHILE 
+        ARGENTINA 
+        PERU 
+        COLOMBIA 
+        OTRO
+    }
+
+    enum TipoPerfilUsuario {
+        ADMINISTRADOR
+        USUARIO_NORMAL
+        YOUTUBER
+        NUTRICIONISTA 
+        CHEF_VERIFICADO
+         
+    }
+
+    enum UnidadMedida {
+        GRAMO 
+        KILOGRAMO 
+        MILILITRO
+        LITRO 
+        TAZAS 
+        CUCHARADAS 
+        UNIDADES
+        ALGUSTO
+    }
+
+    enum TipoVegetal {
+        FRUTA
+        VERDURA
+        OTRO
+        NO_APLICA
+    }
+
+    ' === INTERFACES DOMINIO (4 en total) ===
+    interface IIdentificable <<interface>> {
+        + ObtenerIdentificador() : string 
+        + ObtenerResumenEntidad() : string 
+    }
+
+    interface IValidable <<interface>> {
+        + EsValido() : bool 
+        + ObtenerErroresValidacion() : List<string> 
+    }
+
+    interface ICalificable <<interface>> {
+        + AgregarCalificacion(Calificacion calificacion) : void
+        + double ObtenerPromedioCalificaciones() : double
+    }
+
+    interface IFiltrable <<interface>> {
+        + bool CumpleFiltro(FiltroReceta filtro) : bool
+    }
+
+    ' === CLASES BASE Y USUARIOS (Herencias 1, 2, 3) ===
+    abstract class Usuario {
+        # string idUsuario 
+        # string nombreUsuario  
+        # string correo
+        # string biografia 
+        # DateTime fechaRegistro 
+        # TipoPerfilUsuario tipoPerfil
+        # ConfiguracionPerfil configuracionPerfil 
+
+        + Usuario()
+        + string IdUsuario()
+        + string NombreUsuario() 
+        + string Correo()
+        + string Biografia() 
+        + DateTime FechaRegistro() 
+        + ConfiguracionPerfil ConfiguracionPerfil() 
+        + abstract void EjecutarAccionRol()
+        + string ObtenerIdentificador()
+        + string ObtenerResumenEntidad()
+        + bool EsValido() 
+        + List<string> ObtenerErroresValidacion()
+    }
+
+    class UsuarioNormal {
+        - List<string> idsRecetasFavoritas
+        + UsuarioNormal()
+        + void EjecutarAccionRol()
+        + void MarcarFavorita(string idReceta)
+        + void DesmarcarFavorita(string idReceta)
+    }
+
+    class CreadorEspecialista {
+        - string credencialesChef
+        + CreadorEspecialista()
+        + void EjecutarAccionRol()
+        + RecetaPublica PublicarRecetaOficial(RecetaPrivada privada)
+    }
+
+    class Administrador {
+        - string nivelAcceso
+        + Administrador()
+        + void EjecutarAccionRol()
+        + void ForzarEliminacionReceta(string idReceta)
+    }
+
+    class ConfiguracionPerfil {
+        - Estacion estacionPreferida
+        - Origen origen 
+        - string regionPreferida
+        - bool ingredientesEstacion 
+
+        + ConfiguracionPerfil()
+        + Estacion EstacionPreferida()
+        + Origen Origen()
+        + string RegionPreferida()
+        + bool IngredientesEstacion()
+    }
+
+    ' === CLASES DE RECETA (Herencia 4) ===
+    abstract class Receta {
+        # string idReceta
+        # string idUsuarioAutor 
+        # string titulo 
+        # string categoria
+        # string tipoDieta
+        # List<string> etiquetas
+        # string imagenPlatillo 
+        # int tiempoPreparacion 
+        # int porciones 
+        # NivelDificultad dificultad 
+        # Estacion estacion 
+        # DateTime fechaPublicacion 
+        # Origen origen 
+        # string region
+        # List<IngredienteReceta> ingredientes
+        # List<PasoPreparacion> pasos
+
+        + Receta()
+        + string ObtenerIdentificador() 
+        + bool EsValido()
+        + List<string> ObtenerErroresValidacion()
+        + {abstract} bool EsPublicaEnFeed()
+        + {abstract} string ObtenerResumenEntidad()
+    }
+
+    class RecetaPrivada {
+        - string notasPersonales 
+        - bool soloDispositivoLocal 
+
+        + RecetaPrivada()
+        + string NotasPersonales() 
+        + bool SoloDispositivoLocal() 
+        + bool EsPublicaEnFeed()
+        + string ObtenerResumenEntidad() 
+    }
+
+    class RecetaPublica {
+        - string especialidadChef 
+        - bool verificadaPorChef 
+        - bool destacadaEnFeed 
+        - List<Calificacion> calificaciones
+
+        + RecetaPublica()
+        + string EspecialidadChef() 
+        + bool VerificadaPorChef() 
+        + bool DestacadaEnFeed() 
+        + bool EsPublicaEnFeed()
+        + string ObtenerVerificacion()
+        + string ObtenerResumenEntidad()
+        + void AgregarCalificacion(Calificacion calificacion)
+        + double ObtenerPromedioCalificaciones()
+    }
+
+    class PasoPreparacion {
+        - int numeroPaso
+        - string instruccion
+        - int tiempoEstimado 
+        - bool completado
+
+        + PasoPreparacion()
+        + int NumeroPaso()
+        + string Instruccion()
+        + int tiempoEstimado() 
+        + bool Completado()
+        + void MarcarCompletado()
+        + string FormatearPaso()
+    }
+
+    class IngredienteReceta {
+        - string nombre 
+        - double cantidad 
+        - UnidadMedida unidad 
+        - Estacion estacion 
+        - bool esFrutaOVerduraEstacion 
+        - TipoVegetal tipoVegetal
+
+        + IngredienteReceta() 
+        + string Nombre() 
+        + double Cantidad() 
+        + UnidadMedida Unidad() 
+        + Estacion Estacion()
+        + bool EsFrutaOVerduraEstacion() 
+        + TipoVegetal TipoVegetal()
+        + string FormatearIngrediente() 
+        + bool EsValido() 
+        + List<string> ObtenerErroresValidacion()
+    }
+
+    class IngredienteTemporada {
+        - string nombreFrutaVerdura
+        - TipoVegetal tipo
+        - Estacion estacionPrincipal 
+        - Origen paisOrigen
+        - string zonaCultivo 
+
+        + IngredienteTemporada()
+        + string NombreFrutaVerdura()
+        + TipoVegetal Tipo()
+        + Estacion EstacionPrincipal() 
+        + Origen PaisOrigen()
+        + string ZonaCultivo() 
+    }
+
+    class Calificacion {
+        - string idCalificacion
+        - string idUsuario
+        - int puntaje
+        - string comentario
+        - DateTime fecha
+
+        + Calificacion()
+        + int Puntaje()
+        + string Comentario()
+    }
+
+    class FiltroReceta {
+        - TipoVegetal? tipoFrutaOVerdura
+        - string nombreIngrediente
+        - Estacion? estacionTemporada
+        - Origen? pais
+        - string categoriaFiltro
+        - string dietaFiltro
+        - NivelDificultad? dificultad
+        - bool soloVerificadasPorChef
+
+        + FiltroReceta()
+        + TipoVegetal? TipoFrutaOVerdura()
+        + string CategoriaFiltro()
+        + bool CumpleCriterios(Receta receta)
+    }
+}
+
+package "Recetario.Services" {
+
+    interface IPersistenciaJson<T> <<interface>> {
+        + void GuardarEnArchivos(List<T> datos)
+        + List<T> CargarDesdeArchivo()
+        + bool ExisteArchivoJson()
+        + string ObtenerRutaArchivo()
+    }
+
+    class PersistenciaJsonService<T> {
+        - string rutaArchivo
+        + void GuardarEnArchivos(List<T> datos)
+        + List<T> CargarDesdeArchivo()
+        + bool ExisteArchivoJson()
+        + string ObtenerRutaArchivo()
+    }
+
+    class RecetaService {
+        - IPersistenciaJson<RecetaPrivada> repoPrivado
+        - IPersistenciaJson<RecetaPublica> repoPublicoFeed
+
+        + RecetaService()
+        + void GuardarRecetaPrivada(RecetaPrivada receta)
+        + void EditarRecetaPrivada(RecetaPrivada receta)
+        + void EliminarRecetaPrivada(string idReceta)
+        + void PublicarRecetaEnFeed(RecetaPublica receta, Usuario autor)
+        
+        ' Métodos con SOBRECARGA para cumplir requerimiento del PDF
+        + List<RecetaPublica> FiltrarFeedGlobal(FiltroReceta filtro)
+        + List<RecetaPublica> FiltrarFeedGlobal(Estacion estacion, Origen pais)
+        + List<RecetaPrivada> FiltrarRecetasPrivadas(string idUsuario, FiltroReceta filtro)
+        + List<IngredienteTemporada> ConsultarCalendarioTemporada(Estacion estacion)
+    }
+}
+
+' === RELACIONES Y CARDINALIDADES ===
+
+' Interfaces (4 implementaciones de IIdentificable, IValidable, ICalificable, IFiltrable)
+IIdentificable <|.. Usuario
+IValidable <|.. Usuario
+IIdentificable <|.. Receta
+IValidable <|.. Receta
+IValidable <|.. IngredienteReceta
+ICalificable <|.. RecetaPublica
+IFiltrable <|.. RecetaPublica
+
+' Herencias de Usuario (3 herencias)
+Usuario <|-- UsuarioNormal
+Usuario <|-- CreadorEspecialista
+Usuario <|-- Administrador
+
+' Herencia de Recetas (1 herencia más, total 4 herencias)
+Receta <|-- RecetaPrivada
+Receta <|-- RecetaPublica
+
+' Composición (*-- : Ciclo de vida dependiente) (2 composiciones exactas)
+Receta *-- "1..*" IngredienteReceta : contiene >
+Receta *-- "1..*" PasoPreparacion : sigue >
+
+' Agregación (o-- : Contenedor independiente) (2 agregaciones exactas)
+Usuario o-- "1" ConfiguracionPerfil : configura >
+RecetaPublica o-- "0..*" Calificacion : recibe reseñas >
+
+' Asociación con cardinalidad (4+ asociaciones claras)
+Usuario "1" --> "0..*" Receta : crea >
+IngredienteReceta "0..*" --> "0..1" IngredienteTemporada : referencia >
+RecetaService --> IPersistenciaJson : usa persistencia >
+RecetaService ..> FiltroReceta : aplica filtros >
+
+@enduml

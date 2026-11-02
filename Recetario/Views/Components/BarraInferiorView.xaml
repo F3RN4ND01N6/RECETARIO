@@ -4,10 +4,6 @@
              x:Class="Recetario.Views.Components.BarraInferiorView">
 
 
-    <!-- ========================================================================= -->
-    <!--      CONTENEDOR VISUAL DE LA BARRA DE NAVEGACION INFERIOR (5 PESTAÑAS)    -->
-    <!-- ========================================================================= -->
-
     <Border BackgroundColor="#ECE8DC"
             Stroke="#758B68"
             StrokeThickness="1.5"

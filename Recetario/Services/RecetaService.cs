@@ -69,6 +69,13 @@ public class RecetaService
         CargarOInicializarDatos();
     }
 
+    public void EstablecerUsuarioSesion(Usuario usuarioAutenticado)
+    {
+        UsuarioActivo = usuarioAutenticado ?? PerfilUsuarioNormal;
+        UsuarioActivo.EjecutarAccionRol();
+        DatosActualizados?.Invoke();
+    }
+
     public void CambiarRolActivo(TipoPerfilUsuario nuevoTipo)
     {
         UsuarioActivo = nuevoTipo switch

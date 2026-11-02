@@ -1,0 +1,35 @@
+================================================================================
+                    CREDENCIALES - USUARIOS NORMALES / COCINEROS
+================================================================================
+Archivo de persistencia asociado: usuarios_normales.json
+Tipo de Perfil: USUARIO_NORMAL (Cocinero estándar con gestión de recetas favoritas)
+
+--------------------------------------------------------------------------------
+1. USUARIO PREDETERMINADO (INICIAL)
+--------------------------------------------------------------------------------
+ID Usuario    : USR-01
+Nombre        : Fernando Cocinero
+Correo        : fernando@raccolta.cl
+Contraseña    : 123
+Biografía     : Amante de la cocina casera con frutas y verduras frescas de estación.
+Estación Pref.: PRIMAVERA
+Origen        : CHILE
+Región        : Valle Central
+Ingr. Estación: Sí
+
+--------------------------------------------------------------------------------
+2. CÓMO INICIAR SESIÓN COMO USUARIO NORMAL
+--------------------------------------------------------------------------------
+1. Abre la pantalla de Inicio de Sesión.
+2. Ingresa el Correo o Nombre de usuario (ej. fernando@raccolta.cl).
+3. Ingresa la Contraseña (123).
+4. Asegúrate de que el interruptor "¿Eres Administrador?" esté DESACTIVADO (Apagado).
+5. Presiona "Ingresar a la App".
+
+--------------------------------------------------------------------------------
+3. NUEVOS USUARIOS
+--------------------------------------------------------------------------------
+Cualquier usuario nuevo registrado a través del botón "Crear cuenta nueva"
+con la opción "Cocinero / Usuario Normal" se guardará automáticamente en:
+%LOCALAPPDATA%\...\usuarios_normales.json
+================================================================================

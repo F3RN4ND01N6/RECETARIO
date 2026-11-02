@@ -5,9 +5,6 @@ namespace Recetario.Views;
 
 public partial class CrearEditarRecetaPage : ContentPage
 {
-    // =========================================================================
-    //      ATRIBUTOS PRIVADOS DE ESTADO Y COLECCIONES TEMPORALES DEL FORMULARIO
-    // =========================================================================
 
     private readonly RecetaService _service;
     private string? _idRecetaEnEdicion;
@@ -16,10 +13,6 @@ public partial class CrearEditarRecetaPage : ContentPage
     private readonly List<IngredienteReceta> _ingredientesActuales = new();
     private readonly List<PasoPreparacion> _pasosActuales = new();
 
-
-    // =========================================================================
-    //      CONSTRUCTOR DE LA PAGINA CREAR / EDITAR RECETA
-    // =========================================================================
 
     public CrearEditarRecetaPage(RecetaService service)
     {
@@ -36,10 +29,6 @@ public partial class CrearEditarRecetaPage : ContentPage
         CargarDatosPorDefecto();
     }
 
-
-    // =========================================================================
-    //      CONFIGURACION INICIAL DE LOS SELECTORES DESPLEGABLES (PICKERS)
-    // =========================================================================
 
     private void InicializarSelectores()
     {
@@ -107,10 +96,6 @@ public partial class CrearEditarRecetaPage : ContentPage
     }
 
 
-    // =========================================================================
-    //      RESTABLECIMIENTO DEL FORMULARIO AL MODO "CREAR NUEVA RECETA" (UC01)
-    // =========================================================================
-
     private void CargarDatosPorDefecto()
     {
         _idRecetaEnEdicion = null;
@@ -139,10 +124,6 @@ public partial class CrearEditarRecetaPage : ContentPage
         RefrescarListasFormulario();
     }
 
-
-    // =========================================================================
-    //      CARGA DE UNA RECETA EXISTENTE EN EL FORMULARIO PARA SU EDICION (UC02)
-    // =========================================================================
 
     private void CargarRecetaParaEdicion(RecetaPrivada receta)
     {
@@ -182,10 +163,6 @@ public partial class CrearEditarRecetaPage : ContentPage
         RefrescarListasFormulario();
     }
 
-
-    // =========================================================================
-    //      RENDERIZADO VISUAL DE LAS LISTAS DE INGREDIENTES Y PASOS EN PANTALLA
-    // =========================================================================
 
     private void RefrescarListasFormulario()
     {
@@ -290,11 +267,6 @@ public partial class CrearEditarRecetaPage : ContentPage
         }
     }
 
-
-    // =========================================================================
-    //      EVENTOS PARA AGREGAR INGREDIENTES Y PASOS AL BORRADOR DE LA RECETA
-    // =========================================================================
-
     private void OnAgregarIngredienteClicked(object? sender, EventArgs e)
     {
         string nombre = EntryNombreIngrediente.Text?.Trim() ?? string.Empty;
@@ -335,10 +307,6 @@ public partial class CrearEditarRecetaPage : ContentPage
     }
 
 
-    // =========================================================================
-    //      CONSTRUCCION DEL OBJETO RECETAPRIVADA A PARTIR DE LOS CAMPOS DE LA VISTA
-    // =========================================================================
-
     private RecetaPrivada ConstruirRecetaDesdeFormulario()
     {
         int.TryParse(EntryTiempo.Text, out int tiempo);
@@ -371,11 +339,6 @@ public partial class CrearEditarRecetaPage : ContentPage
             notasPersonales: EntryNotasPersonales.Text?.Trim() ?? string.Empty,
             soloDispositivoLocal: true);
     }
-
-
-    // =========================================================================
-    //      EVENTOS DE VALIDACION (UC04), GUARDADO LOCAL (UC14) Y PUBLICACION (UC16)
-    // =========================================================================
 
     private void OnValidarRecetaClicked(object? sender, EventArgs e)
     {
@@ -455,11 +418,6 @@ public partial class CrearEditarRecetaPage : ContentPage
     {
         CargarDatosPorDefecto();
     }
-
-
-    // =========================================================================
-    //      EVENTOS MULTIMEDIA: SELECTOR DE IMAGEN, EXAMINAR PC Y TOMAR FOTO
-    // =========================================================================
 
     private void OnImagenSeleccionadaChanged(object? sender, EventArgs e)
     {

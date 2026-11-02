@@ -1,0 +1,64 @@
+@startuml DiagramaActividades_Recetario
+skinparam shadowing false
+skinparam roundcorner 10
+skinparam ActivityBackgroundColor #F7F4EA
+skinparam ActivityBorderColor #758B68
+skinparam ActivityFontColor #283B2D
+skinparam ActivityDiamondBackgroundColor #ECE8DC
+skinparam ActivityDiamondBorderColor #C8785A
+skinparam SwimlaneTitleBackgroundColor #E8EDE4
+skinparam SwimlaneBorderColor #758B68
+
+
+
+
+
+
+
+title Diagrama de Actividades — Creación, Validación (UC04) y Persistencia JSON Local / Global (UC01, UC14, UC16)
+
+|Usuario Activo (UsuarioNormal / CreadorEspecialista)|
+start
+:Seleccionar rol activo en PerfilPage\n(UsuarioNormal, CreadorEspecialista o Administrador);
+:Abrir pestaña "Crear / Editar Receta"\n(CrearEditarRecetaPage);
+:Ingresar datos principales del platillo (UC01 / UC03):\n- Título, Categoría, TipoDieta, Etiquetas\n- Fotografía (PickerIcono / FilePicker / MediaPicker)\n- TiempoPreparacion, Porciones, NivelDificultad\n- Estacion, Origen, Region y NotasPersonales;
+:Agregar 1..* objetos IngredienteReceta\n(Composición 1..*: nombre, cantidad, UnidadMedida, TipoVegetal);
+:Agregar 1..* objetos PasoPreparacion\n(Composición 1..*: numeroPaso, instruccion, tiempoEstimado);
+:Construir instancia RecetaPrivada desde el formulario;
+
+|RecetaService & Dominio (Recetario.Models)|
+:Invocar validación de integridad (UC04)\nreceta.EsValido() -> ObtenerErroresValidacion();
+:Verificar reglas de Receta e IngredienteReceta (IValidable):\n- Título >= 3 caracteres, Categoría y Dieta no vacías\n- TiempoPreparacion > 0 y Porciones >= 1\n- Al menos 1 IngredienteReceta válido y 1 PasoPreparacion;
+
+if (¿receta.EsValido() == true?) then (No: Datos incompletos)
+    :Retornar lista de errores de validación\n(ObtenerErroresValidacion() / Throw InvalidOperationException);
+    |Usuario Activo (UsuarioNormal / CreadorEspecialista)|
+    :Mostrar BannerValidacion en tono Terracota (#C8785A)\ny alerta DisplayAlertAsync con errores a corregir;
+    stop
+else (Sí: Datos válidos)
+    |Usuario Activo (UsuarioNormal / CreadorEspecialista)|
+    if (¿Acción solicitada por el usuario?) then (Guardar en Mi Recetario Privado [UC01 / UC14])
+        |RecetaService & Dominio (Recetario.Models)|
+        :Ejecutar RecetaService.GuardarRecetaPrivada(receta)\no EditarRecetaPrivada(receta) (UC02);
+        :Actualizar colección en memoria cachePrivadas;
+        |PersistenciaJsonService<T> (Memoria Secundaria JSON)|
+        :Serializar List<RecetaPrivada> con System.Text.Json\nrepoPrivado.GuardarEnArchivos(cachePrivadas);
+        :Escribir archivo "recetas_privadas_local.json"\nen FileSystem.Current.AppDataDirectory (UC14);
+        |Usuario Activo (UsuarioNormal / CreadorEspecialista)|
+        :Notificar evento DatosActualizados y navegar\na pestaña "Mi Recetario" (MisRecetasPage);
+    else (Guardar y Publicar en Feed Global [UC16])
+        |RecetaService & Dominio (Recetario.Models)|
+        :Guardar copia en recetario privado (GuardarRecetaPrivada);
+        :Invocar método polimórfico del rol CreadorEspecialista:\nchef.PublicarRecetaOficial(recetaPrivada) -> RecetaPublica;
+        :Ejecutar chef.EjecutarAccionRol() y asignar\nverificadaPorChef = true, especialidadChef;
+        :Ejecutar RecetaService.PublicarRecetaEnFeed(recetaPublica, chef)\ny actualizar colección cachePublicas;
+        |PersistenciaJsonService<T> (Memoria Secundaria JSON)|
+        :Serializar List<RecetaPublica> con System.Text.Json\nrepoPublicoFeed.GuardarEnArchivos(cachePublicas);
+        :Escribir archivo "recetas_publicas_feed.json"\nen FileSystem.Current.AppDataDirectory (UC16);
+        |Usuario Activo (UsuarioNormal / CreadorEspecialista)|
+        :Notificar evento DatosActualizados y navegar\na pestaña "Feed Global" (FeedPage);
+    endif
+endif
+
+stop
+@enduml
