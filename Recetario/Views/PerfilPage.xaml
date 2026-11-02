@@ -7,8 +7,13 @@
              Shell.NavBarIsVisible="False"
              BackgroundColor="#F7F4EA">
 
-
     <Grid RowDefinitions="*,Auto">
+
+        <Image Source="fondo_feed.jpg"
+            Aspect="AspectFill"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            Opacity="0.88" />
 
         <ScrollView Grid.Row="0" Padding="16">
 

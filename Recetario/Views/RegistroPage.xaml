@@ -4,8 +4,8 @@
              x:Class="Recetario.Views.RegistroPage"
              BackgroundColor="#FFFDF9"
              Title="Registro de Cuenta">
-
-    <ScrollView>
+      
+        <ScrollView>
         <Grid RowDefinitions="Auto,*" Padding="24" MaximumWidthRequest="480" HorizontalOptions="Center">
 
             <VerticalStackLayout Grid.Row="0" Spacing="6" Margin="0,15,0,20">
