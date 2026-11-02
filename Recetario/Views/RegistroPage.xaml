@@ -4,23 +4,31 @@
              x:Class="Recetario.Views.RegistroPage"
              BackgroundColor="#FFFDF9"
              Title="Registro de Cuenta">
-      
+
+    <Grid>
+        <Image Source="fondo_feed.jpg"
+            Aspect="AspectFill"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            Opacity="0.88" />
+
         <ScrollView>
-        <Grid RowDefinitions="Auto,*" Padding="24" MaximumWidthRequest="480" HorizontalOptions="Center">
 
-            <VerticalStackLayout Grid.Row="0" Spacing="6" Margin="0,15,0,20">
-                <Label Text="Crear Nueva Cuenta"
-                       FontSize="24"
-                       FontAttributes="Bold"
-                       TextColor="#2C231E"
-                       HorizontalTextAlignment="Center" />
-                <Label Text="Únete a la comunidad gastronómica de Raccolta"
-                       FontSize="13"
-                       TextColor="#756A63"
-                       HorizontalTextAlignment="Center" />
-            </VerticalStackLayout>
+            <Grid RowDefinitions="Auto,*" Padding="24" MaximumWidthRequest="480" HorizontalOptions="Center">
 
-            <Border Grid.Row="1"
+                <VerticalStackLayout Grid.Row="0" Spacing="6" Margin="0,15,0,20">
+                    <Label Text="Crear Nueva Cuenta"
+                        FontSize="24"
+                        FontAttributes="Bold"
+                        TextColor="#2C231E"
+                        HorizontalTextAlignment="Center" />
+                    <Label Text="Únete a la comunidad gastronómica de Raccolta"
+                    FontSize="13"
+                    TextColor="#756A63"
+                    HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+
+                <Border Grid.Row="1"
                     StrokeShape="RoundRectangle 18"
                     BackgroundColor="#FFFFFF"
                     Stroke="#F3E9DF"
@@ -28,66 +36,65 @@
                     Padding="22"
                     Shadow="{Shadow Brush='#15000000', Offset='0,6', Radius=14}">
 
-                <VerticalStackLayout Spacing="14">
-
-                    <!-- Selector de Tipo de Usuario -->
-                    <VerticalStackLayout Spacing="5">
-                        <Label Text="Tipo de Cuenta a Crear" FontSize="12" FontAttributes="Bold" TextColor="#5A4E45" />
-                        <Border StrokeShape="RoundRectangle 10" Stroke="#E2D6CB" StrokeThickness="1" Padding="12,0" BackgroundColor="#FAF6F2">
-                            <Picker x:Name="PickerTipoCuenta"
+                    <VerticalStackLayout Spacing="14">
+                        <!-- Selector de Tipo de Usuario -->
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Tipo de Cuenta a Crear" FontSize="12" FontAttributes="Bold" TextColor="#5A4E45" />
+                            <Border StrokeShape="RoundRectangle 10" Stroke="#E2D6CB" StrokeThickness="1" Padding="12,0" BackgroundColor="#FAF6F2">
+                                <Picker x:Name="PickerTipoCuenta"
                                     SelectedIndexChanged="OnTipoCuentaChanged"
                                     TextColor="#2C231E"
                                     FontSize="14">
-                                <Picker.ItemsSource>
-                                    <x:Array Type="{x:Type x:String}">
+                                    <Picker.ItemsSource>
+                                        <x:Array Type="{x:Type x:String}">
                                         <x:String>Cocinero / Usuario Normal</x:String>
                                         <x:String>Administrador de Plataforma</x:String>
-                                    </x:Array>
-                                </Picker.ItemsSource>
-                            </Picker>
-                        </Border>
-                    </VerticalStackLayout>
+                                        </x:Array>
+                                    </Picker.ItemsSource>
+                                </Picker>
+                            </Border>
+                        </VerticalStackLayout>
 
-                    <!-- Nombre Completo -->
-                    <VerticalStackLayout Spacing="5">
-                        <Label Text="Nombre de Usuario" FontSize="12" FontAttributes="Bold" TextColor="#5A4E45" />
-                        <Border StrokeShape="RoundRectangle 10" Stroke="#E2D6CB" StrokeThickness="1" Padding="12,0" BackgroundColor="#FAF6F2">
-                            <Entry x:Name="TxtNombre"
-                                   Placeholder="ej. Lucía Morales"
-                                   TextColor="#2C231E"
-                                   PlaceholderColor="#A89B91"
-                                   FontSize="14" />
-                        </Border>
-                    </VerticalStackLayout>
+                        <!-- Nombre Completo -->
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Nombre de Usuario" FontSize="12" FontAttributes="Bold" TextColor="#5A4E45" />
+                            <Border StrokeShape="RoundRectangle 10" Stroke="#E2D6CB" StrokeThickness="1" Padding="12,0" BackgroundColor="#FAF6F2">
+                                <Entry x:Name="TxtNombre"
+                                Placeholder="ej. Lucía Morales"
+                                TextColor="#2C231E"
+                                PlaceholderColor="#A89B91"
+                                 FontSize="14" />
+                            </Border>
+                        </VerticalStackLayout>
 
-                    <!-- Correo Electrónico -->
-                    <VerticalStackLayout Spacing="5">
-                        <Label Text="Correo Electrónico" FontSize="12" FontAttributes="Bold" TextColor="#5A4E45" />
-                        <Border StrokeShape="RoundRectangle 10" Stroke="#E2D6CB" StrokeThickness="1" Padding="12,0" BackgroundColor="#FAF6F2">
-                            <Entry x:Name="TxtCorreo"
-                                   Placeholder="ej. lucia@cocina.cl"
-                                   Keyboard="Email"
-                                   TextColor="#2C231E"
-                                   PlaceholderColor="#A89B91"
-                                   FontSize="14" />
-                        </Border>
-                    </VerticalStackLayout>
+                        <!-- Correo Electrónico -->
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Correo Electrónico" FontSize="12" FontAttributes="Bold" TextColor="#5A4E45" />
+                            <Border StrokeShape="RoundRectangle 10" Stroke="#E2D6CB" StrokeThickness="1" Padding="12,0" BackgroundColor="#FAF6F2">
+                                <Entry x:Name="TxtCorreo"
+                                Placeholder="ej. lucia@cocina.cl"
+                                Keyboard="Email"
+                                TextColor="#2C231E"
+                                PlaceholderColor="#A89B91"
+                                FontSize="14" />
+                            </Border>
+                        </VerticalStackLayout>
 
-                    <!-- Contraseña -->
-                    <VerticalStackLayout Spacing="5">
-                        <Label Text="Contraseña" FontSize="12" FontAttributes="Bold" TextColor="#5A4E45" />
-                        <Border StrokeShape="RoundRectangle 10" Stroke="#E2D6CB" StrokeThickness="1" Padding="12,0" BackgroundColor="#FAF6F2">
-                            <Entry x:Name="TxtPassword"
-                                   Placeholder="Mínimo 3 caracteres"
-                                   IsPassword="True"
-                                   TextColor="#2C231E"
-                                   PlaceholderColor="#A89B91"
-                                   FontSize="14" />
-                        </Border>
-                    </VerticalStackLayout>
+                        <!-- Contraseña -->
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Contraseña" FontSize="12" FontAttributes="Bold" TextColor="#5A4E45" />
+                            <Border StrokeShape="RoundRectangle 10" Stroke="#E2D6CB" StrokeThickness="1" Padding="12,0" BackgroundColor="#FAF6F2">
+                                <Entry x:Name="TxtPassword"
+                                Placeholder="Mínimo 3 caracteres"
+                                IsPassword="True"
+                                TextColor="#2C231E"
+                                PlaceholderColor="#A89B91"
+                                 FontSize="14" />
+                            </Border>
+                        </VerticalStackLayout>
 
-                    <!-- SECCIÓN DINÁMICA: CÓDIGO DE ADMINISTRADOR -->
-                    <Border x:Name="PanelCodigoAdmin"
+                        <!-- SECCIÓN DINÁMICA: CÓDIGO DE ADMINISTRADOR -->
+                        <Border x:Name="PanelCodigoAdmin"
                             IsVisible="False"
                             StrokeShape="RoundRectangle 12"
                             BackgroundColor="#FFF4EC"
@@ -95,30 +102,30 @@
                             StrokeThickness="1.5"
                             Padding="14"
                             Margin="0,4">
-                        <VerticalStackLayout Spacing="8">
-                            <HorizontalStackLayout Spacing="6" VerticalOptions="Center">
-                                <Label Text="🛡️" FontSize="16" />
-                                <Label Text="Clave Única de Confirmación de Administrador"
-                                       FontSize="12"
-                                       FontAttributes="Bold"
-                                       TextColor="#B74100" />
-                            </HorizontalStackLayout>
-                            <Label Text="Para registrarte como Administrador requieres un código de confirmación no reutilizable del archivo codigos_admin.json."
-                                   FontSize="11"
-                                   TextColor="#7A4526" />
-                            <Border StrokeShape="RoundRectangle 8" Stroke="#FFAE73" StrokeThickness="1" Padding="10,0" BackgroundColor="#FFFFFF">
-                                <Entry x:Name="TxtCodigoAdmin"
-                                       Placeholder="ej. ADM-CHILE-2026"
-                                       TextColor="#B74100"
-                                       FontAttributes="Bold"
-                                       PlaceholderColor="#D9A88F"
-                                       FontSize="13" />
-                            </Border>
-                        </VerticalStackLayout>
-                    </Border>
+                            <VerticalStackLayout Spacing="8">
+                                <HorizontalStackLayout Spacing="6" VerticalOptions="Center">
+                                    <Label Text="🛡️" FontSize="16" />
+                                    <Label Text="Clave Única de Confirmación de Administrador"
+                                    FontSize="12"
+                                    FontAttributes="Bold"
+                                    TextColor="#B74100" />
+                                </HorizontalStackLayout>
+                                <Label Text="Para registrarte como Administrador requieres un código de confirmación no reutilizable del archivo codigos_admin.json."
+                                FontSize="11"
+                                TextColor="#7A4526" />
+                                <Border StrokeShape="RoundRectangle 8" Stroke="#FFAE73" StrokeThickness="1" Padding="10,0" BackgroundColor="#FFFFFF">
+                                    <Entry x:Name="TxtCodigoAdmin"
+                                    Placeholder="ej. ADM-CHILE-2026"
+                                    TextColor="#B74100"
+                                    FontAttributes="Bold"
+                                    PlaceholderColor="#D9A88F"
+                                    FontSize="13" />
+                                </Border>
+                            </VerticalStackLayout>
+                        </Border>
 
-                    <!-- Botón Registrarse -->
-                    <Button Text="Completar Registro"
+                        <!-- Botón Registrarse -->
+                        <Button Text="Completar Registro"
                             Clicked="OnRegistrarClicked"
                             BackgroundColor="#FF9E5E"
                             TextColor="White"
@@ -127,16 +134,17 @@
                             HeightRequest="48"
                             Margin="0,10,0,0" />
 
-                    <!-- Botón Volver -->
-                    <Button Text="Cancelar y volver al inicio"
+                        <!-- Botón Volver -->
+                        <Button Text="Cancelar y volver al inicio"
                             Clicked="OnVolverClicked"
                             BackgroundColor="Transparent"
                             TextColor="#756A63"
                             FontSize="12"
                             HeightRequest="36" />
-
-                </VerticalStackLayout>
-            </Border>
-        </Grid>
-    </ScrollView>
+                        
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+        </ScrollView>
+    </Grid>
 </ContentPage>
