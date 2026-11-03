@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:comp="clr-namespace:Recetario.Views.Components"
+             x:Class="Recetario.Views.MisRecetasPage"
+             Title="Mi Recetario"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F7F4EA">
+
+
+    <Grid RowDefinitions="*,Auto">
+        <Image Source="fondo_feed.jpg"
+                   Aspect="AspectFill"
+                   HorizontalOptions="Fill"
+                   VerticalOptions="Fill"
+                   Opacity="0.88" />
+
+        <ScrollView Grid.Row="0" Padding="16">
+
+            <VerticalStackLayout Spacing="14" MaximumWidthRequest="960" HorizontalOptions="Fill">
+
+                <Border BackgroundColor="#E8EDE4"
+                        Stroke="#758B68"
+                        StrokeThickness="1.5"
+                        StrokeShape="RoundRectangle 20"
+                        Padding="18">
+
+                    <VerticalStackLayout Spacing="6">
+
+                        <Label Text="📒 Mi Recetario Privado y Respaldo JSON Local (UC02, UC14, UC15)"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="#283B2D" />
+
+                        <Label Text="Gestiona tus recetas personales, edítalas, elimínalas o publícalas en el Feed Global si eres Chef Especialista (UC16)."
+                               FontSize="13"
+                               TextColor="#5A6B5C" />
+
+                        <Label x:Name="LblRutaJsonLocal"
+                               FontSize="11"
+                               TextColor="#283B2D" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+
+                <Border BackgroundColor="#ECE8DC"
+                        Stroke="#D8D3C4"
+                        StrokeShape="RoundRectangle 16"
+                        Padding="14">
+
+                    <VerticalStackLayout Spacing="10">
+
+                        <!--   FILA DE BUSCADOR DE RECETAS PRIVADAS (BLANCO + GRIS PALIDITO) Y BOTON IR A CREAR (UC01)   -->
+
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+
+                            <Entry x:Name="EntryBuscarPrivada"
+                                   Grid.Column="0"
+                                   Placeholder="Filtrar mis recetas privadas por nombre, ingrediente o etiqueta..."
+                                   BackgroundColor="#FFFFFF"
+                                   PlaceholderColor="#A3ACA4"
+                                   TextColor="#283B2D"
+                                   TextChanged="OnBusquedaPrivadaChanged" />
+
+                            <Button Grid.Column="1"
+                                    Text="➕ Nueva Receta (UC01)"
+                                    Clicked="OnIrACrearClicked"
+                                    BackgroundColor="#758B68"
+                                    TextColor="#FFFFFF"
+                                    FontAttributes="Bold"
+                                    CornerRadius="10" />
+
+                        </Grid>
+
+
+                        <!--   FILA DE CONTADOR Y BOTONES DE GUARDADO / CARGA DE ARCHIVO JSON LOCAL   -->
+
+                        <FlexLayout Wrap="Wrap" JustifyContent="SpaceBetween" AlignItems="Center">
+
+                            <Label x:Name="LblContadorPrivadas"
+                                   FontSize="13"
+                                   FontAttributes="Bold"
+                                   TextColor="#283B2D"
+                                   VerticalOptions="Center" />
+
+                            <HorizontalStackLayout Spacing="8">
+
+                                <!--   BOTON PARA SERIALIZAR EL RECETARIO PRIVADO EN JSON LOCAL (UC14)   -->
+
+                                <Button Text="💾 Guardar en JSON Local (UC14)"
+                                        Clicked="OnGuardarJsonLocalClicked"
+                                        BackgroundColor="#758B68"
+                                        TextColor="#FFFFFF"
+                                        FontSize="12"
+                                        FontAttributes="Bold"
+                                        CornerRadius="10"
+                                        Padding="12,6" />
+
+
+                                <!--   BOTON PARA DESERIALIZAR EL RECETARIO PRIVADO DESDE JSON LOCAL (UC15)   -->
+
+                                <Button Text="📂 Cargar desde JSON Local (UC15)"
+                                        Clicked="OnCargarJsonLocalClicked"
+                                        BackgroundColor="#C8785A"
+                                        TextColor="#FFFFFF"
+                                        FontSize="12"
+                                        FontAttributes="Bold"
+                                        CornerRadius="10"
+                                        Padding="12,6" />
+
+                            </HorizontalStackLayout>
+
+                        </FlexLayout>
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+
+                <VerticalStackLayout x:Name="StackRecetasPrivadas" Spacing="12" />
+
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+
+
+        <comp:BarraInferiorView Grid.Row="1" PestanaActiva="MisRecetas" />
+
+    </Grid>
+
+</ContentPage>

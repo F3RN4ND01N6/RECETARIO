@@ -1,0 +1,46 @@
+================================================================================
+               CREDENCIALES Y CÓDIGOS - ADMINISTRADORES DE PLATAFORMA
+================================================================================
+Archivos de persistencia asociados:
+- administradores.json (Cuentas de administradores)
+- codigos_admin.json   (Claves de validación de un solo uso para nuevos registros)
+
+--------------------------------------------------------------------------------
+1. ADMINISTRADOR PREDETERMINADO (INICIAL)
+--------------------------------------------------------------------------------
+ID Usuario    : ADM-01
+Nombre        : Admin Moderador
+Correo        : admin@raccolta.cl
+Contraseña    : admin
+Nivel Acceso  : ROOT_MODERADOR_GLOBAL
+Biografía     : Administrador general del catálogo y moderación del Feed Público.
+Estación Pref.: TODOELANHIO
+Origen        : CHILE
+Región        : Santiago
+
+--------------------------------------------------------------------------------
+2. CÓMO INICIAR SESIÓN COMO ADMINISTRADOR
+--------------------------------------------------------------------------------
+1. Abre la pantalla de Inicio de Sesión.
+2. Ingresa el Correo o Nombre de usuario (ej. admin@raccolta.cl).
+3. Ingresa la Contraseña (admin).
+4. ACTIVA el interruptor "¿Eres Administrador?" (Encendido).
+5. Presiona "Ingresar a la App".
+
+--------------------------------------------------------------------------------
+3. CÓDIGOS DE CONFIRMACIÓN PARA NUEVOS ADMINISTRADORES
+--------------------------------------------------------------------------------
+Para registrar un nuevo Administrador desde la pantalla de Registro, se debe
+seleccionar "Administrador de Plataforma" e ingresar uno de los siguientes
+códigos únicos (son de un solo uso y quedan invalidados tras registrarse):
+
+  [ Claves Iniciales Disponibles ]
+  • ADM-CHILE-2026
+  • ADM-BROCCOLI-9981
+  • ADM-MASTER-7734
+  • ADM-RACCOLTA-5512
+
+* Nota: Una vez que un código es utilizado, el sistema marca "Utilizado = true"
+  en codigos_admin.json y guarda el correo del administrador que lo canjeó,
+  impidiendo que otra persona lo vuelva a utilizar.
+================================================================================

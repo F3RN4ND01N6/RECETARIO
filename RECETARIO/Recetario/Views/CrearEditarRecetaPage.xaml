@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:comp="clr-namespace:Recetario.Views.Components"
+             x:Class="Recetario.Views.CrearEditarRecetaPage"
+             Title="Crear / Editar"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F7F4EA">
+
+    <Grid RowDefinitions="*,Auto">
+        <Image Source="fondo_feed.jpg"
+            Aspect="AspectFill"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            Opacity="0.88" />
+
+        <ScrollView Grid.Row="0" Padding="16">
+
+            <VerticalStackLayout Spacing="14" MaximumWidthRequest="920" HorizontalOptions="Fill">
+
+
+                <Border BackgroundColor="#E8EDE4"
+                        Stroke="#758B68"
+                        StrokeThickness="1.5"
+                        StrokeShape="RoundRectangle 20"
+                        Padding="18">
+
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+
+                        <!--   TITULO Y SUBTITULO INFORMATIVO DEL MODO ACTUAL (CREAR O EDITAR)   -->
+
+                        <VerticalStackLayout Spacing="4">
+
+                            <Label x:Name="LblTituloModo"
+                                   Text="Crear Nueva Receta"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="#283B2D" />
+
+                            <Label x:Name="LblSubtituloModo"
+                                   Text="Completa los datos generales, ingredientes y pasos."
+                                   FontSize="13"
+                                   TextColor="#5A6B5C" />
+
+                        </VerticalStackLayout>
+
+
+                        <!--   BOTON PARA LIMPIAR EL FORMULARIO Y VOLVER A MODO CREAR   -->
+
+                        <Button Grid.Column="1"
+                                Text="Limpiar"
+                                Clicked="OnLimpiarFormularioClicked"
+                                BackgroundColor="#758B68"
+                                TextColor="#FFFFFF"
+                                FontAttributes="Bold"
+                                CornerRadius="12"
+                                VerticalOptions="Center" />
+
+                    </Grid>
+
+                </Border>
+
+
+
+                <Border BackgroundColor="#ECE8DC"
+                        Stroke="#D8D3C4"
+                        StrokeShape="RoundRectangle 18"
+                        Padding="16">
+
+
+                    <VerticalStackLayout Spacing="12">
+
+
+                        <!--   ENCABEZADO DE LA SECCION 1   -->
+
+                        <Label Text="1. Datos Principales, Categoría, Dieta y Etiquetas"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="#283B2D" />
+
+
+                        <!--   RECUADRO DE TEXTO EN BLANCO CON PLACEHOLDER GRIS PALIDITO PARA EL TITULO   -->
+
+                        <Grid ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="10">
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="Título de la Receta" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Entry x:Name="EntryTitulo"
+                                       Placeholder="Ej: Budín de Zapallo Camote y Choclo"
+                                       BackgroundColor="#FFFFFF"
+                                       PlaceholderColor="#A3ACA4"
+                                       TextColor="#283B2D" />
+                            </VerticalStackLayout>
+                        </Grid>
+
+
+                        <Grid ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="10" >
+
+                            <!--      ESPACIO DE COLUMNA 0 PARA BOTONES DE EXAMINAR Y TOMAR FOTO -->
+
+                            <VerticalStackLayout Grid.Column="0"
+                                                 VerticalOptions="Center"
+                                                 Spacing="12">
+                                
+                                <!--   BOTON PARA EXAMINAR ARCHIVOS (PNG) LISTAS PARA AÑADIR A RECETA  -->
+
+                                <Button Grid.Column="0"
+                                        Text="Examinar"
+                                        Clicked="OnExaminarImagenPcClicked"
+                                        BackgroundColor="#758B68"
+                                        TextColor="#FFFFFF"
+                                        FontAttributes="Bold"
+                                        CornerRadius="10"
+                                        VerticalOptions="Start" 
+                                        />
+                                
+                                
+                                <!--  BOTON PARA TOMAR FOTOGAFIA A PLATILLO -->
+                                
+                                <Button Grid.Column="0"
+                                        Text="Tomar Foto"
+                                        Clicked="OnTomarFotoCLicked"
+                                        BackgroundColor="#C8785A"
+                                        TextColor="#FFFFFF"
+                                        FontAttributes="Bold"
+                                        CornerRadius="10"
+                                        VerticalOptions="Center"/>
+                                
+                                
+                            </VerticalStackLayout>
+
+
+                            <!--       ESPACIO DE COLUMNA 1 PARA PESTAÑAS DE FOTOGRAFIA PLATILLO Y EMOJI REFERENCIA-->
+                        
+                            <VerticalStackLayout Grid.Column="1"
+                                                 VerticalOptions="Center"
+                                                 Spacing="12">
+                                
+                                <!--    FOTOGRAFIA DEL PLATILLO  -->
+
+                                <VerticalStackLayout Grid.Column="1" WidthRequest="190">
+                                    <Label Text="Fotografía del Platillo" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" VerticalOptions="Start"/>
+                                    <Picker x:Name="PickerIcono"
+                                            BackgroundColor="#FFFFFF"
+                                            TextColor="#283B2D"
+                                            SelectedIndexChanged="OnImagenSeleccionadaChanged" 
+                                            VerticalOptions="Start" />
+                                </VerticalStackLayout>
+
+                            </VerticalStackLayout>
+                        
+                        
+
+                        
+                            <!-- ESPACIO DE COLUMNA 2 PARA IMAGEN PREVIA ANTES DE CREAR O EDITAR RECETA (PUBLICA/PRIVADA)  -->
+                        
+                        
+                            <Border Grid.Column="2"
+                                    BackgroundColor="#FFFFFF"
+                                    Stroke="#758B68"
+                                    StrokeShape="RoundRectangle 12"
+                                    WidthRequest="150"
+                                    HeightRequest="150"
+                                    Padding="0"
+                                    VerticalOptions="End">
+                                    <Image x:Name="ImgVistaPrevia"
+                                           Aspect="AspectFill"
+                                           WidthRequest="150"
+                                           HeightRequest="150" />
+                            </Border>
+                        
+                        
+                        
+                        
+                        
+                        </Grid>
+
+
+
+                        <!--   SELECTORES DE CATEGORIA, DIETA Y ETIQUETAS EN FONDO BLANCO   -->
+
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="12">
+
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="Categoría" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Picker x:Name="PickerCategoria" BackgroundColor="#FFFFFF" TextColor="#283B2D" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1">
+                                <Label Text="Tipo de Dieta" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Picker x:Name="PickerDieta" BackgroundColor="#FFFFFF" TextColor="#283B2D" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="2">
+                                <Label Text="Etiquetas (separadas por coma)" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Entry x:Name="EntryEtiquetas"
+                                       Placeholder="Casera, Temporada, Rápida"
+                                       BackgroundColor="#FFFFFF"
+                                       PlaceholderColor="#A3ACA4"
+                                       TextColor="#283B2D" />
+                            </VerticalStackLayout>
+
+                        </Grid>
+
+
+                        <!--   RECUADROS DE TIEMPO, PORCIONES, DIFICULTAD, ESTACION Y PAIS DE ORIGEN   -->
+
+                        <Grid ColumnDefinitions="*,*,*,*,*" ColumnSpacing="10">
+
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="Tiempo (min) *" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Entry x:Name="EntryTiempo"
+                                       Placeholder="Ej: 30"
+                                       Keyboard="Numeric"
+                                       Text="30"
+                                       BackgroundColor="#FFFFFF"
+                                       PlaceholderColor="#A3ACA4"
+                                       TextColor="#283B2D" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1">
+                                <Label Text="Porciones *" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Entry x:Name="EntryPorciones"
+                                       Placeholder="Ej: 4"
+                                       Keyboard="Numeric"
+                                       Text="4"
+                                       BackgroundColor="#FFFFFF"
+                                       PlaceholderColor="#A3ACA4"
+                                       TextColor="#283B2D" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="2">
+                                <Label Text="Dificultad" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Picker x:Name="PickerDificultad" BackgroundColor="#FFFFFF" TextColor="#283B2D" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="3">
+                                <Label Text="Estación" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Picker x:Name="PickerEstacion" BackgroundColor="#FFFFFF" TextColor="#283B2D" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="4">
+                                <Label Text="País Origen" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Picker x:Name="PickerOrigen" BackgroundColor="#FFFFFF" TextColor="#283B2D" />
+                            </VerticalStackLayout>
+
+                        </Grid>
+
+
+                        <!--   RECUADROS DE REGION / ZONA Y NOTAS PERSONALES EN BLANCO   -->
+
+                        <Grid ColumnDefinitions="*,2*" ColumnSpacing="12">
+
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="Región / Zona" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Entry x:Name="EntryRegion"
+                                       Placeholder="Ej: Valle Central"
+                                       Text="Valle Central"
+                                       BackgroundColor="#FFFFFF"
+                                       PlaceholderColor="#A3ACA4"
+                                       TextColor="#283B2D" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1">
+                                <Label Text="Notas Personales (RecetaPrivada)" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Entry x:Name="EntryNotasPersonales"
+                                       Placeholder="Secreto familiar, maridaje o consejo de cocción..."
+                                       BackgroundColor="#FFFFFF"
+                                       PlaceholderColor="#A3ACA4"
+                                       TextColor="#283B2D" />
+                            </VerticalStackLayout>
+
+                        </Grid>
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+
+
+                <Border BackgroundColor="#ECE8DC"
+                        Stroke="#D8D3C4"
+                        StrokeShape="RoundRectangle 18"
+                        Padding="16">
+
+                    <VerticalStackLayout Spacing="10">
+
+                        <Label Text="2. Ingredientes de la Receta"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="#283B2D" />
+
+
+                        <!--   FILA PARA AGREGAR UN NUEVO INGREDIENTE CON RECUADROS BLANCOS   -->
+
+                        <Grid ColumnDefinitions="2*,*,*,*,Auto" ColumnSpacing="8">
+
+                            <Entry x:Name="EntryNombreIngrediente"
+                                   Placeholder="Nombre del ingrediente (ej: Tomate Limachino)"
+                                   BackgroundColor="#FFFFFF"
+                                   PlaceholderColor="#A3ACA4"
+                                   TextColor="#283B2D" />
+
+                            <Entry x:Name="EntryCantidadIngrediente"
+                                   Grid.Column="1"
+                                   Placeholder="Cant."
+                                   Text="2"
+                                   Keyboard="Numeric"
+                                   BackgroundColor="#FFFFFF"
+                                   PlaceholderColor="#A3ACA4"
+                                   TextColor="#283B2D" />
+
+                            <Picker x:Name="PickerUnidadIngrediente"
+                                    Grid.Column="2"
+                                    BackgroundColor="#FFFFFF"
+                                    TextColor="#283B2D" />
+
+                            <Picker x:Name="PickerTipoVegetalIng"
+                                    Grid.Column="3"
+                                    BackgroundColor="#FFFFFF"
+                                    TextColor="#283B2D" />
+
+                            <Button Grid.Column="4"
+                                    Text="Agregar Ingrediente"
+                                    Clicked="OnAgregarIngredienteClicked"
+                                    BackgroundColor="#758B68"
+                                    TextColor="#FFFFFF"
+                                    FontAttributes="Bold"
+                                    CornerRadius="10" />
+
+                        </Grid>
+
+
+                        <!--   LISTADO DINAMICO DE INGREDIENTES AGREGADOS   -->
+
+                        <VerticalStackLayout x:Name="StackListaIngredientes" Spacing="6" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+
+
+                <Border BackgroundColor="#ECE8DC"
+                        Stroke="#D8D3C4"
+                        StrokeShape="RoundRectangle 18"
+                        Padding="16">
+
+                    <VerticalStackLayout Spacing="10">
+
+                        <Label Text="3. Pasos de Preparación"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="#283B2D" />
+
+
+                        <!--   FILA PARA AÑADIR UN NUEVO PASO CON RECUADROS BLANCOS   -->
+
+                        <Grid ColumnDefinitions="*,110,Auto" ColumnSpacing="8">
+
+                            <Entry x:Name="EntryInstruccionPaso"
+                                   Placeholder="Describe la instrucción de este paso..."
+                                   BackgroundColor="#FFFFFF"
+                                   PlaceholderColor="#A3ACA4"
+                                   TextColor="#283B2D" />
+
+                            <Entry x:Name="EntryMinutosPaso"
+                                   Grid.Column="1"
+                                   Placeholder="Minutos"
+                                   Text="10"
+                                   Keyboard="Numeric"
+                                   BackgroundColor="#FFFFFF"
+                                   PlaceholderColor="#A3ACA4"
+                                   TextColor="#283B2D" />
+
+                            <Button Grid.Column="2"
+                                    Text="Añadir Paso"
+                                    Clicked="OnAgregarPasoClicked"
+                                    BackgroundColor="#758B68"
+                                    TextColor="#FFFFFF"
+                                    FontAttributes="Bold"
+                                    CornerRadius="10" />
+
+                        </Grid>
+
+
+                        <!--   LISTADO DINAMICO DE PASOS AGREGADOS   -->
+
+                        <VerticalStackLayout x:Name="StackListaPasos" Spacing="6" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+
+
+                <Border x:Name="BannerValidacion"
+                        BackgroundColor="#E8EDE4"
+                        Stroke="#758B68"
+                        StrokeThickness="1.5"
+                        StrokeShape="RoundRectangle 14"
+                        Padding="14">
+
+                    <Label x:Name="LblEstadoValidacion"
+                           Text="Listo para validar. Presiona 'Validar Datos' o 'Guardar Receta'."
+                           FontSize="13"
+                           FontAttributes="Bold"
+                           TextColor="#283B2D" />
+
+                </Border>
+
+
+
+                <FlexLayout Wrap="Wrap" JustifyContent="SpaceBetween" AlignItems="Center">
+
+                    <Button Text="Validar Datos de la Receta"
+                            Clicked="OnValidarRecetaClicked"
+                            BackgroundColor="#758B68"
+                            TextColor="#FFFFFF"
+                            FontAttributes="Bold"
+                            CornerRadius="12"
+                            Margin="0,4" />
+
+                    <HorizontalStackLayout Spacing="10">
+
+                        <Button x:Name="BtnGuardarPrivada"
+                                Text="Guardar en Mi Recetario"
+                                Clicked="OnGuardarRecetaPrivadaClicked"
+                                BackgroundColor="#758B68"
+                                TextColor="#FFFFFF"
+                                FontAttributes="Bold"
+                                CornerRadius="12" />
+
+                        <Button Text="Guardar y Publicar en Feed Global"
+                                Clicked="OnGuardarYPublicarFeedClicked"
+                                BackgroundColor="#C8785A"
+                                TextColor="#FFFFFF"
+                                FontAttributes="Bold"
+                                CornerRadius="12" />
+
+                    </HorizontalStackLayout>
+
+                </FlexLayout>
+
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+
+
+        <comp:BarraInferiorView Grid.Row="1" PestanaActiva="CrearEditar" />
+
+    </Grid>
+
+</ContentPage>

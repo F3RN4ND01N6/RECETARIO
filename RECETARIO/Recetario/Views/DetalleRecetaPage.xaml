@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Recetario.Views.DetalleRecetaPage"
+             Title="Detalle de Receta"
+             BackgroundColor="#F7F4EA">
+
+    <!-- ========================================================================= -->
+    <!--      CONTENEDOR DESPLAZABLE DE LA VISTA DETALLE DE RECETA     -->
+    <!-- ========================================================================= -->
+    <Grid>
+        <Image Source="fondo_feed.jpg"
+        Aspect="AspectFill"
+        HorizontalOptions="Fill"
+        VerticalOptions="Fill"
+        Opacity="0.88" />
+
+        <ScrollView Padding="18">
+
+        <VerticalStackLayout Spacing="16" MaximumWidthRequest="860" HorizontalOptions="Fill">
+
+
+            <!--      BOTON SUPERIOR IZQUIERDO PARA VOLVER AL LISTADO ANTERIOR (VERDE SALVIA)     -->
+
+            <HorizontalStackLayout Spacing="10">
+
+                <Button Text="← Volver al listado"
+                        Clicked="OnCerrarClicked"
+                        BackgroundColor="#758B68"
+                        TextColor="#FFFFFF"
+                        FontAttributes="Bold"
+                        CornerRadius="12" />
+
+            </HorizontalStackLayout>
+
+
+
+            <!-- ========================================================================= -->
+            <!--      TARJETA DE CABECERA DEL PLATILLO EN VERDE SALVIA Y CREMA CALIDO     -->
+            <!-- ========================================================================= -->
+
+            <Border BackgroundColor="#E8EDE4"
+                    Stroke="#758B68"
+                    StrokeThickness="1.5"
+                    StrokeShape="RoundRectangle 20"
+                    Padding="20">
+
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="18" RowDefinitions="Auto,Auto,Auto,Auto">
+
+                    <!--   ESPACIO DE COLUMNA 0 PARA FOTOGRAFIA DEL PLATILLO   -->
+
+                    <Border Grid.RowSpan="4"
+                            BackgroundColor="#FFFFFF"
+                            Stroke="#758B68"
+                            StrokeThickness="1.5"
+                            StrokeShape="RoundRectangle 18"
+                            WidthRequest="115"
+                            HeightRequest="115"
+                            Padding="0"
+                            VerticalOptions="Center">
+
+                        <Image x:Name="ImgPlatillo"
+                               Aspect="AspectFill"
+                               WidthRequest="115"
+                               HeightRequest="115" />
+
+                    </Border>
+
+
+                    <!--   ESPACIO DE COLUMNA 1 PARA TITULO, CATEGORIA, TIEMPO Y RESUMEN DE ENTIDAD   -->
+
+                    <Label x:Name="LblTitulo"
+                           Grid.Column="1"
+                           Grid.Row="0"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="#283B2D" />
+
+                    <Label x:Name="LblSubtitulo"
+                           Grid.Column="1"
+                           Grid.Row="1"
+                           FontSize="14"
+                           TextColor="#5A6B5C"
+                           Margin="0,2,0,0" />
+
+                    <Label x:Name="LblMeta"
+                           Grid.Column="1"
+                           Grid.Row="2"
+                           FontSize="13"
+                           FontAttributes="Bold"
+                           TextColor="#283B2D"
+                           Margin="0,4,0,0" />
+
+                    <Label x:Name="LblResumenEntidad"
+                           Grid.Column="1"
+                           Grid.Row="3"
+                           FontSize="12"
+                           TextColor="#5A6B5C"
+                           Margin="0,4,0,0" />
+
+                </Grid>
+
+            </Border>
+
+
+
+            <!-- ========================================================================= -->
+            <!--      BARRA DE ACCION PARA MARCAR O DESMARCAR RECETA COMO FAVORITA (TERRACOTA)     -->
+            <!-- ========================================================================= -->
+
+            <HorizontalStackLayout Spacing="10">
+
+                <Button x:Name="BtnFavorita"
+                        Text="♥ Marcar Favorita (UC08)"
+                        Clicked="OnAlternarFavoritaClicked"
+                        BackgroundColor="#C8785A"
+                        TextColor="#FFFFFF"
+                        FontAttributes="Bold"
+                        CornerRadius="12" />
+
+            </HorizontalStackLayout>
+
+
+
+            <!-- ========================================================================= -->
+            <!--      TARJETA DE INGREDIENTES DE LA RECETA (COMPOSICION 1..*)     -->
+            <!-- ========================================================================= -->
+
+            <Border BackgroundColor="#FFFFFF"
+                    Stroke="#D8D3C4"
+                    StrokeShape="RoundRectangle 16"
+                    Padding="16">
+
+                <VerticalStackLayout Spacing="10">
+
+                    <Label Text="🥕 Ingredientes de la Receta (Composición 1..*)"
+                           FontSize="17"
+                           FontAttributes="Bold"
+                           TextColor="#283B2D" />
+
+                    <!--   LISTA DINAMICA DONDE SE RENDERIZAN LOS INGREDIENTES   -->
+
+                    <VerticalStackLayout x:Name="StackIngredientes" Spacing="8" />
+
+                </VerticalStackLayout>
+
+            </Border>
+
+
+
+            <!-- ========================================================================= -->
+            <!--      TARJETA DE PASOS DE PREPARACION INTERACTIVOS (COMPOSICION 1..*)     -->
+            <!-- ========================================================================= -->
+
+            <Border BackgroundColor="#FFFFFF"
+                    Stroke="#D8D3C4"
+                    StrokeShape="RoundRectangle 16"
+                    Padding="16">
+
+                <VerticalStackLayout Spacing="10">
+
+                    <Label Text="👩‍🍳 Paso a Paso Interactivo ( Toca un paso para marcarlo completado )"
+                           FontSize="17"
+                           FontAttributes="Bold"
+                           TextColor="#283B2D" />
+
+                    <!--   LISTA DINAMICA DE PASOS INTERACTIVOS   -->
+
+                    <VerticalStackLayout x:Name="StackPasos" Spacing="8" />
+
+                </VerticalStackLayout>
+
+            </Border>
+
+
+
+            <!-- ========================================================================= -->
+            <!--      SECCION DE CALIFICACIONES Y RESEÑAS (UC09 - ICALIFICABLE)     -->
+            <!-- ========================================================================= -->
+
+            <Border x:Name="PanelCalificaciones"
+                    BackgroundColor="#ECE8DC"
+                    Stroke="#D8D3C4"
+                    StrokeThickness="1.5"
+                    StrokeShape="RoundRectangle 16"
+                    Padding="16">
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Label Text="⭐ Calificar esta Receta (UC09 - ICalificable)"
+                           FontSize="17"
+                           FontAttributes="Bold"
+                           TextColor="#283B2D" />
+
+
+                    <!--   FORMULARIO DE PUNTAJE (1 A 5 ESTRELLAS) Y COMENTARIO EN BLANCO   -->
+
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12" RowDefinitions="Auto,Auto">
+
+                        <Label Text="Puntaje (1 a 5 ★):"
+                               VerticalOptions="Center"
+                               FontAttributes="Bold"
+                               TextColor="#283B2D" />
+
+                        <Picker x:Name="PickerPuntaje"
+                                Grid.Column="1"
+                                BackgroundColor="#FFFFFF"
+                                TextColor="#283B2D" />
+
+                        <Label Grid.Row="1"
+                               Text="Comentario:"
+                               VerticalOptions="Center"
+                               FontAttributes="Bold"
+                               TextColor="#283B2D" />
+
+                        <Entry x:Name="EntryComentario"
+                               Grid.Row="1"
+                               Grid.Column="1"
+                               Placeholder="Escribe tu opinión sobre esta receta..."
+                               BackgroundColor="#FFFFFF"
+                               PlaceholderColor="#A3ACA4"
+                               TextColor="#283B2D" />
+
+                    </Grid>
+
+
+                    <!--   BOTON PARA ENVIAR CALIFICACION Y SERIALIZAR EN JSON GLOBAL   -->
+
+                    <Button Text="Enviar Calificación y Guardar en JSON Global (UC09)"
+                            Clicked="OnEnviarCalificacionClicked"
+                            BackgroundColor="#758B68"
+                            TextColor="#FFFFFF"
+                            FontAttributes="Bold"
+                            CornerRadius="12" />
+
+                    <BoxView HeightRequest="1" Color="#D8D3C4" />
+
+                    <Label Text="Reseñas de la Comunidad:"
+                           FontAttributes="Bold"
+                           TextColor="#283B2D" />
+
+                    <!--   LISTA DINAMICA DE RESEÑAS RECIBIDAS   -->
+
+                    <VerticalStackLayout x:Name="StackResenas" Spacing="8" />
+
+                </VerticalStackLayout>
+
+            </Border>
+
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

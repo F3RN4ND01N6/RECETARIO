@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:comp="clr-namespace:Recetario.Views.Components"
+             x:Class="Recetario.Views.TemporadaPage"
+             Title="Temporada"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F7F4EA">
+    
+    <Grid RowDefinitions="*,Auto">
+        <Image Source="fondo_feed.jpg"
+            Aspect="AspectFill"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            Opacity="0.88" />
+
+        <ScrollView Grid.Row="0" Padding="16">
+
+            <VerticalStackLayout Spacing="14" MaximumWidthRequest="920" HorizontalOptions="Fill">
+
+
+                <Border BackgroundColor="#E8EDE4"
+                        Stroke="#758B68"
+                        StrokeThickness="1.5"
+                        StrokeShape="RoundRectangle 20"
+                        Padding="18">
+
+                    <VerticalStackLayout Spacing="6">
+
+                        <Label Text="🗓️ Calendario de Frutas y Verduras de Temporada (UC07)"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="#283B2D" />
+
+                        <Label Text="Consulta qué frutas y hortalizas están en su punto óptimo según la estación del año y filtra recetas asociadas."
+                               FontSize="13"
+                               TextColor="#5A6B5C" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+
+                <Border BackgroundColor="#FFFFFF"
+                        Stroke="#D8D3C4"
+                        StrokeShape="RoundRectangle 16"
+                        Padding="14">
+
+                    <VerticalStackLayout Spacing="10">
+
+                        <Label Text="Selecciona una Estación:"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#283B2D" />
+
+
+                        <!--   BOTONES PARA FILTRAR INGREDIENTES POR ESTACION (UC07)   -->
+
+                        <FlexLayout Wrap="Wrap" JustifyContent="SpaceBetween">
+
+                            <Button x:Name="BtnEstacionTodo"
+                                    Text="🌎 Todo el Año"
+                                    Clicked="OnTodoElAnioClicked"
+                                    BackgroundColor="#758B68"
+                                    TextColor="#FFFFFF"
+                                    FontAttributes="Bold"
+                                    CornerRadius="14"
+                                    Margin="2" />
+
+                            <Button x:Name="BtnEstacionPrimavera"
+                                    Text="🌸 Primavera"
+                                    Clicked="OnPrimaveraClicked"
+                                    BackgroundColor="#ECE8DC"
+                                    TextColor="#283B2D"
+                                    FontAttributes="Bold"
+                                    CornerRadius="14"
+                                    Margin="2" />
+
+                            <Button x:Name="BtnEstacionVerano"
+                                    Text="☀️ Verano"
+                                    Clicked="OnVeranoClicked"
+                                    BackgroundColor="#ECE8DC"
+                                    TextColor="#283B2D"
+                                    FontAttributes="Bold"
+                                    CornerRadius="14"
+                                    Margin="2" />
+
+                            <Button x:Name="BtnEstacionOtonio"
+                                    Text="🍂 Otoño"
+                                    Clicked="OnOtonioClicked"
+                                    BackgroundColor="#ECE8DC"
+                                    TextColor="#283B2D"
+                                    FontAttributes="Bold"
+                                    CornerRadius="14"
+                                    Margin="2" />
+
+                            <Button x:Name="BtnEstacionInvierno"
+                                    Text="❄️ Invierno"
+                                    Clicked="OnInviernoClicked"
+                                    BackgroundColor="#ECE8DC"
+                                    TextColor="#283B2D"
+                                    FontAttributes="Bold"
+                                    CornerRadius="14"
+                                    Margin="2" />
+
+                        </FlexLayout>
+
+
+                        <!--   ETIQUETA DE ESTACION ACTIVA Y BOTON DE ACCESO DIRECTO AL FEED (TERRACOTA)   -->
+
+                        <Grid ColumnDefinitions="*,Auto" Margin="0,4,0,0">
+
+                            <Label x:Name="LblEstacionSeleccionada"
+                                   Grid.Column="0"
+                                   FontSize="15"
+                                   FontAttributes="Bold"
+                                   TextColor="#283B2D"
+                                   VerticalOptions="Center" />
+
+                            <Button Grid.Column="1"
+                                    Text="🔍 Ver Recetas de esta Estación en el Feed"
+                                    Clicked="OnFiltrarFeedPorEstacionActualClicked"
+                                    BackgroundColor="#C8785A"
+                                    TextColor="#FFFFFF"
+                                    FontAttributes="Bold"
+                                    CornerRadius="12"
+                                    Padding="12,6"
+                                    FontSize="12" />
+
+                        </Grid>
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+
+                <VerticalStackLayout x:Name="StackIngredientesTemporada" Spacing="10" />
+
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+
+        <comp:BarraInferiorView Grid.Row="1" PestanaActiva="Temporada" />
+
+    </Grid>
+
+</ContentPage>

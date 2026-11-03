@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:comp="clr-namespace:Recetario.Views.Components"
+             x:Class="Recetario.Views.PerfilPage"
+             Title="Perfil y Rol"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F7F4EA">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <Image Source="fondo_feed.jpg"
+            Aspect="AspectFill"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            Opacity="0.88" />
+
+        <ScrollView Grid.Row="0" Padding="16">
+
+            <VerticalStackLayout Spacing="14" MaximumWidthRequest="920" HorizontalOptions="Fill">
+
+
+                <Border BackgroundColor="#E8EDE4"
+                        Stroke="#758B68"
+                        StrokeThickness="1.5"
+                        StrokeShape="RoundRectangle 20"
+                        Padding="18">
+
+                    <VerticalStackLayout Spacing="6">
+
+                        <Label Text="👤 Perfil de Usuario, Actores y Polimorfismo (Herencias 1, 2 y 3)"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="#283B2D" />
+
+                        <Label x:Name="LblResumenActor"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#5A6B5C" />
+
+                        <Label x:Name="LblResultadoAccionRol"
+                               FontSize="13"
+                               TextColor="#283B2D"
+                               BackgroundColor="#FFFFFF"
+                               Padding="10,6" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+                <Border BackgroundColor="#ECE8DC"
+                        Stroke="#D8D3C4"
+                        StrokeShape="RoundRectangle 18"
+                        Padding="16">
+
+                    <VerticalStackLayout Spacing="12">
+
+                        <Label Text="Datos del Usuario y Configuracion de Perfil"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="#283B2D" />
+
+
+                        <!--   CAMPOS DE NOMBRE, CORREO ELECTRONICO Y BIOGRAFIA DEL USUARIO EN BLANCO   -->
+
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="12" RowDefinitions="Auto,Auto">
+
+                            <VerticalStackLayout Grid.Column="0" Grid.Row="0">
+                                <Label Text="Nombre de Usuario" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Entry x:Name="EntryNombreUsuario"
+                                       Placeholder="Escribe tu nombre de usuario..."
+                                       BackgroundColor="#FFFFFF"
+                                       PlaceholderColor="#A3ACA4"
+                                       TextColor="#283B2D" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1" Grid.Row="0">
+                                <Label Text="Correo Electrónico" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Entry x:Name="EntryCorreoUsuario"
+                                       Placeholder="ejemplo@correo.cl"
+                                       BackgroundColor="#FFFFFF"
+                                       PlaceholderColor="#A3ACA4"
+                                       TextColor="#283B2D" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.ColumnSpan="2" Grid.Row="1" Margin="0,6,0,0">
+                                <Label Text="Biografía" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Entry x:Name="EntryBiografiaUsuario"
+                                       Placeholder="Cuéntanos sobre tu estilo culinario..."
+                                       BackgroundColor="#FFFFFF"
+                                       PlaceholderColor="#A3ACA4"
+                                       TextColor="#283B2D" />
+                            </VerticalStackLayout>
+
+                        </Grid>
+
+                        <BoxView HeightRequest="1" Color="#D8D3C4" />
+
+
+                        <!--   CAMPOS DE PREFERENCIAS DE TEMPORADA Y ORIGEN (CONFIGURACIONPERFIL)   -->
+
+                        <Label Text="Preferencias de Temporada y Origen:"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="#283B2D" />
+
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="12">
+
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="Estación Preferida" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Picker x:Name="PickerEstacionPref" BackgroundColor="#FFFFFF" TextColor="#283B2D" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1">
+                                <Label Text="País de Origen" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Picker x:Name="PickerOrigenPref" BackgroundColor="#FFFFFF" TextColor="#283B2D" />
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="2">
+                                <Label Text="Región Preferida" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Entry x:Name="EntryRegionPref"
+                                       Placeholder="Ej: Valle Central"
+                                       BackgroundColor="#FFFFFF"
+                                       PlaceholderColor="#A3ACA4"
+                                       TextColor="#283B2D" />
+                            </VerticalStackLayout>
+
+                        </Grid>
+
+                        <HorizontalStackLayout Spacing="8">
+                            <CheckBox x:Name="ChkIngredientesEstacion" Color="#758B68" />
+                            <Label Text="Priorizar frutas y verduras frescas de estación en sugerencias"
+                                   VerticalOptions="Center"
+                                   TextColor="#283B2D" />
+                        </HorizontalStackLayout>
+
+
+                        <!--   BOTON PARA GUARDAR Y VALIDAR EL PERFIL DE USUARIO (VERDE SALVIA)   -->
+
+                        <Button Text="💾 Guardar y Validar Perfil (IValidable)"
+                                Clicked="OnGuardarPerfilClicked"
+                                BackgroundColor="#758B68"
+                                TextColor="#FFFFFF"
+                                FontAttributes="Bold"
+                                CornerRadius="12" />
+
+                        <Button Text="🚪 Cerrar Sesión"
+                                Clicked="OnCerrarSesionClicked"
+                                BackgroundColor="#FFF0ED"
+                                TextColor="#D9381E"
+                                BorderColor="#FFC8BF"
+                                BorderWidth="1"
+                                FontAttributes="Bold"
+                                CornerRadius="12"
+                                HeightRequest="40"
+                                Margin="0,4,0,0" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+
+                <Border BackgroundColor="#FFFFFF"
+                        Stroke="#758B68"
+                        StrokeShape="RoundRectangle 18"
+                        Padding="16">
+
+                    <VerticalStackLayout Spacing="6">
+
+                        <Label Text="💾 Estado del Sistema de Archivos (Memoria Secundaria JSON)"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="#283B2D" />
+
+                        <Label x:Name="LblEstadisticasJson"
+                               FontSize="13"
+                               TextColor="#283B2D" />
+
+                        <Label x:Name="LblRutasJson"
+                               FontSize="11"
+                               TextColor="#5A6B5C" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+
+        <comp:BarraInferiorView Grid.Row="1" PestanaActiva="Perfil" />
+
+    </Grid>
+
+</ContentPage>

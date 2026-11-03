@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:comp="clr-namespace:Recetario.Views.Components"
+             x:Class="Recetario.Views.FeedPage"
+             Title="Feed Global"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#FFFDF9">
+
+    <Grid>
+        <!-- Imagen de Fondo Ilustrada de Ingredientes y Especias -->
+        <Image Source="fondo_feed.jpg"
+               Aspect="AspectFill"
+               HorizontalOptions="Fill"
+               VerticalOptions="Fill"
+               Opacity="0.88" />
+
+        <Grid RowDefinitions="*,Auto">
+        
+            <ScrollView Grid.Row="0" Padding="16">
+        
+                <VerticalStackLayout Spacing="14" MaximumWidthRequest="960" HorizontalOptions="Fill">
+        
+        
+                    <Border BackgroundColor="#E8EDE4"
+                                Stroke="#758B68"
+                                StrokeThickness="1.5"
+                                StrokeShape="RoundRectangle 20"
+                                Padding="18">
+        
+                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto">
+        
+                            <!--   TITULO PRINCIPAL DE LA PLATAFORMA RACCOLTA DI RICETTE   -->
+
+                            <!--(UC05)-->
+                            <Label Text="Raccolta di ricette — Catálogo Global" 
+                                       FontSize="22"
+                                       FontAttributes="Bold"
+                                       TextColor="#283B2D" />
+        
+        
+                            <!--   INSIGNIA DEL ACTOR / ROL ACTIVO EN LA SESION (TERRACOTA)   -->
+        
+                            <Border Grid.Column="1"
+                                        Grid.RowSpan="2"
+                                        BackgroundColor="#C8785A"
+                                        Stroke="#A85E42"
+                                        StrokeShape="RoundRectangle 12"
+                                        Padding="10,6"
+                                        VerticalOptions="End">
+        
+                                <Label x:Name="LblRolActivo"
+                                           FontSize="12"
+                                           FontAttributes="Bold"
+                                           TextColor="#FFFFFF" />
+        
+                            </Border>
+        
+        
+                            <!--   DESCRIPCION Y CONTADOR ESTADISTICO DEL FEED   -->
+        
+                            <Label Grid.Row="1"
+                                       Text="Explora recetas de frutas y verduras de temporada, filtra por origen y califica tus favoritas."
+                                       FontSize="13"
+                                       TextColor="#5A6B5C"
+                                       Margin="0,4,0,0" />
+        
+                            <Label x:Name="LblEstadisticasFeed"
+                                       Grid.Row="2"
+                                       Grid.ColumnSpan="2"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       TextColor="#283B2D"
+                                       Margin="0,6,0,0" />
+        
+                        </Grid>
+        
+                    </Border>
+        
+        
+                    <Border BackgroundColor="#ECE8DC"
+                                Stroke="#D8D3C4"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 18"
+                                Padding="16">
+        
+                        <VerticalStackLayout Spacing="10">
+        
+                            <Label Text="🔍 Buscar y Filtrar Recetas (UC06 — FiltroReceta)"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="#283B2D" />
+        
+        
+                            <!--   BARRA DE BUSQUEDA POR TEXTO EN FONDO BLANCO Y LETRA GRIS PALIDITO   -->
+        
+                            <Entry x:Name="EntryBusqueda"
+                                       Placeholder="Buscar por ingrediente, fruta/verdura, título o etiqueta (#Verano, Choclo, Mango...)"
+                                       BackgroundColor="#FFFFFF"
+                                       PlaceholderColor="#A3ACA4"
+                                       TextColor="#283B2D"
+                                       TextChanged="OnFiltroCambiado" />
+        
+        
+                            <!--   SELECTORES DE FILTRO POR FRUTA/VERDURA, ESTACION, ORIGEN Y DIFICULTAD   -->
+        
+                            <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="10" RowDefinitions="Auto,Auto">
+        
+                                <!--   COLUMNA 0: FILTRO POR TIPO VEGETAL   -->
+        
+                                <VerticalStackLayout Grid.Column="0">
+                                    <Label Text="Fruta / Verdura" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                    <Picker x:Name="PickerVegetal" BackgroundColor="#FFFFFF" TextColor="#283B2D" SelectedIndexChanged="OnFiltroCambiado" />
+                                </VerticalStackLayout>
+        
+        
+                                <!--   COLUMNA 1: FILTRO POR ESTACION DEL AÑO   -->
+        
+                                <VerticalStackLayout Grid.Column="1">
+                                    <Label Text="Estación" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                    <Picker x:Name="PickerEstacion" BackgroundColor="#FFFFFF" TextColor="#283B2D" SelectedIndexChanged="OnFiltroCambiado" />
+                                </VerticalStackLayout>
+        
+        
+                                <!--   COLUMNA 2: FILTRO POR PAIS DE ORIGEN   -->
+        
+                                <VerticalStackLayout Grid.Column="2">
+                                    <Label Text="País / Origen" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                    <Picker x:Name="PickerOrigen" BackgroundColor="#FFFFFF" TextColor="#283B2D" SelectedIndexChanged="OnFiltroCambiado" />
+                                </VerticalStackLayout>
+        
+        
+                                <!--   COLUMNA 3: FILTRO POR NIVEL DE DIFICULTAD   -->
+        
+                                <VerticalStackLayout Grid.Column="3">
+                                    <Label Text="Dificultad" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                    <Picker x:Name="PickerDificultad" BackgroundColor="#FFFFFF" TextColor="#283B2D" SelectedIndexChanged="OnFiltroCambiado" />
+                                </VerticalStackLayout>
+        
+                            </Grid>
+        
+        
+                            <!--   CASILLAS DE VERIFICACION Y BOTONES DE SOBRECARGA / JSON GLOBAL (UC17)   -->
+        
+                            <FlexLayout Wrap="Wrap" JustifyContent="SpaceBetween" AlignItems="Center">
+        
+                                <!--   CHECKS PARA FILTRAR SOLO CHEFS VERIFICADOS O SOLO FAVORITAS (UC08)   -->
+        
+                                <HorizontalStackLayout Spacing="12">
+        
+                                    <HorizontalStackLayout Spacing="4" VerticalOptions="Center">
+                                        <CheckBox x:Name="ChkSoloChefs" Color="#758B68" CheckedChanged="OnFiltroCambiado" />
+                                        <Label Text="✔ Solo Chefs Verificados" VerticalOptions="Center" TextColor="#283B2D" FontSize="13" />
+                                    </HorizontalStackLayout>
+        
+                                    <HorizontalStackLayout Spacing="4" VerticalOptions="Center">
+                                        <CheckBox x:Name="ChkSoloFavoritas" Color="#C8785A" CheckedChanged="OnFiltroCambiado" />
+                                        <Label Text="♥ Solo Mis Favoritas (UC08)" VerticalOptions="Center" TextColor="#283B2D" FontSize="13" />
+                                    </HorizontalStackLayout>
+        
+                                </HorizontalStackLayout>
+        
+        
+                                <!--   BOTONES DE ACCION RAPIDA SOBRE EL FEED (VERDE SALVIA Y TERRACOTA)   -->
+        
+                                <HorizontalStackLayout Spacing="8">
+        
+                                    <Button Text="⚡ Sobrecarga Estación+País"
+                                                Clicked="OnSobrecargaEstacionPaisClicked"
+                                                BackgroundColor="#758B68"
+                                                TextColor="#FFFFFF"
+                                                FontSize="12"
+                                                FontAttributes="Bold"
+                                                CornerRadius="10"
+                                                Padding="10,6" />
+        
+                                    <Button Text="Limpiar Filtros"
+                                                Clicked="OnLimpiarFiltrosClicked"
+                                                BackgroundColor="#FFFFFF"
+                                                TextColor="#283B2D"
+                                                FontSize="12"
+                                                FontAttributes="Bold"
+                                                CornerRadius="10"
+                                                Padding="10,6" />
+        
+                                    <Button Text="📥 Cargar JSON Global (UC17)"
+                                                Clicked="OnRecargarJsonGlobalClicked"
+                                                BackgroundColor="#C8785A"
+                                                TextColor="#FFFFFF"
+                                                FontSize="12"
+                                                FontAttributes="Bold"
+                                                CornerRadius="10"
+                                                Padding="10,6" />
+        
+                                </HorizontalStackLayout>
+        
+                            </FlexLayout>
+        
+                        </VerticalStackLayout>
+        
+                    </Border>
+        
+        
+                    <VerticalStackLayout x:Name="StackTarjetasFeed" Spacing="12" />
+        
+        
+                </VerticalStackLayout>
+        
+            </ScrollView>
+        
+        
+            <comp:BarraInferiorView Grid.Row="1" PestanaActiva="Feed" />
+        
+        </Grid>
+    </Grid>
+
+</ContentPage>

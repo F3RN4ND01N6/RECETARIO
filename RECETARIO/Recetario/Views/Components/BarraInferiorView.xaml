@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Recetario.Views.Components.BarraInferiorView">
+
+
+    <Border BackgroundColor="#ECE8DC"
+            Stroke="#758B68"
+            StrokeThickness="1.5"
+            StrokeShape="RoundRectangle 22,22,0,0"
+            Padding="12,8">
+
+        <Grid ColumnDefinitions="*,*,*,*,*" ColumnSpacing="8" MaximumWidthRequest="960" HorizontalOptions="Fill">
+
+
+            <!--      COLUMNA 0: BOTON PESTAÑA 1 - FEED GLOBAL PUBLICO     -->
+
+            <Button x:Name="BtnTabFeed"
+                    Grid.Column="0"
+                    Text="🏠 Feed Global"
+                    Clicked="OnFeedClicked"
+                    CornerRadius="14"
+                    FontSize="13"
+                    FontAttributes="Bold"
+                    Padding="8,10" />
+
+
+            <!--      COLUMNA 1: BOTON PESTAÑA 2 - MI RECETARIO PRIVADO / FAVORITOS     -->
+
+            <Button x:Name="BtnTabMisRecetas"
+                    Grid.Column="1"
+                    Text="📒 Mi Recetario"
+                    Clicked="OnMisRecetasClicked"
+                    CornerRadius="14"
+                    FontSize="13"
+                    FontAttributes="Bold"
+                    Padding="8,10" />
+
+
+            <!--      COLUMNA 2: BOTON PESTAÑA 3 - FORMULARIO CREAR / EDITAR RECETA     -->
+
+            <Button x:Name="BtnTabCrearEditar"
+                    Grid.Column="2"
+                    Text="Crear"
+                    Clicked="OnCrearEditarClicked"
+                    CornerRadius="14"
+                    FontSize="13"
+                    FontAttributes="Bold"
+                    Padding="8,10" />
+
+
+            <!--      COLUMNA 3: BOTON PESTAÑA 4 - CALENDARIO DE TEMPORADA     -->
+
+            <Button x:Name="BtnTabTemporada"
+                    Grid.Column="3"
+                    Text="🗓️ Temporada"
+                    Clicked="OnTemporadaClicked"
+                    CornerRadius="14"
+                    FontSize="13"
+                    FontAttributes="Bold"
+                    Padding="8,10" />
+
+
+            <!--      COLUMNA 4: BOTON PESTAÑA 5 - PERFIL Y CAMBIO DE ROL     -->
+
+            <Button x:Name="BtnTabPerfil"
+                    Grid.Column="4"
+                    Text="👤 Perfil y Rol"
+                    Clicked="OnPerfilClicked"
+                    CornerRadius="14"
+                    FontSize="13"
+                    FontAttributes="Bold"
+                    Padding="8,10" />
+
+
+        </Grid>
+
+    </Border>
+
+
+</ContentView>

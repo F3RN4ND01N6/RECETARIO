@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Recetario.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:Recetario.Views"
+    Title="Raccolta di ricette — Recetario 2.0"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
+    BackgroundColor="#F7F4EA">
+
+    <TabBar>
+        <ShellContent
+            Title="Feed Global"
+            ContentTemplate="{DataTemplate views:FeedPage}"
+            Route="FeedPage" />
+
+        <ShellContent
+            Title="Mi Recetario"
+            ContentTemplate="{DataTemplate views:MisRecetasPage}"
+            Route="MisRecetasPage" />
+
+        <ShellContent
+            Title="Crear / Editar"
+            ContentTemplate="{DataTemplate views:CrearEditarRecetaPage}"
+            Route="CrearEditarRecetaPage" />
+
+        <ShellContent
+            Title="Temporada"
+            ContentTemplate="{DataTemplate views:TemporadaPage}"
+            Route="TemporadaPage" />
+
+        <ShellContent
+            Title="Perfil y Rol"
+            ContentTemplate="{DataTemplate views:PerfilPage}"
+            Route="PerfilPage" />
+    </TabBar>
+
+</Shell>
