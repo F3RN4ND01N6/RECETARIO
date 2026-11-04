@@ -44,7 +44,7 @@ public partial class DetalleRecetaPage : ContentPage
     private void ActualizarBotonFavorita()
     {
         bool esFav = _service.EsRecetaFavorita(_receta.ObtenerIdentificador());
-        BtnFavorita.Text = esFav ? "♥ En tus Favoritas (Quitar UC08)" : "♡ Marcar como Favorita (UC08)";
+        BtnFavorita.Text = esFav ? "♥ En tus Favoritas" : "♡ Marcar como Favorita";
         BtnFavorita.BackgroundColor = esFav ? Color.FromArgb("#C8785A") : Color.FromArgb("#F5E5DF");
         BtnFavorita.TextColor = esFav ? Color.FromArgb("#FFFFFF") : Color.FromArgb("#C8785A");
     }
@@ -71,6 +71,8 @@ public partial class DetalleRecetaPage : ContentPage
         }
     }
 
+
+    // Modificar el Tick de completado interrumpe el flujo de la funcion RenderizarPasos()
     private void RenderizarPasos()
     {
         StackPasos.Children.Clear();

@@ -86,7 +86,7 @@
         
                         <VerticalStackLayout Spacing="10">
         
-                            <Label Text="🔍 Buscar y Filtrar Recetas (UC06 — FiltroReceta)"
+                            <Label Text="Buscar y Filtrar Recetas"
                                        FontSize="16"
                                        FontAttributes="Bold"
                                        TextColor="#283B2D" />
@@ -150,12 +150,12 @@
         
                                     <HorizontalStackLayout Spacing="4" VerticalOptions="Center">
                                         <CheckBox x:Name="ChkSoloChefs" Color="#758B68" CheckedChanged="OnFiltroCambiado" />
-                                        <Label Text="✔ Solo Chefs Verificados" VerticalOptions="Center" TextColor="#283B2D" FontSize="13" />
+                                        <Label Text="Solo Chefs Verificados" VerticalOptions="Center" TextColor="#283B2D" FontSize="13" />
                                     </HorizontalStackLayout>
         
                                     <HorizontalStackLayout Spacing="4" VerticalOptions="Center">
                                         <CheckBox x:Name="ChkSoloFavoritas" Color="#C8785A" CheckedChanged="OnFiltroCambiado" />
-                                        <Label Text="♥ Solo Mis Favoritas (UC08)" VerticalOptions="Center" TextColor="#283B2D" FontSize="13" />
+                                        <Label Text="♥ Solo Mis Favoritas" VerticalOptions="Center" TextColor="#283B2D" FontSize="13" />
                                     </HorizontalStackLayout>
         
                                 </HorizontalStackLayout>
@@ -165,7 +165,7 @@
         
                                 <HorizontalStackLayout Spacing="8">
         
-                                    <Button Text="⚡ Sobrecarga Estación+País"
+                                    <Button Text="Sobrecarga Estación+País"
                                                 Clicked="OnSobrecargaEstacionPaisClicked"
                                                 BackgroundColor="#758B68"
                                                 TextColor="#FFFFFF"
@@ -183,7 +183,7 @@
                                                 CornerRadius="10"
                                                 Padding="10,6" />
         
-                                    <Button Text="📥 Cargar JSON Global (UC17)"
+                                    <Button Text="Recargar"
                                                 Clicked="OnRecargarJsonGlobalClicked"
                                                 BackgroundColor="#C8785A"
                                                 TextColor="#FFFFFF"

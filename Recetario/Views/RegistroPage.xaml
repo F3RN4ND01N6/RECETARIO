@@ -2,8 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Recetario.Views.RegistroPage"
-             BackgroundColor="#FFFDF9"
-             Title="Registro de Cuenta">
+             BackgroundColor="Transparent">
 
     <Grid>
         <Image Source="fondo_feed.jpg"
@@ -104,7 +103,7 @@
                             Margin="0,4">
                             <VerticalStackLayout Spacing="8">
                                 <HorizontalStackLayout Spacing="6" VerticalOptions="Center">
-                                    <Label Text="🛡️" FontSize="16" />
+                                    <Label FontSize="16" />
                                     <Label Text="Clave Única de Confirmación de Administrador"
                                     FontSize="12"
                                     FontAttributes="Bold"
@@ -115,7 +114,7 @@
                                 TextColor="#7A4526" />
                                 <Border StrokeShape="RoundRectangle 8" Stroke="#FFAE73" StrokeThickness="1" Padding="10,0" BackgroundColor="#FFFFFF">
                                     <Entry x:Name="TxtCodigoAdmin"
-                                    Placeholder="ej. ADM-CHILE-2026"
+                                    Placeholder="***********"
                                     TextColor="#B74100"
                                     FontAttributes="Bold"
                                     PlaceholderColor="#D9A88F"

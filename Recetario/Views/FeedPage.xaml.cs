@@ -170,7 +170,7 @@ public partial class FeedPage : ContentPage
             // Botón Ver Receta en Terracota (#C8785A) o Verde Salvia (#758B68) con texto blanco
             var btnDetalle = new Button
             {
-                Text = "📖 Ver Receta y Calificar (UC09)",
+                Text = "Ver Receta y Calificar",
                 BackgroundColor = Color.FromArgb("#C8785A"),
                 TextColor = Color.FromArgb("#FFFFFF"),
                 FontAttributes = FontAttributes.Bold,
@@ -194,7 +194,7 @@ public partial class FeedPage : ContentPage
             {
                 var btnAdminEliminar = new Button
                 {
-                    Text = "🗑 Moderar / Eliminar (Admin UC02)",
+                    Text = "Moderar / Eliminar",
                     BackgroundColor = Color.FromArgb("#283B2D"),
                     TextColor = Colors.White,
                     FontAttributes = FontAttributes.Bold,
@@ -205,7 +205,7 @@ public partial class FeedPage : ContentPage
                 btnAdminEliminar.Clicked += async (_, _) =>
                 {
                     bool confirmar = await DisplayAlertAsync(
-                        "Moderación de Administrador (UC02)",
+                        "Moderación de Administrador",
                         $"¿Forzar eliminación de '{receta.Titulo}' del Feed Público Global?",
                         "Eliminar", "Cancelar");
                     if (confirmar)
@@ -331,7 +331,7 @@ public partial class FeedPage : ContentPage
     private async void OnRecargarJsonGlobalClicked(object? sender, EventArgs e)
     {
         _service.CargarRespaldoGlobalManual();
-        await DisplayAlertAsync("Respaldo Global JSON (UC17)",
+        await DisplayAlertAsync("Respaldo Global",
             $"Catálogo global deserializado correctamente desde:\n{_service.ObtenerRutaJsonPublico()}",
             "Aceptar");
     }

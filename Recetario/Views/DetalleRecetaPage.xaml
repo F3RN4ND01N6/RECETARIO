@@ -111,7 +111,7 @@
             <HorizontalStackLayout Spacing="10">
 
                 <Button x:Name="BtnFavorita"
-                        Text="♥ Marcar Favorita (UC08)"
+                        Text="♥ Marcar Favorita"
                         Clicked="OnAlternarFavoritaClicked"
                         BackgroundColor="#C8785A"
                         TextColor="#FFFFFF"
@@ -133,7 +133,7 @@
 
                 <VerticalStackLayout Spacing="10">
 
-                    <Label Text="🥕 Ingredientes de la Receta (Composición 1..*)"
+                    <Label Text="Ingredientes de la Receta"
                            FontSize="17"
                            FontAttributes="Bold"
                            TextColor="#283B2D" />
@@ -159,7 +159,7 @@
 
                 <VerticalStackLayout Spacing="10">
 
-                    <Label Text="👩‍🍳 Paso a Paso Interactivo ( Toca un paso para marcarlo completado )"
+                    <Label Text="Paso a Paso Interactivo"
                            FontSize="17"
                            FontAttributes="Bold"
                            TextColor="#283B2D" />
@@ -187,7 +187,7 @@
 
                 <VerticalStackLayout Spacing="12">
 
-                    <Label Text="⭐ Calificar esta Receta (UC09 - ICalificable)"
+                    <Label Text="Calificar esta Receta"
                            FontSize="17"
                            FontAttributes="Bold"
                            TextColor="#283B2D" />
@@ -226,7 +226,7 @@
 
                     <!--   BOTON PARA ENVIAR CALIFICACION Y SERIALIZAR EN JSON GLOBAL   -->
 
-                    <Button Text="Enviar Calificación y Guardar en JSON Global (UC09)"
+                    <Button Text="Enviar Calificación y Guardar"
                             Clicked="OnEnviarCalificacionClicked"
                             BackgroundColor="#758B68"
                             TextColor="#FFFFFF"
