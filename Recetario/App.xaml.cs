@@ -20,7 +20,7 @@ public partial class App : Application
     {
         return new Window(new NavigationPage(new LoginPage(_authService, _service)))
         {
-            Title = "Raccolta di ricette — Recetario 2.0",
+            Title = "Raccolta di ricette",
             Width = 1080,
             Height = 780
         };
