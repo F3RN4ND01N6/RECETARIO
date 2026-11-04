@@ -27,7 +27,7 @@
 
                     <VerticalStackLayout Spacing="6">
 
-                        <Label Text="🗓️ Calendario de Frutas y Verduras de Temporada (UC07)"
+                        <Label Text="Calendario de Frutas y Verduras de Temporada"
                                FontSize="20"
                                FontAttributes="Bold"
                                TextColor="#283B2D" />
@@ -59,7 +59,7 @@
                         <FlexLayout Wrap="Wrap" JustifyContent="SpaceBetween">
 
                             <Button x:Name="BtnEstacionTodo"
-                                    Text="🌎 Todo el Año"
+                                    Text="Todo el Año"
                                     Clicked="OnTodoElAnioClicked"
                                     BackgroundColor="#758B68"
                                     TextColor="#FFFFFF"
@@ -68,7 +68,7 @@
                                     Margin="2" />
 
                             <Button x:Name="BtnEstacionPrimavera"
-                                    Text="🌸 Primavera"
+                                    Text="Primavera"
                                     Clicked="OnPrimaveraClicked"
                                     BackgroundColor="#ECE8DC"
                                     TextColor="#283B2D"
@@ -77,7 +77,7 @@
                                     Margin="2" />
 
                             <Button x:Name="BtnEstacionVerano"
-                                    Text="☀️ Verano"
+                                    Text="Verano"
                                     Clicked="OnVeranoClicked"
                                     BackgroundColor="#ECE8DC"
                                     TextColor="#283B2D"
@@ -86,7 +86,7 @@
                                     Margin="2" />
 
                             <Button x:Name="BtnEstacionOtonio"
-                                    Text="🍂 Otoño"
+                                    Text="Otoño"
                                     Clicked="OnOtonioClicked"
                                     BackgroundColor="#ECE8DC"
                                     TextColor="#283B2D"
@@ -95,7 +95,7 @@
                                     Margin="2" />
 
                             <Button x:Name="BtnEstacionInvierno"
-                                    Text="❄️ Invierno"
+                                    Text="Invierno"
                                     Clicked="OnInviernoClicked"
                                     BackgroundColor="#ECE8DC"
                                     TextColor="#283B2D"
@@ -118,7 +118,7 @@
                                    VerticalOptions="Center" />
 
                             <Button Grid.Column="1"
-                                    Text="🔍 Ver Recetas de esta Estación en el Feed"
+                                    Text="Ver Recetas de esta Estación en el Feed"
                                     Clicked="OnFiltrarFeedPorEstacionActualClicked"
                                     BackgroundColor="#C8785A"
                                     TextColor="#FFFFFF"

@@ -46,7 +46,7 @@ public partial class MisRecetasPage : ContentPage
                 Padding = 22,
                 Content = new Label
                 {
-                    Text = "No hay recetas privadas que coincidan. Usa el botón '➕ Nueva Receta' o la pestaña Crear/Editar para agregar una.",
+                    Text = "No hay recetas privadas que coincidan. Usa el botón 'Nueva Receta' o la pestaña Crear para agregar una.",
                     HorizontalTextAlignment = TextAlignment.Center,
                     TextColor = Color.FromArgb("#283B2D")
                 }
@@ -58,7 +58,7 @@ public partial class MisRecetasPage : ContentPage
         {
             var btnVer = new Button
             {
-                Text = "📖 Ver Detalle",
+                Text = "Ver Detalle",
                 BackgroundColor = Color.FromArgb("#C8785A"),
                 TextColor = Color.FromArgb("#FFFFFF"),
                 FontAttributes = FontAttributes.Bold,
@@ -73,7 +73,7 @@ public partial class MisRecetasPage : ContentPage
 
             var btnEditar = new Button
             {
-                Text = "✏ Editar Receta (UC02)",
+                Text = "Editar Receta",
                 BackgroundColor = Color.FromArgb("#758B68"),
                 TextColor = Color.FromArgb("#FFFFFF"),
                 FontAttributes = FontAttributes.Bold,
@@ -88,7 +88,7 @@ public partial class MisRecetasPage : ContentPage
 
             var btnPublicarChef = new Button
             {
-                Text = "🌐 Publicar en Feed Global (Chef UC16)",
+                Text = "Publicar en Feed Global",
                 BackgroundColor = Color.FromArgb("#E8EDE4"),
                 TextColor = Color.FromArgb("#283B2D"),
                 FontAttributes = FontAttributes.Bold,
@@ -102,8 +102,8 @@ public partial class MisRecetasPage : ContentPage
                 var recetaPublica = chef.PublicarRecetaOficial(receta);
                 _service.PublicarRecetaEnFeed(recetaPublica, chef);
 
-                await DisplayAlertAsync("Receta Publicada en Feed Global (UC16)",
-                    $"'{recetaPublica.Titulo}' fue certificada por {chef.NombreUsuario()} y serializada en el archivo JSON Global.",
+                await DisplayAlertAsync("Receta Publicada en Feed Global",
+                    $"'{recetaPublica.Titulo}' fue certificada por {chef.NombreUsuario()} y serializada en el archivo Global.",
                     "Ver en Feed");
 
                 _service.NavegarAPestana("Feed");
@@ -111,7 +111,7 @@ public partial class MisRecetasPage : ContentPage
 
             var btnEliminar = new Button
             {
-                Text = "🗑 Eliminar (UC02)",
+                Text = "Eliminar",
                 BackgroundColor = Color.FromArgb("#F5E5DF"),
                 TextColor = Color.FromArgb("#A85E42"),
                 FontAttributes = FontAttributes.Bold,
@@ -122,7 +122,7 @@ public partial class MisRecetasPage : ContentPage
             btnEliminar.Clicked += async (_, _) =>
             {
                 bool confirmar = await DisplayAlertAsync(
-                    "Eliminar Receta Privada (UC02)",
+                    "Eliminar Receta Privada",
                     $"¿Deseas eliminar '{receta.Titulo}' de tu recetario local?",
                     "Eliminar", "Cancelar");
                 if (confirmar)
@@ -189,7 +189,7 @@ public partial class MisRecetasPage : ContentPage
                         },
                         new Label
                         {
-                            Text = $"📝 Notas personales: {(string.IsNullOrWhiteSpace(receta.NotasPersonales()) ? "Sin notas adicionales" : receta.NotasPersonales())}",
+                            Text = $"Notas personales: {(string.IsNullOrWhiteSpace(receta.NotasPersonales()) ? "Sin notas adicionales" : receta.NotasPersonales())}",
                             FontSize = 13,
                             TextColor = Color.FromArgb("#283B2D"),
                             BackgroundColor = Color.FromArgb("#F7F4EA"),
@@ -223,7 +223,7 @@ public partial class MisRecetasPage : ContentPage
     private async void OnGuardarJsonLocalClicked(object? sender, EventArgs e)
     {
         _service.GuardarRespaldoPrivadoManual();
-        await DisplayAlertAsync("Respaldo Local Guardado (UC14)",
+        await DisplayAlertAsync("Respaldo Local Guardado",
             $"Recetario privado serializado exitosamente en:\n{_service.ObtenerRutaJsonPrivado()}",
             "Aceptar");
     }
@@ -231,7 +231,7 @@ public partial class MisRecetasPage : ContentPage
     private async void OnCargarJsonLocalClicked(object? sender, EventArgs e)
     {
         _service.CargarRespaldoPrivadoManual();
-        await DisplayAlertAsync("Respaldo Local Cargado (UC15)",
+        await DisplayAlertAsync("Respaldo Local Cargado",
             $"Recetario privado deserializado desde:\n{_service.ObtenerRutaJsonPrivado()}",
             "Aceptar");
     }

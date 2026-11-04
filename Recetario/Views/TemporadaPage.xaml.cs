@@ -22,7 +22,7 @@ public partial class TemporadaPage : ContentPage
         var lista = _service.ConsultarCalendarioTemporada(estacion);
 
         LblEstacionSeleccionada.Text =
-            $"Estación seleccionada: {estacion} ({lista.Count} frutas y verduras registradas)";
+            $"Estación seleccionada: ({lista.Count} frutas y verduras registradas)";
 
         StackIngredientesTemporada.Children.Clear();
 
@@ -88,7 +88,7 @@ public partial class TemporadaPage : ContentPage
                     },
                     new Label
                     {
-                        Text = $"📍 País de origen: {item.PaisOrigen()}  •  Zona de cultivo: {item.ZonaCultivo()}",
+                        Text = $"País de origen: {item.PaisOrigen()}  •  Zona de cultivo: {item.ZonaCultivo()}",
                         FontSize = 13,
                         TextColor = Color.FromArgb("#5A6B5C")
                     }

@@ -28,7 +28,7 @@
 
                     <VerticalStackLayout Spacing="6">
 
-                        <Label Text="👤 Perfil de Usuario, Actores y Polimorfismo (Herencias 1, 2 y 3)"
+                        <Label Text="Perfil de Usuario, Actores y Polimorfismo"
                                FontSize="20"
                                FontAttributes="Bold"
                                TextColor="#283B2D" />
@@ -137,14 +137,14 @@
 
                         <!--   BOTON PARA GUARDAR Y VALIDAR EL PERFIL DE USUARIO (VERDE SALVIA)   -->
 
-                        <Button Text="💾 Guardar y Validar Perfil (IValidable)"
+                        <Button Text="Guardar y Validar Perfil"
                                 Clicked="OnGuardarPerfilClicked"
                                 BackgroundColor="#758B68"
                                 TextColor="#FFFFFF"
                                 FontAttributes="Bold"
                                 CornerRadius="12" />
 
-                        <Button Text="🚪 Cerrar Sesión"
+                        <Button Text="Cerrar Sesión"
                                 Clicked="OnCerrarSesionClicked"
                                 BackgroundColor="#FFF0ED"
                                 TextColor="#D9381E"
@@ -167,7 +167,7 @@
 
                     <VerticalStackLayout Spacing="6">
 
-                        <Label Text="💾 Estado del Sistema de Archivos (Memoria Secundaria JSON)"
+                        <Label Text="Estado del Sistema de Archivos"
                                FontSize="16"
                                FontAttributes="Bold"
                                TextColor="#283B2D" />

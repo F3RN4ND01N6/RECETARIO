@@ -31,7 +31,7 @@ public partial class PerfilPage : ContentPage
         usuario.EjecutarAccionRol();
 
         LblResumenActor.Text = $"ID: {usuario.ObtenerIdentificador()}  |  {usuario.ObtenerResumenEntidad()}";
-        LblResultadoAccionRol.Text = $"▶ EjecutarAccionRol(): {usuario.UltimaAccionRolMensaje}";
+        LblResultadoAccionRol.Text = $"{usuario.UltimaAccionRolMensaje}";
 
         EntryNombreUsuario.Text = usuario.NombreUsuario();
         EntryCorreoUsuario.Text = usuario.Correo();
@@ -46,11 +46,11 @@ public partial class PerfilPage : ContentPage
         LblEstadisticasJson.Text =
             $"• Recetas Públicas en Feed Global: {_service.TotalRecetasPublicas}\n" +
             $"• Recetas Privadas en Respaldo Local: {_service.TotalRecetasPrivadas}\n" +
-            $"• Recetas Marcadas como Favoritas (UC08): {_service.TotalFavoritas}";
+            $"• Recetas Marcadas como Favoritas: {_service.TotalFavoritas}";
 
         LblRutasJson.Text =
-            $"JSON Privado (UC14/UC15): {_service.ObtenerRutaJsonPrivado()}\n" +
-            $"JSON Global (UC16/UC17): {_service.ObtenerRutaJsonPublico()}";
+            $"Privado: {_service.ObtenerRutaJsonPrivado()}\n" +
+            $"Global: {_service.ObtenerRutaJsonPublico()}";
     }
 
     private void OnSeleccionarUsuarioNormalClicked(object? sender, EventArgs e)
