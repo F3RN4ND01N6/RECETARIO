@@ -27,19 +27,15 @@
 
                     <VerticalStackLayout Spacing="6">
 
-                        <Label Text="📒 Mi Recetario Privado y Respaldo JSON Local (UC02, UC14, UC15)"
+                        <Label Text="Mi Recetario Privado"
                                FontSize="20"
                                FontAttributes="Bold"
                                TextColor="#283B2D" />
 
-                        <Label Text="Gestiona tus recetas personales, edítalas, elimínalas o publícalas en el Feed Global si eres Chef Especialista (UC16)."
+                        <Label Text="Gestiona tus recetas personales, edítalas, elimínalas o publícalas en el Feed Global si eres Chef Especialista."
                                FontSize="13"
                                TextColor="#5A6B5C" />
-
-                        <Label x:Name="LblRutaJsonLocal"
-                               FontSize="11"
-                               TextColor="#283B2D" />
-
+                        
                     </VerticalStackLayout>
 
                 </Border>
@@ -65,7 +61,7 @@
                                    TextChanged="OnBusquedaPrivadaChanged" />
 
                             <Button Grid.Column="1"
-                                    Text="➕ Nueva Receta (UC01)"
+                                    Text="Nueva Receta"
                                     Clicked="OnIrACrearClicked"
                                     BackgroundColor="#758B68"
                                     TextColor="#FFFFFF"
@@ -89,7 +85,7 @@
 
                                 <!--   BOTON PARA SERIALIZAR EL RECETARIO PRIVADO EN JSON LOCAL (UC14)   -->
 
-                                <Button Text="💾 Guardar en JSON Local (UC14)"
+                                <Button Text="Guardar en Local"
                                         Clicked="OnGuardarJsonLocalClicked"
                                         BackgroundColor="#758B68"
                                         TextColor="#FFFFFF"
@@ -101,7 +97,7 @@
 
                                 <!--   BOTON PARA DESERIALIZAR EL RECETARIO PRIVADO DESDE JSON LOCAL (UC15)   -->
 
-                                <Button Text="📂 Cargar desde JSON Local (UC15)"
+                                <Button Text="Cargar desde Local"
                                         Clicked="OnCargarJsonLocalClicked"
                                         BackgroundColor="#C8785A"
                                         TextColor="#FFFFFF"

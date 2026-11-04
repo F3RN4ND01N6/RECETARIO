@@ -28,7 +28,6 @@ public partial class MisRecetasPage : ContentPage
 
     private void RefrescarLista()
     {
-        LblRutaJsonLocal.Text = $"📁 Archivo JSON Local: {_service.ObtenerRutaJsonPrivado()}";
 
         var filtro = new FiltroReceta(nombreIngrediente: EntryBuscarPrivada.Text ?? string.Empty);
         var privadas = _service.FiltrarRecetasPrivadas(_service.UsuarioActivo.ObtenerIdentificador(), filtro);

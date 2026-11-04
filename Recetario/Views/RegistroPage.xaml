@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Recetario.Views.RegistroPage"
-             BackgroundColor="Transparent">
+             BackgroundColor="Transparent"
+             NavigationPage.HasNavigationBar="False">
 
     <Grid>
         <Image Source="fondo_feed.jpg"
@@ -14,12 +15,24 @@
         <ScrollView>
 
             <Grid RowDefinitions="Auto,*" Padding="24" MaximumWidthRequest="480" HorizontalOptions="Center">
-
+                
                 <VerticalStackLayout Grid.Row="0" Spacing="6" Margin="0,15,0,20">
-                    <Label Text="Crear Nueva Cuenta Putito"
+                    <Border StrokeShape="RoundRectangle 24"
+                            BackgroundColor="#FFE8D6"
+                            Stroke="#472C4C"
+                            StrokeThickness="2"
+                            WidthRequest="100"
+                            HeightRequest="100"
+                            HorizontalOptions="Center">
+                        <Image Source="logo.jpg"
+                            Aspect="AspectFill"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Fill"/>
+                    </Border>
+                    <Label Text="Crear Nueva Cuenta"
                         FontSize="24"
                         FontAttributes="Bold"
-                        TextColor="#2C231E"
+                        TextColor="DarkMagenta"
                         HorizontalTextAlignment="Center" />
                     <Label Text="Únete a la comunidad gastronómica de Raccolta"
                     FontSize="13"
@@ -38,7 +51,7 @@
                     <VerticalStackLayout Spacing="14">
                         <!-- Selector de Tipo de Usuario -->
                         <VerticalStackLayout Spacing="5">
-                            <Label Text="Tipo de Cuenta a Crear" FontSize="12" FontAttributes="Bold" TextColor="#5A4E45" />
+                            <Label Text="Tipo de Cuenta" FontSize="12" FontAttributes="Bold" TextColor="#D05000" />
                             <Border StrokeShape="RoundRectangle 10" Stroke="#E2D6CB" StrokeThickness="1" Padding="12,0" BackgroundColor="#FAF6F2">
                                 <Picker x:Name="PickerTipoCuenta"
                                     SelectedIndexChanged="OnTipoCuentaChanged"
@@ -56,7 +69,7 @@
 
                         <!-- Nombre Completo -->
                         <VerticalStackLayout Spacing="5">
-                            <Label Text="Nombre de Usuario" FontSize="12" FontAttributes="Bold" TextColor="#5A4E45" />
+                            <Label Text="Nombre de Usuario" FontSize="12" FontAttributes="Bold" TextColor="#D05000" />
                             <Border StrokeShape="RoundRectangle 10" Stroke="#E2D6CB" StrokeThickness="1" Padding="12,0" BackgroundColor="#FAF6F2">
                                 <Entry x:Name="TxtNombre"
                                 Placeholder="ej. Lucía Morales"
@@ -68,7 +81,7 @@
 
                         <!-- Correo Electrónico -->
                         <VerticalStackLayout Spacing="5">
-                            <Label Text="Correo Electrónico" FontSize="12" FontAttributes="Bold" TextColor="#5A4E45" />
+                            <Label Text="Correo Electrónico" FontSize="12" FontAttributes="Bold" TextColor="#D05000" />
                             <Border StrokeShape="RoundRectangle 10" Stroke="#E2D6CB" StrokeThickness="1" Padding="12,0" BackgroundColor="#FAF6F2">
                                 <Entry x:Name="TxtCorreo"
                                 Placeholder="ej. lucia@cocina.cl"
@@ -81,7 +94,7 @@
 
                         <!-- Contraseña -->
                         <VerticalStackLayout Spacing="5">
-                            <Label Text="Contraseña" FontSize="12" FontAttributes="Bold" TextColor="#5A4E45" />
+                            <Label Text="Contraseña" FontSize="12" FontAttributes="Bold" TextColor="#D05000" />
                             <Border StrokeShape="RoundRectangle 10" Stroke="#E2D6CB" StrokeThickness="1" Padding="12,0" BackgroundColor="#FAF6F2">
                                 <Entry x:Name="TxtPassword"
                                 Placeholder="Mínimo 3 caracteres"

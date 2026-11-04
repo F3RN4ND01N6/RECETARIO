@@ -31,7 +31,7 @@
                     <Label Text="Raccolta di ricette"
                            FontSize="30"
                            FontAttributes="Bold"
-                           TextColor="#2C231E"
+                           TextColor="DarkMagenta"
                            HorizontalTextAlignment="Center" 
                            FontFamily="ScriptFont"/>
                     <Label Text="Tu recetario de estación y cocina de autor"
@@ -54,11 +54,11 @@
                         <Label Text="Iniciar Sesión"
                                FontSize="20"
                                FontAttributes="Bold"
-                               TextColor="#2C231E" />
+                               TextColor="#D05000" />
 
                         <!-- Campo Usuario / Correo -->
                         <VerticalStackLayout Spacing="5">
-                            <Label Text="Usuario o Correo Electrónico" FontSize="12" FontAttributes="Bold" TextColor="#5A4E45" />
+                            <Label Text="Usuario o Correo Electrónico" FontSize="12" FontAttributes="Bold" TextColor="#D05000" />
                             <Border StrokeShape="RoundRectangle 10" Stroke="#E2D6CB" StrokeThickness="1" Padding="12,0" BackgroundColor="#FAF6F2">
                                 <Entry x:Name="TxtIdentificador"
                                        Placeholder="ej. fernando@raccolta.cl o admin@raccolta.cl"
@@ -70,7 +70,7 @@
 
                         <!-- Campo Contraseña -->
                         <VerticalStackLayout Spacing="5">
-                            <Label Text="Contraseña" FontSize="12" FontAttributes="Bold" TextColor="#5A4E45" />
+                            <Label Text="Contraseña" FontSize="12" FontAttributes="Bold" TextColor="#D05000" />
                             <Border StrokeShape="RoundRectangle 10" Stroke="#E2D6CB" StrokeThickness="1" Padding="12,0" BackgroundColor="#FAF6F2">
                                 <Entry x:Name="TxtPassword"
                                        Placeholder="••••••••"
