@@ -16,7 +16,7 @@
             <Grid RowDefinitions="Auto,*" Padding="24" MaximumWidthRequest="480" HorizontalOptions="Center">
 
                 <VerticalStackLayout Grid.Row="0" Spacing="6" Margin="0,15,0,20">
-                    <Label Text="Crear Nueva Cuenta"
+                    <Label Text="Crear Nueva Cuenta Putito"
                         FontSize="24"
                         FontAttributes="Bold"
                         TextColor="#2C231E"
