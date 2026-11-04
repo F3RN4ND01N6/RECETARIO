@@ -38,7 +38,7 @@
                                    TextColor="#283B2D" />
 
                             <Label x:Name="LblSubtituloModo"
-                                   Text="Completa los datos generales, ingredientes y pasos. Todos los campos son verificados por IValidable (UC04)."
+                                   Text="Completa los datos generales, ingredientes y pasos. Todos los campos son verificados."
                                    FontSize="13"
                                    TextColor="#5A6B5C" />
 

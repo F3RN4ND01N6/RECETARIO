@@ -64,7 +64,8 @@ public partial class MisRecetasPage : ContentPage
                 FontAttributes = FontAttributes.Bold,
                 CornerRadius = 12,
                 Padding = new Thickness(12, 6),
-                FontSize = 12
+                FontSize = 12,
+                Margin = new Thickness(0, 0, 5, 5)
             };
             btnVer.Clicked += async (_, _) =>
             {
@@ -79,7 +80,8 @@ public partial class MisRecetasPage : ContentPage
                 FontAttributes = FontAttributes.Bold,
                 CornerRadius = 12,
                 Padding = new Thickness(12, 6),
-                FontSize = 12
+                FontSize = 12,
+                Margin = new Thickness(0, 0, 5, 5)
             };
             btnEditar.Clicked += (_, _) =>
             {
@@ -94,7 +96,8 @@ public partial class MisRecetasPage : ContentPage
                 FontAttributes = FontAttributes.Bold,
                 CornerRadius = 12,
                 Padding = new Thickness(12, 6),
-                FontSize = 12
+                FontSize = 12,
+                Margin = new Thickness(0, 0, 5, 5)
             };
             btnPublicarChef.Clicked += async (_, _) =>
             {
@@ -117,7 +120,8 @@ public partial class MisRecetasPage : ContentPage
                 FontAttributes = FontAttributes.Bold,
                 CornerRadius = 12,
                 Padding = new Thickness(12, 6),
-                FontSize = 12
+                FontSize = 12,
+                Margin = new Thickness(0,0,5,5)
             };
             btnEliminar.Clicked += async (_, _) =>
             {

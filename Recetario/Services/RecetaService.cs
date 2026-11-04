@@ -101,7 +101,7 @@ public class RecetaService
         if (!receta.EsValido())
         {
             string errores = string.Join("\n• ", receta.ObtenerErroresValidacion());
-            throw new InvalidOperationException($"La receta no superó la validación (UC04):\n• {errores}");
+            throw new InvalidOperationException($"La receta no superó la validación:\n• {errores}");
         }
 
         int idx = cachePrivadas.FindIndex(r => r.ObtenerIdentificador() == receta.ObtenerIdentificador());
@@ -129,7 +129,7 @@ public class RecetaService
         if (!receta.EsValido())
         {
             string errores = string.Join("\n• ", receta.ObtenerErroresValidacion());
-            throw new InvalidOperationException($"Error de validación al editar (UC04):\n• {errores}");
+            throw new InvalidOperationException($"Error de validación al editar:\n• {errores}");
         }
 
         int idx = cachePrivadas.FindIndex(r => r.ObtenerIdentificador() == receta.ObtenerIdentificador());
@@ -167,7 +167,7 @@ public class RecetaService
         if (!receta.EsValido())
         {
             string errores = string.Join("\n• ", receta.ObtenerErroresValidacion());
-            throw new InvalidOperationException($"No se puede publicar en el Feed Global (UC04):\n• {errores}");
+            throw new InvalidOperationException($"No se puede publicar en el Feed Global:\n• {errores}");
         }
 
         autor?.EjecutarAccionRol();
@@ -319,7 +319,7 @@ public class RecetaService
     public void DispararEdicionReceta(RecetaPrivada receta)
     {
         SolicitudEditarReceta?.Invoke(receta);
-        SolicitudCambiarPestana?.Invoke("CrearEditar");
+        SolicitudCambiarPestana?.Invoke("Crear");
     }
 
     public void DispararFiltroEstacionEnFeed(Estacion estacion)

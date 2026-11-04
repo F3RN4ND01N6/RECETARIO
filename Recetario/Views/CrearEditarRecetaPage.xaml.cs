@@ -376,8 +376,8 @@ public partial class CrearEditarRecetaPage : ContentPage
         }
 
         await DisplayAlertAsync(
-            eraEdicion ? "Receta Editada (UC02)" : "Receta Creada",
-            $"'{receta.Titulo}' fue validada (UC04) y almacenada.",
+            eraEdicion ? "Receta Editada" : "Receta Creada",
+            $"'{receta.Titulo}' fue validada y almacenada.",
             "Ir a Mi Recetario");
 
         CargarDatosPorDefecto();
