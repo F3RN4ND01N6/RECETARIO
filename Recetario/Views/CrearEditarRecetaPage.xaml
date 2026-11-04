@@ -32,7 +32,7 @@
                         <VerticalStackLayout Spacing="4">
 
                             <Label x:Name="LblTituloModo"
-                                   Text="➕ Crear Nueva Receta (UC01, UC03, UC04)"
+                                   Text="Crear Nueva Receta"
                                    FontSize="20"
                                    FontAttributes="Bold"
                                    TextColor="#283B2D" />
@@ -48,7 +48,7 @@
                         <!--   BOTON PARA LIMPIAR EL FORMULARIO Y VOLVER A MODO CREAR   -->
 
                         <Button Grid.Column="1"
-                                Text="🔄 Limpiar / Modo Crear"
+                                Text="Limpiar / Modo Crear"
                                 Clicked="OnLimpiarFormularioClicked"
                                 BackgroundColor="#758B68"
                                 TextColor="#FFFFFF"
@@ -73,7 +73,7 @@
 
                         <!--   ENCABEZADO DE LA SECCION 1   -->
 
-                        <Label Text="1. Datos Principales, Categoría, Dieta y Etiquetas (UC01 / UC03)"
+                        <Label Text="1. Datos Principales, Categoría, Dieta y Etiquetas "
                                FontSize="16"
                                FontAttributes="Bold"
                                TextColor="#283B2D" />
@@ -136,7 +136,7 @@
                                                  Spacing="12">
                                 
                                 <!--    FOTOGRAFIA DEL PLATILLO  -->
-                                
+
                                 <VerticalStackLayout Grid.Column="1" WidthRequest="190">
                                     <Label Text="Fotografía del Platillo" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" VerticalOptions="Start"/>
                                     <Picker x:Name="PickerIcono"
@@ -144,17 +144,6 @@
                                             TextColor="#283B2D"
                                             SelectedIndexChanged="OnImagenSeleccionadaChanged" 
                                             VerticalOptions="Start" />
-                                </VerticalStackLayout>
-                                
-                                
-                                <!--  EMOJI DE REFERENCIA -->
-
-                                <VerticalStackLayout Grid.Column="1" WidthRequest="190" VerticalOptions="End">
-                                    <Label Text="Emoji Referencia" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" VerticalOptions="End"/>
-                                    <Picker x:Name="PickerEmoji"
-                                            BackgroundColor="#FFFFFF"
-                                            TextColor="#283B2D"
-                                            VerticalOptions="End" />
                                 </VerticalStackLayout>
 
 
@@ -193,12 +182,12 @@
                         <Grid ColumnDefinitions="*,*,*" ColumnSpacing="12">
 
                             <VerticalStackLayout Grid.Column="0">
-                                <Label Text="Categoría (UC03) *" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Label Text="Categoría" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
                                 <Picker x:Name="PickerCategoria" BackgroundColor="#FFFFFF" TextColor="#283B2D" />
                             </VerticalStackLayout>
 
                             <VerticalStackLayout Grid.Column="1">
-                                <Label Text="Tipo de Dieta (UC03) *" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Label Text="Tipo de Dieta " FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
                                 <Picker x:Name="PickerDieta" BackgroundColor="#FFFFFF" TextColor="#283B2D" />
                             </VerticalStackLayout>
 
@@ -296,7 +285,7 @@
 
                     <VerticalStackLayout Spacing="10">
 
-                        <Label Text="2. Ingredientes de la Receta (Composición 1..* — IngredienteReceta)"
+                        <Label Text="2. Ingredientes de la Receta "
                                FontSize="16"
                                FontAttributes="Bold"
                                TextColor="#283B2D" />
@@ -332,7 +321,7 @@
                                     TextColor="#283B2D" />
 
                             <Button Grid.Column="4"
-                                    Text="➕ Agregar"
+                                    Text="Agregar Ingrediente"
                                     Clicked="OnAgregarIngredienteClicked"
                                     BackgroundColor="#758B68"
                                     TextColor="#FFFFFF"
@@ -359,7 +348,7 @@
 
                     <VerticalStackLayout Spacing="10">
 
-                        <Label Text="3. Pasos de Preparación (Composición 1..* — PasoPreparacion)"
+                        <Label Text="3. Pasos de Preparación"
                                FontSize="16"
                                FontAttributes="Bold"
                                TextColor="#283B2D" />
@@ -385,7 +374,7 @@
                                    TextColor="#283B2D" />
 
                             <Button Grid.Column="2"
-                                    Text="➕ Añadir Paso"
+                                    Text="Añadir Paso"
                                     Clicked="OnAgregarPasoClicked"
                                     BackgroundColor="#758B68"
                                     TextColor="#FFFFFF"
@@ -413,7 +402,7 @@
                         Padding="14">
 
                     <Label x:Name="LblEstadoValidacion"
-                           Text="✔ Listo para validar (UC04). Presiona 'Validar Datos' o 'Guardar Receta'."
+                           Text="Listo para validar. Presiona 'Validar Datos' o 'Guardar Receta'."
                            FontSize="13"
                            FontAttributes="Bold"
                            TextColor="#283B2D" />
@@ -424,7 +413,7 @@
 
                 <FlexLayout Wrap="Wrap" JustifyContent="SpaceBetween" AlignItems="Center">
 
-                    <Button Text="🔍 Validar Datos de la Receta (UC04)"
+                    <Button Text="Validar Datos de la Receta"
                             Clicked="OnValidarRecetaClicked"
                             BackgroundColor="#758B68"
                             TextColor="#FFFFFF"
@@ -435,14 +424,14 @@
                     <HorizontalStackLayout Spacing="10">
 
                         <Button x:Name="BtnGuardarPrivada"
-                                Text="💾 Guardar en Mi Recetario JSON (UC01 / UC14)"
+                                Text="Guardar en Mi Recetario"
                                 Clicked="OnGuardarRecetaPrivadaClicked"
                                 BackgroundColor="#758B68"
                                 TextColor="#FFFFFF"
                                 FontAttributes="Bold"
                                 CornerRadius="12" />
 
-                        <Button Text="🌐 Guardar y Publicar en Feed Global (UC16)"
+                        <Button Text="Guardar y Publicar en Feed Global"
                                 Clicked="OnGuardarYPublicarFeedClicked"
                                 BackgroundColor="#C8785A"
                                 TextColor="#FFFFFF"

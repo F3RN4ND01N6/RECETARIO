@@ -41,7 +41,7 @@
 
             <Button x:Name="BtnTabCrearEditar"
                     Grid.Column="2"
-                    Text="➕ Crear / Editar"
+                    Text="Crear"
                     Clicked="OnCrearEditarClicked"
                     CornerRadius="14"
                     FontSize="13"

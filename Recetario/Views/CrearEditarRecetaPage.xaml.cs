@@ -48,10 +48,6 @@ public partial class CrearEditarRecetaPage : ContentPage
         ImgVistaPrevia.Source = "platillo_default.jpg";
 
 
-        //   SELECTOR DE EMOJI DE REFERENCIA CULINARIA
-        PickerEmoji.ItemsSource = new List<string> { "🍲", "🌽", "🎃", "🥦", "🍓", "🍑", "🥭", "🥗", "🥧", "🍝" };
-        PickerEmoji.SelectedIndex = 0;
-
 
         //   SELECTOR DE CATEGORIA GASTRONOMICA (UC03)
         PickerCategoria.ItemsSource = new List<string>
@@ -104,9 +100,9 @@ public partial class CrearEditarRecetaPage : ContentPage
         PickerIcono.SelectedIndex = 0;
         ImgVistaPrevia.Source = "platillo_default.jpg";
 
-        LblTituloModo.Text = "➕ Crear Nueva Receta (UC01, UC03, UC04)";
-        LblSubtituloModo.Text = "Completa los datos generales, ingredientes y pasos. Todos los campos son verificados por IValidable (UC04).";
-        BtnGuardarPrivada.Text = "💾 Guardar en Mi Recetario JSON (UC01 / UC14)";
+        LblTituloModo.Text = "Crear Nueva Receta";
+        LblSubtituloModo.Text = "Completa los datos generales, ingredientes y pasos. Todos los campos son verificados.";
+        BtnGuardarPrivada.Text = "Guardar en Mi Recetario";
 
         EntryTitulo.Text = string.Empty;
         EntryEtiquetas.Text = "Temporada, Casera";
@@ -129,9 +125,9 @@ public partial class CrearEditarRecetaPage : ContentPage
     {
         _idRecetaEnEdicion = receta.ObtenerIdentificador();
 
-        LblTituloModo.Text = $"✏ Editando Receta '{receta.Titulo}' (ID: {_idRecetaEnEdicion} — UC02)";
+        LblTituloModo.Text = $"Editando Receta '{receta.Titulo}' (ID: {_idRecetaEnEdicion} ";
         LblSubtituloModo.Text = "Modifica cualquier campo, ingrediente o paso y presiona Actualizar.";
-        BtnGuardarPrivada.Text = "💾 Actualizar Receta Editada (UC02 / UC14)";
+        BtnGuardarPrivada.Text = "Actualizar Receta Editada";
 
         EntryTitulo.Text = receta.Titulo;
         _rutaImagenPersonalizada = receta.ImagenPlatillo;
@@ -347,13 +343,13 @@ public partial class CrearEditarRecetaPage : ContentPage
         {
             BannerValidacion.BackgroundColor = Color.FromArgb("#E8EDE4");
             BannerValidacion.Stroke = Color.FromArgb("#758B68");
-            LblEstadoValidacion.Text = $"✅ Validación Exitosa (UC04 — IValidable.EsValido() = true): '{borrador.Titulo}' cumple todas las reglas de dominio.";
+            LblEstadoValidacion.Text = $"Validación Exitosa: '{borrador.Titulo}' cumple todas las reglas.";
         }
         else
         {
             BannerValidacion.BackgroundColor = Color.FromArgb("#F5E5DF");
             BannerValidacion.Stroke = Color.FromArgb("#C8785A");
-            LblEstadoValidacion.Text = "❌ Errores de Validación (UC04):\n• " + string.Join("\n• ", borrador.ObtenerErroresValidacion());
+            LblEstadoValidacion.Text = "Errores de Validación:\n• " + string.Join("\n• ", borrador.ObtenerErroresValidacion());
         }
     }
 
@@ -363,7 +359,7 @@ public partial class CrearEditarRecetaPage : ContentPage
         if (!receta.EsValido())
         {
             OnValidarRecetaClicked(sender, e);
-            await DisplayAlertAsync("Validación de Receta (UC04)",
+            await DisplayAlertAsync("Validación de Receta",
                 string.Join("\n• ", receta.ObtenerErroresValidacion()),
                 "Corregir");
             return;
@@ -380,8 +376,8 @@ public partial class CrearEditarRecetaPage : ContentPage
         }
 
         await DisplayAlertAsync(
-            eraEdicion ? "Receta Editada (UC02)" : "Receta Creada (UC01)",
-            $"'{receta.Titulo}' fue validada (UC04) y almacenada en el archivo JSON Local (UC14).",
+            eraEdicion ? "Receta Editada (UC02)" : "Receta Creada",
+            $"'{receta.Titulo}' fue validada (UC04) y almacenada.",
             "Ir a Mi Recetario");
 
         CargarDatosPorDefecto();
@@ -394,7 +390,7 @@ public partial class CrearEditarRecetaPage : ContentPage
         if (!recetaPrivada.EsValido())
         {
             OnValidarRecetaClicked(sender, e);
-            await DisplayAlertAsync("Validación de Receta (UC04)",
+            await DisplayAlertAsync("Validación de Receta",
                 string.Join("\n• ", recetaPrivada.ObtenerErroresValidacion()),
                 "Corregir");
             return;
@@ -406,8 +402,8 @@ public partial class CrearEditarRecetaPage : ContentPage
         var recetaPublica = chef.PublicarRecetaOficial(recetaPrivada);
         _service.PublicarRecetaEnFeed(recetaPublica, chef);
 
-        await DisplayAlertAsync("Publicada en Feed Global (UC16)",
-            $"'{recetaPublica.Titulo}' se guardó y publicó en el Feed Global JSON certificada por {chef.NombreUsuario()}.",
+        await DisplayAlertAsync("Publicada en Feed Global",
+            $"'{recetaPublica.Titulo}' se guardó y publicó en el Feed Global certificada por {chef.NombreUsuario()}.",
             "Ver en Feed Global");
 
         CargarDatosPorDefecto();
