@@ -5,47 +5,59 @@ namespace Recetario.Models;
 /// <summary>
 /// Paso secuencial dentro de la preparación de una receta (Composición 1..* en Receta).
 /// </summary>
+// PasoPreparacion representa cada una de las instrucciones ordenadas necesarias para cocinar una receta.
 public class PasoPreparacion
 {
+
+    // [JsonInclude] permite que los campos privados sean serializados y guardados en los archivos JSON.
     [JsonInclude]
-    private int numeroPaso = 1;
+    private int numeroPaso = 1; // orden correlativo del paso (1, 2, 3...)
 
     [JsonInclude]
-    private string instruccion = string.Empty;
+    private string instruccion = string.Empty; // texto explicativo de lo que se debe hacer en este paso
 
     [JsonInclude]
-    private int tiempoEstimado = 5;
+    private int tiempoEstimado = 5; // duración estimada en minutos para completar este paso
 
     [JsonInclude]
-    private bool completado = false;
+    private bool completado = false; // estado interactivo que indica si el cocinero ya realizó el paso
 
+
+    // Constructor vacío por defecto necesario para la deserialización JSON.
     public PasoPreparacion()
     {
     }
 
+
+    // Constructor con parámetros para inicializar un nuevo paso de preparación.
     public PasoPreparacion(int numeroPaso, string instruccion, int tiempoEstimado, bool completado = false)
     {
-        this.numeroPaso = numeroPaso;
-        this.instruccion = instruccion;
-        this.tiempoEstimado = tiempoEstimado;
-        this.completado = completado;
+        this.numeroPaso = numeroPaso; // asigna el número del paso
+        this.instruccion = instruccion; // asigna el texto de la instrucción
+        this.tiempoEstimado = tiempoEstimado; // asigna los minutos de duración
+        this.completado = completado; // asigna si inicia completado o pendiente
     }
 
     // Métodos exactos del Diagrama de Clases
-    public int NumeroPaso() => numeroPaso;
-    public string Instruccion() => instruccion;
-    public int TiempoEstimado() => tiempoEstimado;
-    public bool Completado() => completado;
+    public int NumeroPaso() => numeroPaso; // devuelve el número de paso
+    public string Instruccion() => instruccion; // devuelve la instrucción
+    public int TiempoEstimado() => tiempoEstimado; // devuelve el tiempo estimado
+    public bool Completado() => completado; // devuelve el estado de completado
 
+
+    // Alterna el valor booleano de completado al presionar el botón del paso en la vista DetalleRecetaPage.
     public void MarcarCompletado()
     {
-        completado = !completado;
+        completado = !completado; // niega el valor actual (si era false pasa a true y viceversa)
     }
 
+
+    // Formatea el texto del paso para mostrarlo en listas y vistas de detalle.
     public string FormatearPaso() =>
         $"Paso {numeroPaso} ({this.tiempoEstimado} min): {instruccion}";
 
     // Propiedades de apoyo para enlace XAML
+    // [JsonIgnore] omite estas propiedades durante la serialización para no duplicar datos en el JSON.
     [JsonIgnore]
     public int NumeroPasoBind
     {
@@ -81,27 +93,32 @@ public class PasoPreparacion
 /// <summary>
 /// Ingrediente o cultivo de estación del Calendario de Temporada (UC07).
 /// </summary>
+// IngredienteTemporada representa una fruta o verdura en el catálogo estacional con su zona de cultivo.
 public class IngredienteTemporada
 {
     [JsonInclude]
-    private string nombreFrutaVerdura = string.Empty;
+    private string nombreFrutaVerdura = string.Empty; // nombre del fruto o vegetal
 
     [JsonInclude]
-    private TipoVegetal tipo = TipoVegetal.VERDURA;
+    private TipoVegetal tipo = TipoVegetal.VERDURA; // si es FRUTA, VERDURA u OTRO
 
     [JsonInclude]
-    private Estacion estacionPrincipal = Estacion.PRIMAVERA;
+    private Estacion estacionPrincipal = Estacion.PRIMAVERA; // estación en la que se cosecha naturalmente
 
     [JsonInclude]
-    private Origen paisOrigen = Origen.CHILE;
+    private Origen paisOrigen = Origen.CHILE; // país de producción principal
 
     [JsonInclude]
-    private string zonaCultivo = string.Empty;
+    private string zonaCultivo = string.Empty; // valle, región o localidad de cultivo
 
+
+    // Constructor vacío por defecto para la serialización JSON.
     public IngredienteTemporada()
     {
     }
 
+
+    // Constructor con parámetros para inicializar el vegetal o fruta de temporada.
     public IngredienteTemporada(string nombreFrutaVerdura, TipoVegetal tipo, Estacion estacionPrincipal, Origen paisOrigen, string zonaCultivo)
     {
         this.nombreFrutaVerdura = nombreFrutaVerdura;
@@ -132,39 +149,44 @@ public class IngredienteTemporada
     public string OrigenZonaTexto => $"{paisOrigen} • {zonaCultivo}";
 
     [JsonIgnore]
-    public string IconoVegetal => tipo == TipoVegetal.FRUTA ? "🍊" : "🍅";
+    public string IconoVegetal => tipo == TipoVegetal.FRUTA ? "🍊" : "🍅"; // emoji o icono representativo
 }
 
 /// <summary>
 /// Ingrediente cuantificado que compone una receta .
 /// </summary>
+// IngredienteReceta representa un ingrediente específico dentro de una receta con cantidad y unidad de medida.
 public class IngredienteReceta : IValidable
 {
     [JsonInclude]
-    private string nombre = string.Empty;
+    private string nombre = string.Empty; // nombre del ingrediente (ej: Harina, Choclo)
 
     [JsonInclude]
-    private double cantidad = 1;
+    private double cantidad = 1; // cantidad numérica requerida
 
     [JsonInclude]
-    private UnidadMedida unidad = UnidadMedida.UNIDADES;
+    private UnidadMedida unidad = UnidadMedida.UNIDADES; // gramos, tazas, unidades, etc.
 
     [JsonInclude]
-    private Estacion estacion = Models.Estacion.TODOELANHIO;
+    private Estacion estacion = Models.Estacion.TODOELANHIO; // temporada a la que pertenece el ingrediente
 
     [JsonInclude]
-    private bool esFrutaOVerduraEstacion = false;
+    private bool esFrutaOVerduraEstacion = false; // indica si es un producto de temporada verificado
 
     [JsonInclude]
-    private TipoVegetal tipoVegetal = Models.TipoVegetal.NO_APLICA;
+    private TipoVegetal tipoVegetal = Models.TipoVegetal.NO_APLICA; // clasificación botánica
 
     [JsonInclude]
-    private IngredienteTemporada? referenciaTemporada;
+    private IngredienteTemporada? referenciaTemporada; // enlace opcional al catálogo de temporada
 
+
+    // Constructor vacío por defecto para la serialización JSON.
     public IngredienteReceta()
     {
     }
 
+
+    // Constructor con parámetros para construir el ingrediente de la receta.
     public IngredienteReceta(
         string nombre,
         double cantidad,
@@ -183,10 +205,6 @@ public class IngredienteReceta : IValidable
         this.referenciaTemporada = referenciaTemporada;
     }
 
-
-
-
-
     // Métodos exactos del Diagrama de Clases
     public string Nombre() => nombre;
     public double Cantidad() => cantidad;
@@ -197,9 +215,7 @@ public class IngredienteReceta : IValidable
     public IngredienteTemporada? ReferenciaTemporada() => referenciaTemporada;
 
 
-
-
-
+    // Formatea el ingrediente mostrando su cantidad, unidad de medida y sufijo de temporada si aplica.
     public string FormatearIngrediente()
     {
         string sufijoVegetal = esFrutaOVerduraEstacion && tipoVegetal != Models.TipoVegetal.NO_APLICA
@@ -207,57 +223,53 @@ public class IngredienteReceta : IValidable
             : string.Empty;
 
         return unidad == UnidadMedida.ALGUSTO
-            ? $"{nombre} (al gusto){sufijoVegetal}"
+            ? $"{nombre} (al gusto){sufijoVegetal}" // formato sin cantidad numérica fija
             : $"{cantidad:0.##} {unidad.ToString().ToLowerInvariant()} de {nombre}{sufijoVegetal}";
     }
 
+
+    // Implementación de IValidable: es válido si no posee errores de validación.
     public bool EsValido() => ObtenerErroresValidacion().Count == 0;
 
+
+    // Devuelve los errores encontrados en los campos del ingrediente.
     public List<string> ObtenerErroresValidacion()
     {
         var errores = new List<string>();
-        if (string.IsNullOrWhiteSpace(nombre))
+        if (string.IsNullOrWhiteSpace(nombre)) // valida que el nombre no esté vacío
             errores.Add("El nombre del ingrediente no puede estar vacío.");
-        if (unidad != UnidadMedida.ALGUSTO && cantidad <= 0)
+        if (unidad != UnidadMedida.ALGUSTO && cantidad <= 0) // valida que la cantidad sea positiva
             errores.Add($"La cantidad de '{nombre}' debe ser mayor que 0.");
         return errores;
     }
-
-
-
 
     // ELIMINACION OPORTUNA -> -> //
     [JsonIgnore]
     public string TextoFormateado => FormatearIngrediente();
 }
 
-
-
-
 /// <summary>
 /// RECEÑA PUNTAJE DE RECETAS (UC09).
 /// </summary>
+// Calificacion representa una valoración numérica con comentario dejada por un usuario a una receta pública.
 public class Calificacion
 {
 
     // PROPIEDADES XAML
+    [JsonInclude]
+    private string idCalificacion = Guid.NewGuid().ToString("N")[..8]; // identificador único de la calificación
 
     [JsonInclude]
-    private string idCalificacion = Guid.NewGuid().ToString("N")[..8];
+    private string idUsuario = string.Empty; // nombre o identificador del usuario que calificó
 
     [JsonInclude]
-    private string idUsuario = string.Empty;
+    private int puntaje = 5; // cantidad de estrellas de 1 a 5
 
     [JsonInclude]
-    private int puntaje = 5;
+    private string comentario = string.Empty; // texto de la reseña
 
     [JsonInclude]
-    private string comentario = string.Empty;
-
-    [JsonInclude]
-    private DateTime fecha = DateTime.Now;
-
-
+    private DateTime fecha = DateTime.Now; // fecha y hora en la que se publicó la reseña
 
     /// <summary>
     /// ELIMINACION OPORTUNA -> -> //
@@ -266,19 +278,15 @@ public class Calificacion
     {
     }
 
-
-
+    // Constructor con parámetros para inicializar una nueva reseña o calificación.
     public Calificacion(string idUsuario, int puntaje, string comentario)
     {
         this.idCalificacion = Guid.NewGuid().ToString("N")[..8];
         this.idUsuario = idUsuario;
-        this.puntaje = Math.Clamp(puntaje, 1, 5);
+        this.puntaje = Math.Clamp(puntaje, 1, 5); // Math.Clamp asegura que el puntaje siempre esté entre 1 y 5
         this.comentario = comentario;
         this.fecha = DateTime.Now;
     }
-
-
-
 
     // Métodos exactos del Diagrama de Clases
     public string IdCalificacion() => idCalificacion;
@@ -287,11 +295,9 @@ public class Calificacion
     public string Comentario() => comentario;
     public DateTime Fecha() => fecha;
 
-
-
-
     // Propiedades de lectura para XAML
     [JsonIgnore]
+    // Genera una cadena con estrellas rellenas y vacías según el puntaje (ej: ★★★★☆)
     public string EstrellasTexto => new string('★', Math.Clamp(puntaje, 1, 5)) + new string('☆', 5 - Math.Clamp(puntaje, 1, 5));
 
     [JsonIgnore]
@@ -301,43 +307,35 @@ public class Calificacion
     public string AutorYFechaTexto => $"Por {idUsuario} • {fecha:dd/MM/yyyy}";
 }
 
-
-
-
-
-
 /// <summary>
 /// Criterios de búsqueda y filtrado multicriterio de recetas (UC06).
 /// </summary>
+// FiltroReceta encapsula los parámetros de búsqueda para filtrar el feed público o el recetario privado.
 public class FiltroReceta
 {
     [JsonInclude]
-    private TipoVegetal? tipoFrutaOVerdura;
+    private TipoVegetal? tipoFrutaOVerdura; // filtro por fruta o verdura
 
     [JsonInclude]
-    private string nombreIngrediente = string.Empty;
+    private string nombreIngrediente = string.Empty; // texto de búsqueda por ingrediente o título
 
     [JsonInclude]
-    private Estacion? estacionTemporada;
+    private Estacion? estacionTemporada; // filtro por estación
 
     [JsonInclude]
-    private Origen? pais;
+    private Origen? pais; // filtro por país de origen
 
     [JsonInclude]
-    private string categoriaFiltro = string.Empty;
+    private string categoriaFiltro = string.Empty; // filtro por categoría culinaria
 
     [JsonInclude]
-    private string dietaFiltro = string.Empty;
+    private string dietaFiltro = string.Empty; // filtro por tipo de dieta
 
     [JsonInclude]
-    private NivelDificultad? dificultad;
+    private NivelDificultad? dificultad; // filtro por nivel de dificultad
 
     [JsonInclude]
-    private bool soloVerificadasPorChef;
-
-
-
-
+    private bool soloVerificadasPorChef; // filtro para ver únicamente recetas certificadas por chefs
 
     /// <summary>
     /// ELIMINACION OPORTUNA -> -> //
@@ -346,10 +344,7 @@ public class FiltroReceta
     {
     }
 
-
-
-
-
+    // Constructor con parámetros opcionales para configurar los criterios deseados de búsqueda.
     public FiltroReceta(
         TipoVegetal? tipoFrutaOVerdura = null,
         string nombreIngrediente = "",
@@ -370,8 +365,6 @@ public class FiltroReceta
         this.soloVerificadasPorChef = soloVerificadasPorChef;
     }
 
-
-
     // Métodos exactos del Diagrama de Clases
     public TipoVegetal? TipoFrutaOVerdura() => tipoFrutaOVerdura;
     public string CategoriaFiltro() => categoriaFiltro;
@@ -382,21 +375,18 @@ public class FiltroReceta
     public NivelDificultad? Dificultad() => dificultad;
     public bool SoloVerificadasPorChef() => soloVerificadasPorChef;
 
-
-
-
-
     /// <summary>
     /// RESTRICCIONES PARA LA CREACION DE RECETAS (EXCEPCIONES)
     /// </summary>
     /// <param name="receta"></param>
     /// <returns></returns>
-
+    // Evalúa si una receta cumple con todos los filtros activos configurados.
     public bool CumpleCriterios(Receta receta)
     {
         if (receta == null)
             return false;
 
+        // Comprueba si el texto coincide en el título, etiquetas o ingredientes de la receta
         if (!string.IsNullOrWhiteSpace(nombreIngrediente))
         {
             string termino = nombreIngrediente.Trim();
@@ -408,6 +398,7 @@ public class FiltroReceta
                 return false;
         }
 
+        // Comprueba si contiene el tipo vegetal solicitado
         if (tipoFrutaOVerdura.HasValue && tipoFrutaOVerdura.Value != TipoVegetal.NO_APLICA)
         {
             bool tieneTipo = receta.Ingredientes.Any(i => i.TipoVegetal() == tipoFrutaOVerdura.Value);
@@ -415,42 +406,48 @@ public class FiltroReceta
                 return false;
         }
 
+        // Comprueba si coincide con la estación
         if (estacionTemporada.HasValue && estacionTemporada.Value != Estacion.TODOELANHIO)
         {
             if (receta.Estacion != estacionTemporada.Value && receta.Estacion != Estacion.TODOELANHIO)
                 return false;
         }
 
+        // Comprueba si coincide con el país de origen
         if (pais.HasValue)
         {
             if (receta.Origen != pais.Value)
                 return false;
         }
 
+        // Comprueba si coincide con la categoría
         if (!string.IsNullOrWhiteSpace(categoriaFiltro) && !categoriaFiltro.Equals("Todas", StringComparison.OrdinalIgnoreCase))
         {
             if (!receta.Categoria.Contains(categoriaFiltro.Trim(), StringComparison.OrdinalIgnoreCase))
                 return false;
         }
 
+        // Comprueba si coincide con la dieta
         if (!string.IsNullOrWhiteSpace(dietaFiltro) && !dietaFiltro.Equals("Todas", StringComparison.OrdinalIgnoreCase))
         {
             if (!receta.TipoDieta.Contains(dietaFiltro.Trim(), StringComparison.OrdinalIgnoreCase))
                 return false;
         }
 
+        // Comprueba si coincide con la dificultad
         if (dificultad.HasValue)
         {
             if (receta.Dificultad != dificultad.Value)
                 return false;
         }
 
+        // Comprueba si se solicitaron únicamente recetas certificadas por chefs
         if (soloVerificadasPorChef)
         {
             if (receta is not RecetaPublica pub || !pub.VerificadaPorChef())
                 return false;
         }
 
-        return true;
+        return true; // cumple con todos los filtros
     }
 }

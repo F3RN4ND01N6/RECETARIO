@@ -5,11 +5,16 @@ namespace Recetario.Services;
 /// <summary>
 /// Servicio principal de negocio y orquestación de Casos de Uso (UC01..UC09, UC14..UC17).
 /// </summary>
+// RecetaService es el cerebro del negocio de la aplicación: administra las recetas privadas y públicas,
+// controla el estado del usuario activo, coordina la persistencia JSON y notifica cambios a la interfaz mediante eventos.
 public class RecetaService
 {
-    private IPersistenciaJson<RecetaPrivada> repoPrivado;
-    private IPersistenciaJson<RecetaPublica> repoPublicoFeed;
 
+    // readonly significa que estas instancias de repositorios de persistencia solo se asignan en el constructor.
+    private IPersistenciaJson<RecetaPrivada> repoPrivado; // repositorio para serializar y deserializar recetas privadas
+    private IPersistenciaJson<RecetaPublica> repoPublicoFeed; // repositorio para el feed de recetas públicas globales
+
+    // Listas en memoria caché para acceso rápido a las recetas y el calendario de temporada
     private List<RecetaPrivada> cachePrivadas = new();
     private List<RecetaPublica> cachePublicas = new();
     private List<IngredienteTemporada> catalogoTemporada = new();
@@ -19,26 +24,32 @@ public class RecetaService
     public CreadorEspecialista PerfilCreadorEspecialista { get; }
     public Administrador PerfilAdministrador { get; }
 
+    // Usuario actualmente autenticado o activo en la sesión de la aplicación
     public Usuario UsuarioActivo { get; private set; }
 
-    // Eventos de sincronización entre pestañas de la barra inferior
-    public event Action? DatosActualizados;
-    public event Action<RecetaPrivada>? SolicitudEditarReceta;
-    public event Action<Estacion>? SolicitudFiltrarFeedPorEstacion;
-    public event Action<string>? SolicitudCambiarPestana;
+    // Eventos de sincronización entre pestañas de la barra inferior (Action delegates)
+    public event Action? DatosActualizados; // notifica cuando las recetas han cambiado para refrescar la interfaz
+    public event Action<RecetaPrivada>? SolicitudEditarReceta; // notifica para cargar una receta en la pestaña de edicion
+    public event Action<Estacion>? SolicitudFiltrarFeedPorEstacion; // notifica para filtrar el feed desde la vista de temporada
+    public event Action<string>? SolicitudCambiarPestana; // notifica a AppShell para cambiar de pestaña activa
 
+
+    // Metodo que dispara el evento SolicitudCambiarPestana para cambiar de pantalla mediante Shell.
     public void NavegarAPestana(string destino)
     {
-        SolicitudCambiarPestana?.Invoke(destino);
+        SolicitudCambiarPestana?.Invoke(destino); // invoca el evento si existen suscriptores
     }
 
+
+    // Constructor del servicio de recetas, inicializa los repositorios JSON, crea los perfiles de prueba y carga los datos.
     public RecetaService()
     {
-        repoPrivado = new PersistenciaJsonService<RecetaPrivada>("recetas_privadas_local.json");
-        repoPublicoFeed = new PersistenciaJsonService<RecetaPublica>("recetas_publicas_feed.json");
+        repoPrivado = new PersistenciaJsonService<RecetaPrivada>("recetas_privadas_local.json"); // crea el repositorio privado
+        repoPublicoFeed = new PersistenciaJsonService<RecetaPublica>("recetas_publicas_feed.json"); // crea el repositorio público
 
         var configInicial = new ConfiguracionPerfil(Estacion.PRIMAVERA, Origen.CHILE, "Valle Central", true);
 
+        // Instancia el perfil de Usuario Normal / Cocinero
         PerfilUsuarioNormal = new UsuarioNormal(
             idUsuario: "USR-01",
             nombreUsuario: "Fernando Cocinero",
@@ -46,6 +57,7 @@ public class RecetaService
             biografia: "Amante de la cocina casera con frutas y verduras frescas de estación.",
             configuracion: configInicial);
 
+        // Instancia el perfil de Chef Certificado / Creador Especialista
         PerfilCreadorEspecialista = new CreadorEspecialista(
             idUsuario: "CHEF-01",
             nombreUsuario: "Chef Valentina Rojas",
@@ -54,6 +66,7 @@ public class RecetaService
             credencialesChef: "Chef Ejecutiva & Nutricionista gastronómica certificada",
             configuracion: new ConfiguracionPerfil(Estacion.VERANO, Origen.CHILE, "Región del Maule", true));
 
+        // Instancia el perfil de Administrador / Moderador Global
         PerfilAdministrador = new Administrador(
             idUsuario: "ADM-01",
             nombreUsuario: "Admin Moderador",
@@ -62,30 +75,35 @@ public class RecetaService
             nivelAcceso: "ROOT_MODERADOR_GLOBAL",
             configuracion: new ConfiguracionPerfil(Estacion.TODOELANHIO, Origen.CHILE, "Santiago", true));
 
-        UsuarioActivo = PerfilUsuarioNormal;
-        UsuarioActivo.EjecutarAccionRol();
+        UsuarioActivo = PerfilUsuarioNormal; // define el usuario activo inicial
+        UsuarioActivo.EjecutarAccionRol(); // genera el mensaje de rol activo inicial
 
-        InicializarCatalogoTemporada();
-        CargarOInicializarDatos();
+        InicializarCatalogoTemporada(); // llena la lista de ingredientes de temporada (frutas y verduras)
+        CargarOInicializarDatos(); // lee los archivos JSON o siembra recetas de ejemplo si estan vacios
     }
 
+
+    // Metodo para establecer el usuario que ha iniciado sesion en LoginPage y disparar la actualizacion de datos.
     public void EstablecerUsuarioSesion(Usuario usuarioAutenticado)
     {
-        UsuarioActivo = usuarioAutenticado ?? PerfilUsuarioNormal;
-        UsuarioActivo.EjecutarAccionRol();
-        DatosActualizados?.Invoke();
+        UsuarioActivo = usuarioAutenticado ?? PerfilUsuarioNormal; // asigna usuario autenticado o fallback
+        UsuarioActivo.EjecutarAccionRol(); // ejecuta polimorfismo de rol
+        DatosActualizados?.Invoke(); // notifica a las vistas para que refresquen su encabezado
     }
 
+
+    // Metodo que permite alternar el rol del usuario entre Usuario Normal, Chef y Administrador desde la vista de Perfil.
     public void CambiarRolActivo(TipoPerfilUsuario nuevoTipo)
     {
+        // switch expression para alternar la referencia del usuario activo según el tipo seleccionado
         UsuarioActivo = nuevoTipo switch
         {
             TipoPerfilUsuario.CHEF_VERIFICADO => PerfilCreadorEspecialista,
             TipoPerfilUsuario.ADMINISTRADOR => PerfilAdministrador,
             _ => PerfilUsuarioNormal
         };
-        UsuarioActivo.EjecutarAccionRol();
-        DatosActualizados?.Invoke();
+        UsuarioActivo.EjecutarAccionRol(); // actualiza el mensaje de accion del rol polimórfico
+        DatosActualizados?.Invoke(); // refresca los datos en la interfaz de usuario
     }
 
     // === MÉTODOS EXACTOS DEL DIAGRAMA DE CLASES ===
@@ -93,34 +111,37 @@ public class RecetaService
     /// <summary>
     /// UC01 / UC04 / UC14: Valida y guarda una nueva receta privada en el repositorio JSON local.
     /// </summary>
+    // Metodo que valida las reglas de IValidable y guarda la receta privada en la lista y en el archivo JSON.
     public void GuardarRecetaPrivada(RecetaPrivada receta)
     {
         if (receta == null)
             throw new ArgumentNullException(nameof(receta));
 
-        if (!receta.EsValido())
+        if (!receta.EsValido()) // valida que la receta cumpla todas las reglas del negocio
         {
             string errores = string.Join("\n• ", receta.ObtenerErroresValidacion());
             throw new InvalidOperationException($"La receta no superó la validación:\n• {errores}");
         }
 
+        // Busca si ya existe una receta con el mismo ID en la coleccion
         int idx = cachePrivadas.FindIndex(r => r.ObtenerIdentificador() == receta.ObtenerIdentificador());
         if (idx >= 0)
         {
-            cachePrivadas[idx] = receta;
+            cachePrivadas[idx] = receta; // actualiza si ya existia
         }
         else
         {
-            cachePrivadas.Insert(0, receta);
+            cachePrivadas.Insert(0, receta); // inserta al principio de la lista para mostrarla de primera
         }
 
-        repoPrivado.GuardarEnArchivos(cachePrivadas);
-        DatosActualizados?.Invoke();
+        repoPrivado.GuardarEnArchivos(cachePrivadas); // persiste en el archivo recetas_privadas_local.json
+        DatosActualizados?.Invoke(); // notifica a las vistas suscritas
     }
 
     /// <summary>
     /// UC02 / UC04 / UC14: Edita una receta privada existente y actualiza el JSON local.
     /// </summary>
+    // Metodo para actualizar los datos de una receta privada editada en el formulario.
     public void EditarRecetaPrivada(RecetaPrivada receta)
     {
         if (receta == null)
@@ -142,23 +163,25 @@ public class RecetaService
             cachePrivadas.Insert(0, receta);
         }
 
-        repoPrivado.GuardarEnArchivos(cachePrivadas);
+        repoPrivado.GuardarEnArchivos(cachePrivadas); // guarda los cambios en el archivo JSON
         DatosActualizados?.Invoke();
     }
 
     /// <summary>
     /// UC02 / UC14: Elimina una receta privada por su identificador y sincroniza el JSON local.
     /// </summary>
+    // Metodo que elimina la receta privada de la lista y actualiza el archivo en disco.
     public void EliminarRecetaPrivada(string idReceta)
     {
-        cachePrivadas.RemoveAll(r => r.ObtenerIdentificador() == idReceta);
-        repoPrivado.GuardarEnArchivos(cachePrivadas);
+        cachePrivadas.RemoveAll(r => r.ObtenerIdentificador() == idReceta); // elimina todos los elementos que coincidan con el ID
+        repoPrivado.GuardarEnArchivos(cachePrivadas); // actualiza el archivo JSON local
         DatosActualizados?.Invoke();
     }
 
     /// <summary>
     /// UC16: Publica una receta en el Feed Global JSON (requiere rol CreadorEspecialista o convierte desde privada).
     /// </summary>
+    // Metodo que añade una receta pública al catálogo global y persiste en recetas_publicas_feed.json.
     public void PublicarRecetaEnFeed(RecetaPublica receta, Usuario autor)
     {
         if (receta == null)
@@ -170,7 +193,7 @@ public class RecetaService
             throw new InvalidOperationException($"No se puede publicar en el Feed Global:\n• {errores}");
         }
 
-        autor?.EjecutarAccionRol();
+        autor?.EjecutarAccionRol(); // actualiza estado del autor
 
         int idx = cachePublicas.FindIndex(r => r.ObtenerIdentificador() == receta.ObtenerIdentificador());
         if (idx >= 0)
@@ -182,26 +205,30 @@ public class RecetaService
             cachePublicas.Insert(0, receta);
         }
 
-        repoPublicoFeed.GuardarEnArchivos(cachePublicas);
+        repoPublicoFeed.GuardarEnArchivos(cachePublicas); // persiste en recetas_publicas_feed.json
         DatosActualizados?.Invoke();
     }
 
     /// <summary>
     /// UC06: Sobrecarga 1 — Filtra el Feed Global aplicando un objeto FiltroReceta completo.
     /// </summary>
+    // Primera sobrecarga del metodo de filtrado, recibe un objeto FiltroReceta completo.
     public List<RecetaPublica> FiltrarFeedGlobal(FiltroReceta filtro)
     {
         if (filtro == null)
-            return new List<RecetaPublica>(cachePublicas);
+            return new List<RecetaPublica>(cachePublicas); // si no hay filtro devuelve todas las recetas publicas
 
+        // Where evalua que cada receta cumpla con todos los criterios de busqueda especificados
         return cachePublicas.Where(r => r.CumpleFiltro(filtro)).ToList();
     }
 
     /// <summary>
     /// UC06: Sobrecarga 2 — Filtra el Feed Global directamente por Estación y País de Origen.
     /// </summary>
+    // Segunda sobrecarga del metodo de filtrado, recibe directamente la Estacion y el Pais de Origen.
     public List<RecetaPublica> FiltrarFeedGlobal(Estacion estacion, Origen pais)
     {
+        // Construye un FiltroReceta rapido con los parametros recibidos y reutiliza la primera sobrecarga
         var filtroRapido = new FiltroReceta(
             estacionTemporada: estacion,
             pais: pais);
@@ -211,10 +238,12 @@ public class RecetaService
     /// <summary>
     /// UC06: Filtra las recetas privadas de un usuario según un FiltroReceta.
     /// </summary>
+    // Metodo que filtra las recetas privadas locales pertenecientes al usuario especificado.
     public List<RecetaPrivada> FiltrarRecetasPrivadas(string idUsuario, FiltroReceta filtro)
     {
-        var baseQuery = cachePrivadas.AsEnumerable();
+        var baseQuery = cachePrivadas.AsEnumerable(); // inicia la consulta diferida
 
+        // Filtra para que el usuario solo vea sus propias recetas privadas o las creadas por defecto
         if (!string.IsNullOrWhiteSpace(idUsuario) && idUsuario != "TODOS")
         {
             baseQuery = baseQuery.Where(r =>
@@ -227,17 +256,19 @@ public class RecetaService
         if (filtro == null)
             return baseQuery.ToList();
 
-        return baseQuery.Where(r => filtro.CumpleCriterios(r)).ToList();
+        return baseQuery.Where(r => filtro.CumpleCriterios(r)).ToList(); // filtra segun el texto ingresado
     }
 
     /// <summary>
     /// UC07: Consulta los ingredientes de fruta y verdura correspondientes a una estación del año.
     /// </summary>
+    // Metodo que devuelve la lista de ingredientes de temporada para la estacion seleccionada en TemporadaPage.
     public List<IngredienteTemporada> ConsultarCalendarioTemporada(Estacion estacion)
     {
-        if (estacion == Estacion.TODOELANHIO)
+        if (estacion == Estacion.TODOELANHIO) // si es TODOELANHIO devuelve el catalogo completo
             return new List<IngredienteTemporada>(catalogoTemporada);
 
+        // Filtra los ingredientes que pertenecen a la estacion consultada o disponibles todo el año
         return catalogoTemporada
             .Where(i => i.EstacionPrincipal() == estacion || i.EstacionPrincipal() == Estacion.TODOELANHIO)
             .ToList();
@@ -245,53 +276,64 @@ public class RecetaService
 
     // === MÉTODOS ADICIONALES PARA CASOS DE USO SOCIALES Y DE ARCHIVOS (UC02, UC08, UC09, UC14..UC17) ===
 
+    // Comprueba si una receta está marcada como favorita por el usuario activo.
     public bool EsRecetaFavorita(string idReceta) =>
         PerfilUsuarioNormal.EsFavorita(idReceta);
 
+
+    // Alterna el estado de favorita de una receta (agrega o quita) y notifica a las vistas.
     public bool AlternarFavorita(string idReceta)
     {
         if (PerfilUsuarioNormal.EsFavorita(idReceta))
         {
-            PerfilUsuarioNormal.DesmarcarFavorita(idReceta);
+            PerfilUsuarioNormal.DesmarcarFavorita(idReceta); // quita de favoritas
             DatosActualizados?.Invoke();
             return false;
         }
         else
         {
-            PerfilUsuarioNormal.MarcarFavorita(idReceta);
+            PerfilUsuarioNormal.MarcarFavorita(idReceta); // agrega a favoritas
             DatosActualizados?.Invoke();
             return true;
         }
     }
 
+
+    // Agrega una nueva calificacion con puntaje y comentario a una receta pública y persiste en disco.
     public void CalificarRecetaPublica(string idReceta, Calificacion calificacion)
     {
         var receta = cachePublicas.FirstOrDefault(r => r.ObtenerIdentificador() == idReceta);
         if (receta != null)
         {
-            receta.AgregarCalificacion(calificacion);
-            repoPublicoFeed.GuardarEnArchivos(cachePublicas);
+            receta.AgregarCalificacion(calificacion); // añade la calificacion a la receta
+            repoPublicoFeed.GuardarEnArchivos(cachePublicas); // persiste las calificaciones en el JSON
             DatosActualizados?.Invoke();
         }
     }
 
+
+    // Permite a un Administrador forzar la eliminación de una receta pública inapropiada del feed global.
     public void EliminarRecetaPublicaComoAdmin(string idReceta)
     {
-        if (UsuarioActivo is Administrador admin)
+        if (UsuarioActivo is Administrador admin) // valida si el usuario tiene privilegios de moderacion
         {
             admin.ForzarEliminacionReceta(idReceta);
         }
-        cachePublicas.RemoveAll(r => r.ObtenerIdentificador() == idReceta);
-        repoPublicoFeed.GuardarEnArchivos(cachePublicas);
+        cachePublicas.RemoveAll(r => r.ObtenerIdentificador() == idReceta); // elimina la receta de la lista
+        repoPublicoFeed.GuardarEnArchivos(cachePublicas); // persiste la eliminacion en el archivo JSON
         DatosActualizados?.Invoke();
     }
 
+
+    // Guarda manualmente las recetas privadas en el archivo JSON local.
     public void GuardarRespaldoPrivadoManual()
     {
         repoPrivado.GuardarEnArchivos(cachePrivadas);
         DatosActualizados?.Invoke();
     }
 
+
+    // Deserializa manualmente las recetas privadas desde el archivo JSON local.
     public void CargarRespaldoPrivadoManual()
     {
         if (repoPrivado.ExisteArchivoJson())
@@ -301,6 +343,8 @@ public class RecetaService
         }
     }
 
+
+    // Deserializa manualmente el catálogo público desde el archivo JSON global.
     public void CargarRespaldoGlobalManual()
     {
         if (repoPublicoFeed.ExisteArchivoJson())
@@ -310,18 +354,24 @@ public class RecetaService
         }
     }
 
+
+    // Propiedades y metodos para consultar rutas de archivos y totales estadisticos
     public string ObtenerRutaJsonPrivado() => repoPrivado.ObtenerRutaArchivo();
     public string ObtenerRutaJsonPublico() => repoPublicoFeed.ObtenerRutaArchivo();
-    public int TotalRecetasPrivadas => cachePrivadas.Count;
-    public int TotalRecetasPublicas => cachePublicas.Count;
-    public int TotalFavoritas => PerfilUsuarioNormal.ObtenerIdsFavoritas().Count;
+    public int TotalRecetasPrivadas => cachePrivadas.Count; // cantidad de recetas privadas
+    public int TotalRecetasPublicas => cachePublicas.Count; // cantidad de recetas publicas
+    public int TotalFavoritas => PerfilUsuarioNormal.ObtenerIdsFavoritas().Count; // total de favoritas
 
+
+    // Notifica la solicitud de edicion de una receta privada y solicita cambiar a la pestaña CrearEditar.
     public void DispararEdicionReceta(RecetaPrivada receta)
     {
         SolicitudEditarReceta?.Invoke(receta);
         SolicitudCambiarPestana?.Invoke("Crear");
     }
 
+
+    // Notifica la solicitud de filtro por estacion desde TemporadaPage y solicita cambiar al Feed.
     public void DispararFiltroEstacionEnFeed(Estacion estacion)
     {
         SolicitudFiltrarFeedPorEstacion?.Invoke(estacion);
@@ -330,6 +380,7 @@ public class RecetaService
 
     // === DATOS SEMILLA (SEED DATA) ===
 
+    // Metodo privado que inicializa la lista completa de frutas y verduras de temporada para Chile y Latinoamérica.
     private void InicializarCatalogoTemporada()
     {
         catalogoTemporada = new List<IngredienteTemporada>
@@ -361,6 +412,8 @@ public class RecetaService
         };
     }
 
+
+    // Metodo privado que carga o inicializa los datos iniciales de recetas públicas y privadas en disco.
     private void CargarOInicializarDatos()
     {
         if (repoPublicoFeed.ExisteArchivoJson())
@@ -368,7 +421,7 @@ public class RecetaService
             cachePublicas = repoPublicoFeed.CargarDesdeArchivo();
         }
 
-        if (cachePublicas.Count == 0)
+        if (cachePublicas.Count == 0) // si no habia recetas en el archivo JSON siembra las recetas iniciales
         {
             cachePublicas = CrearRecetasPublicasSemilla();
         }
@@ -377,14 +430,14 @@ public class RecetaService
             foreach (var r in cachePublicas)
                 r.ImagenPlatillo = Receta.NormalizarRutaImagen(r.ImagenPlatillo, r.Titulo);
         }
-        repoPublicoFeed.GuardarEnArchivos(cachePublicas);
+        repoPublicoFeed.GuardarEnArchivos(cachePublicas); // guarda en disco
 
         if (repoPrivado.ExisteArchivoJson())
         {
             cachePrivadas = repoPrivado.CargarDesdeArchivo();
         }
 
-        if (cachePrivadas.Count == 0)
+        if (cachePrivadas.Count == 0) // siembra recetas privadas iniciales si no existen
         {
             cachePrivadas = CrearRecetasPrivadasSemilla();
         }
@@ -402,6 +455,8 @@ public class RecetaService
         }
     }
 
+
+    // static metodo que genera la lista de recetas públicas semilla con sus ingredientes, pasos y calificaciones.
     private static List<RecetaPublica> CrearRecetasPublicasSemilla()
     {
         return new List<RecetaPublica>
@@ -547,6 +602,8 @@ public class RecetaService
         };
     }
 
+
+    // static metodo que genera las recetas privadas iniciales guardadas en el dispositivo local.
     private static List<RecetaPrivada> CrearRecetasPrivadasSemilla()
     {
         return new List<RecetaPrivada>
