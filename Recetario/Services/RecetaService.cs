@@ -367,7 +367,7 @@ public class RecetaService
     public void DispararEdicionReceta(RecetaPrivada receta)
     {
         SolicitudEditarReceta?.Invoke(receta);
-        SolicitudCambiarPestana?.Invoke("Crear");
+        SolicitudCambiarPestana?.Invoke("CrearEditar");
     }
 
 

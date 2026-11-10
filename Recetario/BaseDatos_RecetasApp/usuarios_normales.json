@@ -30,5 +30,21 @@
       "regionPreferida": "Central",
       "ingredientesEstacion": true
     }
+  },
+  {
+    "idsRecetasFavoritas": [],
+    "idUsuario": "USR-008BC5",
+    "nombreUsuario": "paula",
+    "correo": "paula@gmail.com",
+    "password": "123",
+    "biografia": "Cocinero entusiasta de recetas de temporada.",
+    "fechaRegistro": "2026-11-10T09:09:56.1849306-03:00",
+    "tipoPerfil": 0,
+    "configuracionPerfil": {
+      "estacionPreferida": 1,
+      "origen": 0,
+      "regionPreferida": "Central",
+      "ingredientesEstacion": true
+    }
   }
 ]
