@@ -250,7 +250,7 @@ public partial class MisRecetasPage : ContentPage
     // Metodo que navega a la pestaña de Crear/Editar Receta al presionar el boton correspondiente.
     private void OnIrACrearClicked(object? sender, EventArgs e)
     {
-        _service.NavegarAPestana("Crear"); // solicita al servicio cambiar a la pestaña CrearEditar
+        _service.NavegarAPestana("CrearEditar"); // solicita al servicio cambiar a la pestaña CrearEditar
     }
 
 
