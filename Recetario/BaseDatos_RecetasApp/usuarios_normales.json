@@ -46,5 +46,21 @@
       "regionPreferida": "Central",
       "ingredientesEstacion": true
     }
+  },
+  {
+    "idsRecetasFavoritas": [],
+    "idUsuario": "USR-A24A77",
+    "nombreUsuario": "pedro",
+    "correo": "pedro1@gmail.com",
+    "password": "123",
+    "biografia": "Cocinero entusiasta de recetas de temporada.",
+    "fechaRegistro": "2026-11-10T10:54:07.1525056-03:00",
+    "tipoPerfil": 0,
+    "configuracionPerfil": {
+      "estacionPreferida": 1,
+      "origen": 0,
+      "regionPreferida": "Central",
+      "ingredientesEstacion": true
+    }
   }
 ]
