@@ -2,11 +2,17 @@ using Recetario.Services;
 
 namespace Recetario.Views;
 
+
+// Partial significa que la clase RegistroPage está definida en varios archivos, y el compilador los combinará en una sola clase durante la compilación.
 public partial class RegistroPage : ContentPage
 {
+
+    // readonly significa que estas variables solo pueden ser asignadas en el constructor de la clase y no pueden ser modificadas.
     private readonly AuthService _authService;
     private readonly RecetaService _recetaService;
 
+
+    // RegistroPage sive para inicializar los componentes y ademas los auto servicios o los servicios automaticos.
     public RegistroPage(AuthService authService, RecetaService recetaService)
     {
         InitializeComponent();
@@ -16,6 +22,8 @@ public partial class RegistroPage : ContentPage
         PickerTipoCuenta.SelectedIndex = 0; // Cocinero / Usuario Normal por defecto
     }
 
+
+    // 
     private void OnTipoCuentaChanged(object? sender, EventArgs e)
     {
         bool esAdmin = PickerTipoCuenta.SelectedIndex == 1;
