@@ -1,0 +1,34 @@
+[
+  {
+    "idsRecetasFavoritas": [],
+    "idUsuario": "USR-01",
+    "nombreUsuario": "Fernando Cocinero",
+    "correo": "fernando@raccolta.cl",
+    "password": "123",
+    "biografia": "Amante de la cocina casera con frutas y verduras frescas de estación.",
+    "fechaRegistro": "2026-11-09T13:25:36.7318131-03:00",
+    "tipoPerfil": 0,
+    "configuracionPerfil": {
+      "estacionPreferida": 1,
+      "origen": 0,
+      "regionPreferida": "Valle Central",
+      "ingredientesEstacion": true
+    }
+  },
+  {
+    "idsRecetasFavoritas": [],
+    "idUsuario": "USR-5AD805",
+    "nombreUsuario": "pedrito",
+    "correo": "pedrito@gmail.com",
+    "password": "123",
+    "biografia": "Cocinero entusiasta de recetas de temporada.",
+    "fechaRegistro": "2026-11-09T13:26:07.3878762-03:00",
+    "tipoPerfil": 0,
+    "configuracionPerfil": {
+      "estacionPreferida": 1,
+      "origen": 0,
+      "regionPreferida": "Central",
+      "ingredientesEstacion": true
+    }
+  }
+]

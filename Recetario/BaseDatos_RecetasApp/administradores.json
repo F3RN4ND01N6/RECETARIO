@@ -1,0 +1,18 @@
+[
+  {
+    "nivelAcceso": "ROOT_MODERADOR_GLOBAL",
+    "idUsuario": "ADM-01",
+    "nombreUsuario": "Admin Moderador",
+    "correo": "admin@raccolta.cl",
+    "password": "admin",
+    "biografia": "Administrador general del catálogo y moderación del Feed Público.",
+    "fechaRegistro": "2026-11-09T13:25:36.740861-03:00",
+    "tipoPerfil": 2,
+    "configuracionPerfil": {
+      "estacionPreferida": 0,
+      "origen": 0,
+      "regionPreferida": "Santiago",
+      "ingredientesEstacion": true
+    }
+  }
+]

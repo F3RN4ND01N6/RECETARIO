@@ -1,0 +1,358 @@
+[
+  {
+    "especialidadChef": "Cocina Patrimonial Chilena",
+    "verificadaPorChef": true,
+    "destacadaEnFeed": true,
+    "calificaciones": [
+      {
+        "idCalificacion": "f306c87e",
+        "idUsuario": "Fernando Cocinero",
+        "puntaje": 5,
+        "comentario": "¡Increíble textura cremosa! Con tomates de verano queda insuperable.",
+        "fecha": "2026-11-09T13:25:36.6525634-03:00"
+      },
+      {
+        "idCalificacion": "9d82139d",
+        "idUsuario": "Camila Huerta",
+        "puntaje": 5,
+        "comentario": "Fácil de seguir paso a paso y muy aromática con la albahaca.",
+        "fecha": "2026-11-09T13:25:36.6525663-03:00"
+      }
+    ],
+    "idReceta": "PUB-101",
+    "idUsuarioAutor": "CHEF-01",
+    "titulo": "Pastelera de Choclo y Albahaca de Verano",
+    "categoria": "Plato Principal",
+    "tipoDieta": "Vegetariana",
+    "etiquetas": [
+      "Choclo",
+      "Verano",
+      "Tradicional",
+      "SinCarne"
+    ],
+    "imagenPlatillo": "pastelera_choclo.jpg",
+    "tiempoPreparacion": 45,
+    "porciones": 6,
+    "dificultad": 1,
+    "estacion": 2,
+    "fechaPublicacion": "2026-11-09T13:25:36.6532434-03:00",
+    "origen": 0,
+    "region": "Valle Central",
+    "ingredientes": [
+      {
+        "nombre": "Choclo Pastelero rallado",
+        "cantidad": 6,
+        "unidad": 6,
+        "estacion": 2,
+        "esFrutaOVerduraEstacion": true,
+        "tipoVegetal": 1,
+        "referenciaTemporada": null
+      },
+      {
+        "nombre": "Tomate Limachino en gajos",
+        "cantidad": 3,
+        "unidad": 6,
+        "estacion": 2,
+        "esFrutaOVerduraEstacion": true,
+        "tipoVegetal": 0,
+        "referenciaTemporada": null
+      },
+      {
+        "nombre": "Hojas de Albahaca fresca",
+        "cantidad": 2,
+        "unidad": 5,
+        "estacion": 2,
+        "esFrutaOVerduraEstacion": true,
+        "tipoVegetal": 1,
+        "referenciaTemporada": null
+      },
+      {
+        "nombre": "Leche tibia",
+        "cantidad": 250,
+        "unidad": 2,
+        "estacion": 0,
+        "esFrutaOVerduraEstacion": false,
+        "tipoVegetal": 3,
+        "referenciaTemporada": null
+      },
+      {
+        "nombre": "Sal de mar y pimienta",
+        "cantidad": 1,
+        "unidad": 7,
+        "estacion": 0,
+        "esFrutaOVerduraEstacion": false,
+        "tipoVegetal": 3,
+        "referenciaTemporada": null
+      }
+    ],
+    "pasos": [
+      {
+        "numeroPaso": 1,
+        "instruccion": "Rallar o procesar los choclos pasteleros junto con las hojas de albahaca fresca.",
+        "tiempoEstimado": 10,
+        "completado": false
+      },
+      {
+        "numeroPaso": 2,
+        "instruccion": "Cocinar a fuego suave revolviendo con cuchara de palo e incorporando la leche tibia poco a poco.",
+        "tiempoEstimado": 20,
+        "completado": false
+      },
+      {
+        "numeroPaso": 3,
+        "instruccion": "Llevar a fuente de greda y gratinar al horno por 15 minutos; servir con ensalada de tomate limachino.",
+        "tiempoEstimado": 15,
+        "completado": false
+      }
+    ]
+  },
+  {
+    "especialidadChef": "Nutrición Basada en Plantas",
+    "verificadaPorChef": true,
+    "destacadaEnFeed": true,
+    "calificaciones": [
+      {
+        "idCalificacion": "da47d5a5",
+        "idUsuario": "Martín Gómez",
+        "puntaje": 4,
+        "comentario": "El toque de naranja realza muchísimo el dulzor del zapallo.",
+        "fecha": "2026-11-09T13:25:36.6532511-03:00"
+      }
+    ],
+    "idReceta": "PUB-102",
+    "idUsuarioAutor": "CHEF-01",
+    "titulo": "Crema Rostizada de Zapallo Camote y Naranja",
+    "categoria": "Sopas y Cremas",
+    "tipoDieta": "Vegana",
+    "etiquetas": [
+      "Zapallo",
+      "Reconfortante",
+      "Otoño",
+      "Saludable"
+    ],
+    "imagenPlatillo": "crema_zapallo.jpg",
+    "tiempoPreparacion": 35,
+    "porciones": 4,
+    "dificultad": 0,
+    "estacion": 3,
+    "fechaPublicacion": "2026-11-09T13:25:36.6532533-03:00",
+    "origen": 1,
+    "region": "Mendoza",
+    "ingredientes": [
+      {
+        "nombre": "Zapallo Camote en cubos",
+        "cantidad": 800,
+        "unidad": 0,
+        "estacion": 3,
+        "esFrutaOVerduraEstacion": true,
+        "tipoVegetal": 1,
+        "referenciaTemporada": null
+      },
+      {
+        "nombre": "Jugo de Naranja natural",
+        "cantidad": 150,
+        "unidad": 2,
+        "estacion": 4,
+        "esFrutaOVerduraEstacion": true,
+        "tipoVegetal": 0,
+        "referenciaTemporada": null
+      },
+      {
+        "nombre": "Cebolla morada",
+        "cantidad": 1,
+        "unidad": 6,
+        "estacion": 0,
+        "esFrutaOVerduraEstacion": true,
+        "tipoVegetal": 1,
+        "referenciaTemporada": null
+      },
+      {
+        "nombre": "Aceite de oliva extra virgen",
+        "cantidad": 2,
+        "unidad": 5,
+        "estacion": 0,
+        "esFrutaOVerduraEstacion": false,
+        "tipoVegetal": 3,
+        "referenciaTemporada": null
+      }
+    ],
+    "pasos": [
+      {
+        "numeroPaso": 1,
+        "instruccion": "Hornear los cubos de zapallo camote y cebolla con aceite de oliva a 200°C hasta dorar.",
+        "tiempoEstimado": 20,
+        "completado": false
+      },
+      {
+        "numeroPaso": 2,
+        "instruccion": "Licuar con caldo caliente y el toque cítrico de jugo de naranja fresco.",
+        "tiempoEstimado": 10,
+        "completado": false
+      },
+      {
+        "numeroPaso": 3,
+        "instruccion": "Servir bien caliente decorado con semillas de zapallo tostadas.",
+        "tiempoEstimado": 5,
+        "completado": false
+      }
+    ]
+  },
+  {
+    "especialidadChef": "Cocina Saludable de Estación",
+    "verificadaPorChef": true,
+    "destacadaEnFeed": false,
+    "calificaciones": [
+      {
+        "idCalificacion": "8767e1f9",
+        "idUsuario": "Lucía Pérez",
+        "puntaje": 5,
+        "comentario": "Queda al dente y llena de color, ideal para una cena ligera.",
+        "fecha": "2026-11-09T13:25:36.6532548-03:00"
+      }
+    ],
+    "idReceta": "PUB-103",
+    "idUsuarioAutor": "CHEF-01",
+    "titulo": "Salteado Tibio de Brócoli, Espárragos y Limón",
+    "categoria": "Ensalada Tibia",
+    "tipoDieta": "Keto / Baja en Carbohidratos",
+    "etiquetas": [
+      "Brócoli",
+      "Verde",
+      "Rápida",
+      "Antioxidante"
+    ],
+    "imagenPlatillo": "salteado_brocoli.jpg",
+    "tiempoPreparacion": 20,
+    "porciones": 2,
+    "dificultad": 0,
+    "estacion": 4,
+    "fechaPublicacion": "2026-11-09T13:25:36.6532562-03:00",
+    "origen": 0,
+    "region": "Sabana Central",
+    "ingredientes": [
+      {
+        "nombre": "Brócoli Fresco en arbolitos",
+        "cantidad": 400,
+        "unidad": 0,
+        "estacion": 4,
+        "esFrutaOVerduraEstacion": true,
+        "tipoVegetal": 1,
+        "referenciaTemporada": null
+      },
+      {
+        "nombre": "Espárragos Verdes tiernos",
+        "cantidad": 6,
+        "unidad": 6,
+        "estacion": 1,
+        "esFrutaOVerduraEstacion": true,
+        "tipoVegetal": 1,
+        "referenciaTemporada": null
+      },
+      {
+        "nombre": "Almendras laminadas tostadas",
+        "cantidad": 50,
+        "unidad": 0,
+        "estacion": 0,
+        "esFrutaOVerduraEstacion": false,
+        "tipoVegetal": 2,
+        "referenciaTemporada": null
+      }
+    ],
+    "pasos": [
+      {
+        "numeroPaso": 1,
+        "instruccion": "Blanquear los arbolitos de brócoli y espárragos en agua hirviendo por 3 minutos.",
+        "tiempoEstimado": 5,
+        "completado": false
+      },
+      {
+        "numeroPaso": 2,
+        "instruccion": "Saltear a fuego fuerte con ajo laminado, aceite de oliva y ralladura de limón.",
+        "tiempoEstimado": 10,
+        "completado": false
+      },
+      {
+        "numeroPaso": 3,
+        "instruccion": "Emplatar con las almendras tostadas por encima.",
+        "tiempoEstimado": 5,
+        "completado": false
+      }
+    ]
+  },
+  {
+    "especialidadChef": "Repostería Casera",
+    "verificadaPorChef": false,
+    "destacadaEnFeed": false,
+    "calificaciones": [
+      {
+        "idCalificacion": "54592f11",
+        "idUsuario": "Chef Valentina Rojas",
+        "puntaje": 5,
+        "comentario": "Excelente balance entre la acidez del maracuyá y el dulzor de la frutilla.",
+        "fecha": "2026-11-09T13:25:36.6532574-03:00"
+      }
+    ],
+    "idReceta": "PUB-104",
+    "idUsuarioAutor": "USR-01",
+    "titulo": "Tartaleta Rústica de Frutillas y Maracuyá",
+    "categoria": "Postre de Estación",
+    "tipoDieta": "Vegetariana",
+    "etiquetas": [
+      "Frutilla",
+      "Primavera",
+      "Dulce",
+      "Frutal"
+    ],
+    "imagenPlatillo": "tartaleta_frutilla.jpg",
+    "tiempoPreparacion": 40,
+    "porciones": 8,
+    "dificultad": 1,
+    "estacion": 1,
+    "fechaPublicacion": "2026-11-09T13:25:36.6532582-03:00",
+    "origen": 2,
+    "region": "Costa Central",
+    "ingredientes": [
+      {
+        "nombre": "Frutilla Dulce fresca",
+        "cantidad": 500,
+        "unidad": 0,
+        "estacion": 1,
+        "esFrutaOVerduraEstacion": true,
+        "tipoVegetal": 0,
+        "referenciaTemporada": null
+      },
+      {
+        "nombre": "Pulpa de Maracuyá Dorado",
+        "cantidad": 1,
+        "unidad": 4,
+        "estacion": 1,
+        "esFrutaOVerduraEstacion": true,
+        "tipoVegetal": 0,
+        "referenciaTemporada": null
+      },
+      {
+        "nombre": "Harina de avena y almendra",
+        "cantidad": 2,
+        "unidad": 4,
+        "estacion": 0,
+        "esFrutaOVerduraEstacion": false,
+        "tipoVegetal": 2,
+        "referenciaTemporada": null
+      }
+    ],
+    "pasos": [
+      {
+        "numeroPaso": 1,
+        "instruccion": "Hornear la base crujiente de avena por 15 minutos hasta que esté dorada.",
+        "tiempoEstimado": 15,
+        "completado": false
+      },
+      {
+        "numeroPaso": 2,
+        "instruccion": "Rellenar con crema suave de maracuyá y coronar con frutillas frescas laminadas.",
+        "tiempoEstimado": 25,
+        "completado": false
+      }
+    ]
+  }
+]

@@ -1,0 +1,148 @@
+[
+  {
+    "notasPersonales": "Receta familiar de fin de semana. Probar también con manzanas en otoño.",
+    "soloDispositivoLocal": true,
+    "idReceta": "PRIV-001",
+    "idUsuarioAutor": "USR-01",
+    "titulo": "Tostadas Francesas de Durazno y Miel de Ulmo",
+    "categoria": "Desayuno / Brunch",
+    "tipoDieta": "Vegetariana",
+    "etiquetas": [
+      "Durazno",
+      "Desayuno",
+      "Pastel"
+    ],
+    "imagenPlatillo": "tostadas_durazno.jpg",
+    "tiempoPreparacion": 20,
+    "porciones": 2,
+    "dificultad": 0,
+    "estacion": 2,
+    "fechaPublicacion": "2026-11-09T13:25:36.7288588-03:00",
+    "origen": 0,
+    "region": "O'Higgins",
+    "ingredientes": [
+      {
+        "nombre": "Durazno maduro en láminas",
+        "cantidad": 2,
+        "unidad": 6,
+        "estacion": 2,
+        "esFrutaOVerduraEstacion": true,
+        "tipoVegetal": 0,
+        "referenciaTemporada": null
+      },
+      {
+        "nombre": "Pan brioche grueso",
+        "cantidad": 4,
+        "unidad": 6,
+        "estacion": 0,
+        "esFrutaOVerduraEstacion": false,
+        "tipoVegetal": 3,
+        "referenciaTemporada": null
+      },
+      {
+        "nombre": "Miel de ulmo y canela",
+        "cantidad": 2,
+        "unidad": 5,
+        "estacion": 0,
+        "esFrutaOVerduraEstacion": false,
+        "tipoVegetal": 3,
+        "referenciaTemporada": null
+      }
+    ],
+    "pasos": [
+      {
+        "numeroPaso": 1,
+        "instruccion": "Caramelizar los duraznos en sartén con una cucharada de miel y canela.",
+        "tiempoEstimado": 8,
+        "completado": false
+      },
+      {
+        "numeroPaso": 2,
+        "instruccion": "Dorar el pan brioche por ambos lados y servir con los duraznos tibios encima.",
+        "tiempoEstimado": 12,
+        "completado": false
+      }
+    ]
+  },
+  {
+    "notasPersonales": "Lista para certificar y publicar en el Feed Oficial cuando esté en modo Chef.",
+    "soloDispositivoLocal": false,
+    "idReceta": "PRIV-002",
+    "idUsuarioAutor": "CHEF-01",
+    "titulo": "Ceviche Andino de Mango, Palta y Camote",
+    "categoria": "Entrada Fresca",
+    "tipoDieta": "Vegana",
+    "etiquetas": [
+      "Mango",
+      "Palta",
+      "Fresco",
+      "Verano"
+    ],
+    "imagenPlatillo": "ceviche_mango.jpg",
+    "tiempoPreparacion": 25,
+    "porciones": 4,
+    "dificultad": 0,
+    "estacion": 2,
+    "fechaPublicacion": "2026-11-09T13:25:36.7288627-03:00",
+    "origen": 2,
+    "region": "Piura",
+    "ingredientes": [
+      {
+        "nombre": "Mango Kent firme en cubos",
+        "cantidad": 2,
+        "unidad": 6,
+        "estacion": 2,
+        "esFrutaOVerduraEstacion": true,
+        "tipoVegetal": 0,
+        "referenciaTemporada": null
+      },
+      {
+        "nombre": "Palta Hass en cubos",
+        "cantidad": 2,
+        "unidad": 6,
+        "estacion": 3,
+        "esFrutaOVerduraEstacion": true,
+        "tipoVegetal": 0,
+        "referenciaTemporada": null
+      },
+      {
+        "nombre": "Camote Morado glaseado",
+        "cantidad": 300,
+        "unidad": 0,
+        "estacion": 3,
+        "esFrutaOVerduraEstacion": true,
+        "tipoVegetal": 1,
+        "referenciaTemporada": null
+      },
+      {
+        "nombre": "Jugo de limón sutil y cilantro",
+        "cantidad": 100,
+        "unidad": 2,
+        "estacion": 0,
+        "esFrutaOVerduraEstacion": true,
+        "tipoVegetal": 0,
+        "referenciaTemporada": null
+      }
+    ],
+    "pasos": [
+      {
+        "numeroPaso": 1,
+        "instruccion": "Cortar el mango y la palta en cubos regulares de 1.5 cm.",
+        "tiempoEstimado": 10,
+        "completado": false
+      },
+      {
+        "numeroPaso": 2,
+        "instruccion": "Emulsionar el jugo de limón sutil con cilantro picado, ají limo suave y sal.",
+        "tiempoEstimado": 5,
+        "completado": false
+      },
+      {
+        "numeroPaso": 3,
+        "instruccion": "Mezclar suavemente y acompañar con medallones de camote morado tibio.",
+        "tiempoEstimado": 10,
+        "completado": false
+      }
+    ]
+  }
+]
