@@ -1,5 +1,69 @@
 [
   {
+    "notasPersonales": "prueba de recetas nueva",
+    "soloDispositivoLocal": true,
+    "idReceta": "PRIV-A9B42",
+    "idUsuarioAutor": "USR-05A4FA",
+    "titulo": "Pastel de choclo",
+    "categoria": "Plato Principal",
+    "tipoDieta": "Vegetariana",
+    "etiquetas": [
+      "Temporada",
+      "Casera"
+    ],
+    "imagenPlatillo": "paste_choclo.png",
+    "tiempoPreparacion": 30,
+    "porciones": 4,
+    "dificultad": 0,
+    "estacion": 1,
+    "fechaPublicacion": "2026-11-10T13:24:25.2488126-03:00",
+    "origen": 0,
+    "region": "Valle Central",
+    "ingredientes": [
+      {
+        "nombre": "Zapallo Camote en cubos",
+        "cantidad": 500,
+        "unidad": 0,
+        "estacion": 3,
+        "esFrutaOVerduraEstacion": true,
+        "tipoVegetal": 1,
+        "referenciaTemporada": null
+      },
+      {
+        "nombre": "choclo",
+        "cantidad": 2,
+        "unidad": 6,
+        "estacion": 1,
+        "esFrutaOVerduraEstacion": true,
+        "tipoVegetal": 1,
+        "referenciaTemporada": null
+      },
+      {
+        "nombre": "albaca",
+        "cantidad": 1,
+        "unidad": 7,
+        "estacion": 1,
+        "esFrutaOVerduraEstacion": false,
+        "tipoVegetal": 2,
+        "referenciaTemporada": null
+      }
+    ],
+    "pasos": [
+      {
+        "numeroPaso": 1,
+        "instruccion": "Lavar, pelar y cortar los vegetales de estación en trozos regulares.",
+        "tiempoEstimado": 10,
+        "completado": false
+      },
+      {
+        "numeroPaso": 2,
+        "instruccion": "cocinar hasta hervir",
+        "tiempoEstimado": 30,
+        "completado": false
+      }
+    ]
+  },
+  {
     "notasPersonales": "Receta familiar de fin de semana. Probar también con manzanas en otoño.",
     "soloDispositivoLocal": true,
     "idReceta": "PRIV-001",

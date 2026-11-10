@@ -228,7 +228,7 @@ public partial class FeedPage : ContentPage
             {
                 var btnAdminEliminar = new Button
                 {
-                    Text = "Moderar / Eliminar",
+                    Text = "Eliminar",
                     BackgroundColor = Color.FromArgb("#283B2D"), // verde muy oscuro
                     TextColor = Colors.White,
                     FontAttributes = FontAttributes.Bold,

@@ -192,7 +192,7 @@
                             </VerticalStackLayout>
 
                             <VerticalStackLayout Grid.Column="2">
-                                <Label Text="Etiquetas (separadas por coma)" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
+                                <Label Text="Etiquetas" FontSize="12" FontAttributes="Bold" TextColor="#283B2D" />
                                 <Entry x:Name="EntryEtiquetas"
                                        Placeholder="Casera, Temporada, Rápida"
                                        BackgroundColor="#FFFFFF"
