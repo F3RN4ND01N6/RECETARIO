@@ -1,7 +1,5 @@
 @startuml DiagramaClases
-title Diagrama de clases - Recetario
-
-'skinparam classAttributeIconSize 0
+title Diagrama de Clases Completo - Raccolta di ricette (Recetario)
 
 package "Recetario.Models" {
 
@@ -29,12 +27,9 @@ package "Recetario.Models" {
     }
 
     enum TipoPerfilUsuario {
-        ADMINISTRADOR
         USUARIO_NORMAL
-        YOUTUBER
-        NUTRICIONISTA 
         CHEF_VERIFICADO
-         
+        ADMINISTRADOR
     }
 
     enum UnidadMedida {
@@ -68,11 +63,23 @@ package "Recetario.Models" {
 
     interface ICalificable <<interface>> {
         + AgregarCalificacion(Calificacion calificacion) : void
-        + double ObtenerPromedioCalificaciones() : double
+        + ObtenerPromedioCalificaciones() : double
     }
 
     interface IFiltrable <<interface>> {
-        + bool CumpleFiltro(FiltroReceta filtro) : bool
+        + CumpleFiltro(FiltroReceta filtro) : bool
+    }
+
+    ' === SEGURIDAD Y ACTIVACIÓN ADMIN ===
+    class CodigoConfirmacionAdmin {
+        + string Codigo
+        + bool Utilizado
+        + string UsadoPorCorreo
+        + DateTime? FechaUso
+        + CodigoConfirmacionAdmin()
+        + CodigoConfirmacionAdmin(string codigo)
+        + string ObtenerIdentificador()
+        + string ObtenerResumenEntidad()
     }
 
     ' === CLASES BASE Y USUARIOS (Herencias 1, 2, 3) ===
@@ -80,6 +87,7 @@ package "Recetario.Models" {
         # string idUsuario 
         # string nombreUsuario  
         # string correo
+        # string password
         # string biografia 
         # DateTime fechaRegistro 
         # TipoPerfilUsuario tipoPerfil
@@ -89,9 +97,14 @@ package "Recetario.Models" {
         + string IdUsuario()
         + string NombreUsuario() 
         + string Correo()
+        + string Password()
+        + void EstablecerPassword(string nuevaPassword)
+        + bool ValidarPassword(string passwordAValidar)
         + string Biografia() 
         + DateTime FechaRegistro() 
         + ConfiguracionPerfil ConfiguracionPerfil() 
+        + TipoPerfilUsuario ObtenerTipoPerfil()
+        + void ActualizarDatosBasicos(string nuevoNombre, string nuevoCorreo, string nuevaBiografia)
         + abstract void EjecutarAccionRol()
         + string ObtenerIdentificador()
         + string ObtenerResumenEntidad()
@@ -105,12 +118,16 @@ package "Recetario.Models" {
         + void EjecutarAccionRol()
         + void MarcarFavorita(string idReceta)
         + void DesmarcarFavorita(string idReceta)
+        + bool EsFavorita(string idReceta)
+        + IReadOnlyList<string> ObtenerIdsFavoritas()
     }
 
     class CreadorEspecialista {
         - string credencialesChef
         + CreadorEspecialista()
         + void EjecutarAccionRol()
+        + string CredencialesChef()
+        + void ActualizarCredenciales(string nuevasCredenciales)
         + RecetaPublica PublicarRecetaOficial(RecetaPrivada privada)
     }
 
@@ -118,6 +135,7 @@ package "Recetario.Models" {
         - string nivelAcceso
         + Administrador()
         + void EjecutarAccionRol()
+        + string NivelAcceso()
         + void ForzarEliminacionReceta(string idReceta)
     }
 
@@ -132,6 +150,7 @@ package "Recetario.Models" {
         + Origen Origen()
         + string RegionPreferida()
         + bool IngredientesEstacion()
+        + void ActualizarConfiguracion(Estacion estacion, Origen paisOrigen, string region, bool priorizarEstacion)
     }
 
     ' === CLASES DE RECETA (Herencia 4) ===
@@ -159,6 +178,7 @@ package "Recetario.Models" {
         + List<string> ObtenerErroresValidacion()
         + {abstract} bool EsPublicaEnFeed()
         + {abstract} string ObtenerResumenEntidad()
+        + {static} string NormalizarRutaImagen(string valor, string tituloReceta)
     }
 
     class RecetaPrivada {
@@ -168,6 +188,7 @@ package "Recetario.Models" {
         + RecetaPrivada()
         + string NotasPersonales() 
         + bool SoloDispositivoLocal() 
+        + void ActualizarNotasPrivadas(string notas, bool soloLocal)
         + bool EsPublicaEnFeed()
         + string ObtenerResumenEntidad() 
     }
@@ -187,6 +208,8 @@ package "Recetario.Models" {
         + string ObtenerResumenEntidad()
         + void AgregarCalificacion(Calificacion calificacion)
         + double ObtenerPromedioCalificaciones()
+        + bool CumpleFiltro(FiltroReceta filtro)
+        + IReadOnlyList<Calificacion> ObtenerCalificaciones()
     }
 
     class PasoPreparacion {
@@ -198,7 +221,7 @@ package "Recetario.Models" {
         + PasoPreparacion()
         + int NumeroPaso()
         + string Instruccion()
-        + int tiempoEstimado() 
+        + int TiempoEstimado() 
         + bool Completado()
         + void MarcarCompletado()
         + string FormatearPaso()
@@ -211,6 +234,7 @@ package "Recetario.Models" {
         - Estacion estacion 
         - bool esFrutaOVerduraEstacion 
         - TipoVegetal tipoVegetal
+        - IngredienteTemporada referenciaTemporada
 
         + IngredienteReceta() 
         + string Nombre() 
@@ -219,6 +243,7 @@ package "Recetario.Models" {
         + Estacion Estacion()
         + bool EsFrutaOVerduraEstacion() 
         + TipoVegetal TipoVegetal()
+        + IngredienteTemporada ReferenciaTemporada()
         + string FormatearIngrediente() 
         + bool EsValido() 
         + List<string> ObtenerErroresValidacion()
@@ -247,8 +272,12 @@ package "Recetario.Models" {
         - DateTime fecha
 
         + Calificacion()
+        + Calificacion(string idUsuario, int puntaje, string comentario)
+        + string IdCalificacion()
+        + string IdUsuario()
         + int Puntaje()
         + string Comentario()
+        + DateTime Fecha()
     }
 
     class FiltroReceta {
@@ -263,7 +292,13 @@ package "Recetario.Models" {
 
         + FiltroReceta()
         + TipoVegetal? TipoFrutaOVerdura()
+        + string NombreIngrediente()
+        + Estacion? EstacionTemporada()
+        + Origen? Pais()
         + string CategoriaFiltro()
+        + string DietaFiltro()
+        + NivelDificultad? Dificultad()
+        + bool SoloVerificadasPorChef()
         + bool CumpleCriterios(Receta receta)
     }
 }
@@ -279,23 +314,43 @@ package "Recetario.Services" {
 
     class PersistenciaJsonService<T> {
         - string rutaArchivo
+        + PersistenciaJsonService(string nombreArchivo)
         + void GuardarEnArchivos(List<T> datos)
         + List<T> CargarDesdeArchivo()
         + bool ExisteArchivoJson()
         + string ObtenerRutaArchivo()
     }
 
+    class AuthService {
+        - IPersistenciaJson<UsuarioNormal> _repoUsuariosNormales
+        - IPersistenciaJson<Administrador> _repoAdministradores
+        - IPersistenciaJson<CodigoConfirmacionAdmin> _repoCodigosAdmin
+        + AuthService()
+        + (bool, string, Usuario) IniciarSesion(string identificador, string password, bool esModoAdmin)
+        + (bool, string, UsuarioNormal) RegistrarUsuarioNormal(string nombre, string correo, string password, Estacion estacion, Origen origen, string region)
+        + (bool, string, Administrador) RegistrarAdministrador(string nombre, string correo, string password, string codigoConfirmacion)
+        + List<CodigoConfirmacionAdmin> ObtenerCodigosDisponibles()
+    }
+
     class RecetaService {
         - IPersistenciaJson<RecetaPrivada> repoPrivado
         - IPersistenciaJson<RecetaPublica> repoPublicoFeed
+        - List<RecetaPrivada> cachePrivadas
+        - List<RecetaPublica> cachePublicas
+        - List<IngredienteTemporada> catalogoTemporada
+        - Usuario usuarioActivo
 
         + RecetaService()
+        + void EstablecerUsuarioSesion(Usuario usuarioAutenticado)
+        + void CambiarRolActivo(TipoPerfilUsuario nuevoTipo)
         + void GuardarRecetaPrivada(RecetaPrivada receta)
         + void EditarRecetaPrivada(RecetaPrivada receta)
         + void EliminarRecetaPrivada(string idReceta)
         + void PublicarRecetaEnFeed(RecetaPublica receta, Usuario autor)
-        
-        ' Métodos con SOBRECARGA para cumplir requerimiento del PDF
+        + void CalificarRecetaPublica(string idReceta, Calificacion calificacion)
+        + void EliminarRecetaPublicaComoAdmin(string idReceta)
+        + bool AlternarFavorita(string idReceta)
+        + bool EsRecetaFavorita(string idReceta)
         + List<RecetaPublica> FiltrarFeedGlobal(FiltroReceta filtro)
         + List<RecetaPublica> FiltrarFeedGlobal(Estacion estacion, Origen pais)
         + List<RecetaPrivada> FiltrarRecetasPrivadas(string idUsuario, FiltroReceta filtro)
@@ -305,7 +360,7 @@ package "Recetario.Services" {
 
 ' === RELACIONES Y CARDINALIDADES ===
 
-' Interfaces (4 implementaciones de IIdentificable, IValidable, ICalificable, IFiltrable)
+' Implementación de Interfaces
 IIdentificable <|.. Usuario
 IValidable <|.. Usuario
 IIdentificable <|.. Receta
@@ -313,28 +368,35 @@ IValidable <|.. Receta
 IValidable <|.. IngredienteReceta
 ICalificable <|.. RecetaPublica
 IFiltrable <|.. RecetaPublica
+IIdentificable <|.. CodigoConfirmacionAdmin
+IPersistenciaJson <|.. PersistenciaJsonService
 
-' Herencias de Usuario (3 herencias)
+' Herencias de Usuario
 Usuario <|-- UsuarioNormal
 Usuario <|-- CreadorEspecialista
 Usuario <|-- Administrador
 
-' Herencia de Recetas (1 herencia más, total 4 herencias)
+' Herencia de Recetas
 Receta <|-- RecetaPrivada
 Receta <|-- RecetaPublica
 
-' Composición (*-- : Ciclo de vida dependiente) (2 composiciones exactas)
+' Composiciones (*-- Ciclo de vida dependiente)
 Receta *-- "1..*" IngredienteReceta : contiene >
 Receta *-- "1..*" PasoPreparacion : sigue >
 
-' Agregación (o-- : Contenedor independiente) (2 agregaciones exactas)
+' Agregaciones (o-- Independientes)
 Usuario o-- "1" ConfiguracionPerfil : configura >
 RecetaPublica o-- "0..*" Calificacion : recibe reseñas >
 
-' Asociación con cardinalidad (4+ asociaciones claras)
+' Asociaciones y Dependencias de Servicios
 Usuario "1" --> "0..*" Receta : crea >
 IngredienteReceta "0..*" --> "0..1" IngredienteTemporada : referencia >
+RecetaService --> "1" Usuario : usuarioActivo >
+RecetaService o-- "0..*" IngredienteTemporada : catálogo >
 RecetaService --> IPersistenciaJson : usa persistencia >
 RecetaService ..> FiltroReceta : aplica filtros >
+AuthService --> IPersistenciaJson : usa persistencia >
+AuthService ..> CodigoConfirmacionAdmin : valida códigos >
+AuthService ..> Usuario : gestiona sesiones >
 
 @enduml
