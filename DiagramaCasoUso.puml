@@ -1,4 +1,4 @@
-@startuml DiagramaCasosDeUso_Broccoli
+@startuml DiagramaCasosDeUso_Raccolta_di_ricette
 left to right direction
 
 title Diagrama de Casos de Uso - Raccolta di ricette (RecetasApp)
@@ -25,7 +25,8 @@ rectangle "Raccolta di ricette" {
 
     package "1. Gestión del Recetario" as P1 {
         usecase "UC01: Crear Receta\n(Privada o Estándar)" as UC01
-        usecase "UC02: Editar o Eliminar Receta" as UC02
+        usecase "UC02: Editar Receta" as UC02
+        usecase "UC10: Eliminar Receta" as UC10
         usecase "UC03: Asignar Categoría, Dieta y Etiquetas" as UC03
         usecase "UC04: Validar Datos de la Receta" as UC04
     }
@@ -50,7 +51,11 @@ rectangle "Raccolta di ricette" {
         usecase "UC08: Marcar/Desmarcar como Favorita" as UC08
         usecase "UC09: Calificar una Receta" as UC09
     }
-
+    Package "6. Secion de Usuario" as P6 {
+        usecase "UC20: Crear Cuenta" as UC20
+        usecase "UC21: Iniciar Secion" as UC21
+        usecase "UC22: Validacion de Datos de Usuario" as UC22    
+    }
     ' Alinear casos de uso en columna vertical
     UC01 -[hidden]right- UC02
     UC02 -[hidden]right- UC03
@@ -77,18 +82,27 @@ Usuario -[#Green]-> UC06
 Usuario -[#Green]-> UC07
 Usuario -[#Green]-> UC08
 Usuario -[#Green]-> UC09
+Usuario -[#Green]-> UC10
 Usuario -[#Green]-> UC14
 Usuario -[#Green]-> UC15
+Usuario -[#Green]-> UC20
+Usuario -[#Green]-> UC21
 
 Creador -[#Blue]-> UC16
 
 Administrador -[#Red]-> UC02
 Administrador -[#Red]-> UC17
+Administrador -[#Red]-> UC20
+Administrador -[#Red]-> UC21
 
 ' === 2. RELACIONES INTERNAS ===
 UC01 .[#Purple].> UC04 : <<include>>
 UC02 .[#Purple].> UC04 : <<include>>
 UC03 .[#Purple].> UC04 : <<include>>
+UC10 .[#Purple].> UC04 : <<include>>
+UC10 .[#Purple].> UC04 : <<include>>
+UC20 .[#Purple].> UC22 : <<include>>
+UC21 .[#Purple].> UC22 : <<include>>
 
 ' === 3. CONEXIONES AL SISTEMA DE ARCHIVOS ===
 UC14 -[#Yellow]--> SistemaArchivos : "Serializa JSON Local"
